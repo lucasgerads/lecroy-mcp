@@ -1,0 +1,1851 @@
+Operator's Manual
+WaveSurfer 3000z Oscilloscopes
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual © 2023 Teledyne LeCroy, Inc. All rights reserved.
+This document does not contain export controlled information. Users are permitted to duplicate and distribute Teledyne LeCroy, Inc. documentation for internal educational purposes only. Resale or unauthorized duplication of Teledyne LeCroy publications is strictly prohibited. Teledyne LeCroy is a trademark of Teledyne LeCroy, Inc., Inc. Other product or brand names are trademarks or requested trademarks of their respective holders. Information in this publication supersedes all earlier versions. Specifications are subject to change without notice. November, 2023 wavsurfer-3000z-om-eng_08nov23.pdf
+
+Contents
+
+Safety
+
+1
+
+Symbols
+
+1
+
+Precautions
+
+1
+
+Operating Environment
+
+2
+
+Measuring Terminal Ratings (C1-C4 and Ext)
+
+2
+
+Cooling
+
+2
+
+Power
+
+2
+
+Oscilloscope Overview and Set Up
+
+3
+
+Front Input/Output
+
+3
+
+Back Input/Output
+
+3
+
+Front Panel
+
+4
+
+Signal Interfaces
+
+6
+
+Probes
+
+7
+
+Micro SD Card
+
+7
+
+Positioning the Feet
+
+8
+
+Connecting to Other Devices/Systems
+
+8
+
+Powering On/Off
+
+9
+
+Software Activation
+
+10
+
+Language Selection
+
+10
+
+Using MAUI
+
+11
+
+Touch Screen
+
+11
+
+Controlling Traces
+
+17
+
+Zooming
+
+20
+
+Print/Screen Capture
+
+23
+
+Acquisition
+
+24
+
+Auto Setup
+
+24
+
+Vertical
+
+24
+
+Timebase
+
+27
+
+Digital (Mixed-Signal)
+
+31
+
+Trigger
+
+35
+
+Viewing Acquisition Status
+
+43
+
+Display
+
+44
+
+Display Set Up
+
+44
+
+Persistence Display
+
+46
+
+Math and Measure
+
+47
+
+Cursors
+
+47
+
+Measure
+
+51
+
+Math
+
+57
+
+Memories
+
+68
+
+Analysis Tools
+
+70
+
+Standard Tools
+
+70
+
+Optional Tools
+
+70
+
+WaveScan
+
+70
+
+PASS/FAIL Testing
+
+74
+
+i
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+
+Save / Recall
+
+76
+
+Save Setups
+
+76
+
+Recall Setups
+
+77
+
+Save Waveforms
+
+78
+
+Recall Waveforms
+
+80
+
+Save Table Data
+
+81
+
+Auto Save
+
+82
+
+LabNotebook
+
+83
+
+Utilities & Preferences
+
+86
+
+Utilities Dialog
+
+86
+
+Disk Utilities
+
+93
+
+Preferences Dialog
+
+95
+
+WaveSource Automatic Waveform Generator
+
+98
+
+Digital Voltmeter
+
+100
+
+Maintenance
+
+102
+
+Cleaning
+
+102
+
+Fuse Replacement
+
+102
+
+Restart/Reboot Instrument
+
+102
+
+MAUITM Firmware Update for Windows CE Oscilloscopes
+
+103
+
+Technical Support
+
+104
+
+Returning a Product for Service
+
+105
+
+Warranty
+
+106
+
+Certifications
+
+107
+
+Index
+
+110
+
+Welcome
+Thank you for purchasing a Teledyne LeCroy WaveSurfer 3000z oscilloscope. We're certain you'll be pleased with the detailed features unique to our instruments.
+Take a moment to verify that all items on the packing list or invoice copy have been shipped to you. Contact your nearest Teledyne LeCroy customer service center or national distributor if anything is missing or damaged. We can only be responsible for replacement if you contact us immediately.
+Images in this manual may have been taken using a different model oscilloscope. They are meant only to illustrate general concepts. Rest assured that while the GUI may look different than yours, the functionality is the same unless otherwise stated.
+We truly hope you enjoy using Teledyne LeCroy's fine products.
+
+ii
+
+Safety
+Safety
+Symbols
+These symbols appear on the instrument or in documentation to alert you to important safety concerns: Caution of potential damage to instrument or Warning of potential bodily injury. Refer to manual. Do not proceed until the information is fully understood and conditions are met. Warning, risk of electric shock or burn.
+Caution, contains parts/assemblies susceptible to damage by Electrostatic Discharge (ESD).
+Frame or chassis terminal (ground connection).
+Alternating current.
+Standby power (front of instrument).
+Precautions
+Observe generally accepted safety procedures in addition to the precautions listed here. The overall safety of any system incorporating this product is the responsibility of the assembler of the system. Use proper power cord. Use only the power cord shipped with and certified for the country of use. Maintain ground. The AC inlet ground is connected directly to the chassis of the . To avoid electric shock, connect only to a mating outlet with a safety ground contact.
+Caution: Interrupting the protective conductor inside or outside the oscilloscope, or disconnecting the safety ground terminal, creates a hazardous situation. Intentional interruption is prohibited.
+Connect and disconnect properly. Do not connect/disconnect probes, test leads, or cables while they are connected to a live voltage source. Observe all terminal ratings. Do not apply a voltage to any input that exceeds the maximum rating of that input. Refer to the marking next to the terminals for maximum allowed values. Use indoors only within the operational environment listed. Do not use in wet or explosive atmospheres. Keep product surfaces clean and dry. See Cleaning. Do not block the cooling vents. Leave a minimum six-inch (15 cm) gap between the instrument and the nearest object. Keep the underside clear of papers and other objects. Exercise care when lifting and carrying. Unplug the instrument to move it. Use the built-in carrying handle. Do not remove the covers or inside parts. Refer all maintenance to qualified service personnel. Do not operate with suspected failures. Check body and cables regularly. If any part is damaged, cease operation immediately and secure the from inadvertent use.
+1
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+
+Operating Environment
+
+Temperature: Humidity:
+Altitude:
+
+0 °C to 50 °C
+Maximum relative humidity (RH) 90% up to 31 °C, decreasing linearly to 50% relative humidity at 40 °C
+Up to 10,000 ft (3,048 m) at or below 30 °C
+
+Measuring Terminal Ratings (C1-C4 and Ext)
+Caution: Measuring terminals have no rated measurement category per IEC/EN 61010-1:2010. Measuring terminals are not intended to be connected directly to supply mains.
+
+Cooling
+The relies on forced air cooling with internal fans and vents. The internal fan control circuitry regulates the fan speed based on the ambient temperature. This is performed automatically after start-up.
+
+Caution: Do not block the cooling vents.
+
+Take care to avoid restricting the airflow to any part. In a benchtop configuration, leave a minimum of 15 cm (6 inches) around the sides between and the nearest object. The feet provide adequate bottom clearance. Follow rackmount instructions for proper rack spacing.
+
+Power
+The instrument operates from a single-phase, 100 to 240 Vrms (± 10%) AC power source at 50/60 Hz (± 5%), or a 100 to 120 Vrms (± 10%) AC power source at 400 Hz (± 5%). The instrument automatically adapts to the line voltage. Manual voltage selection is not required.
+
+Power Consumption
+
+Power Consumption
+Nominal Maximum* Standby
+
+WaveSurfer 3000z
+4-channel 80 W (80 VA) 150 W (150 VA)
+4W
+
+WaveSurfer 3000
+
+4-channel 80 W (80 VA) 150 W (150 VA)
+4W
+
+2-channel 65 W (65 VA) 100 W (100 VA)
+4W
+
+* Maximum consumption represents power accessories installed on all inputs/outputs (e.g., active probes, USB peripherals, digital leadset, etc.).
+
+Ground
+The AC inlet ground is connected directly to the frame of the instrument. For adequate protection against electric shock, connect to a mating outlet with a safety ground contact.
+
+Caution: Only use the power cord provided with your instrument. Interrupting the protective conductor inside or outside the oscilloscope, or disconnecting the safety ground terminal, creates a hazardous situation. Intentional interruption is prohibited.
+
+2
+
+Oscilloscope Overview and Set Up
+Front Input/Output
+
+Oscilloscope Overview and Set Up
+
+A. Power button. B. Channel inputs 1-4 for analog signals. C. Mixed signal interface for digital inputs (WS3K-MSO required). D. Front-mounted host USB port for transferring data or connecting peripherals such as a mouse or keyboard. E. Ground and calibration output terminal used to compensate passive probes.
+Back Input/Output
+
+A. WaveSource connector outputs signal from the internal waveform generator. B. MicroSD Card slot. C. EXT Trig connector accepts external trigger. D. AUX OUT connector sends trigger out. E. VGA connector sends video out to external monitors. F. Ethernet port connects the oscilloscope to a LAN. G. USBTMC port enables remote control of the oscilloscope. H. Additional host USB ports (2) connect external devices such as printers or storage drives. I. Fuse holder. J. AC Power inlet. See the general set up instructions for more information about configuring connections to other devices.
+3
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Front Panel
+The Front Panel houses "hard" controls for basic oscilloscope functions. See the later sections of this manual for instructions on using the touch screen to make the settings described here.
+All the knobs on the front panel function one way if turned and another if pushed like a button. The top label describes the knob's "turn" action, the bottom label its "push" action.
+Front panel buttons light up to indicate which traces and functions are active. Actions performed from the front panel always apply to the active trace.
+Miscellaneous Controls
+Auto Setup performs an Auto Setup.
+Default Setup resets the oscilloscope to the factory defaults.
+Print captures the entire screen and outputs it according to your Hardcopy settings. Touch Screen enables/disables touch screen functionalilty. Clear Sweeps resets the acquisition counter and any cumulative measurements.
+Shortcut Buttons
+Decode opens the Serial Decode dialog if you have serial data decoder options installed.
+WaveScan opens the WaveScan dialog.
+History opens the History Mode dialog.
+WaveSource opens the WaveSource waveform generator dialog if you have the function generator option installed.
+Trigger Controls
+Level knob changes the trigger threshold level (V). The number is shown on the Trigger descriptor box. Pushing the knob sets the trigger level to the 50% point of the input signal. READY indicator lights when the trigger is armed. TRIG'D is lit momentarily when a trigger occurs. A fast trigger rate causes the light to stay lit continuously. Setup corresponds to the menu selection Trigger > Trigger Setup. Press it once to open the Trigger Setup dialog and again to close the dialog. Auto triggers acquisition after a time-out, even if the trigger conditions are not met. Normal triggers acquisition each time a signal is present that meets the trigger conditions. Single triggers once (single-shot acquisition) when the input signal meets the trigger conditions. If the oscilloscope is already armed, it will force a trigger. Stop stops acquisition. If you boot up the instrument with the trigger in Stop mode, a "No trace available" message is shown. Press the Auto button to display a trace.
+4
+
+Oscilloscope Overview and Set Up
+Horizontal Controls
+The Delay knob changes the Trigger Delay value (S) when turned. Push the knob to reset Delay to zero.
+The Horizontal Adjust knob sets the Time/division (S) of the oscilloscope acquisition system when the trace source is an input channel. The Time/div value is shown on the Timebase descriptor box. When using this control, the oscilloscope allocates memory as needed to maintain the highest sample rate possible for the timebase setting. When the trace is a zoom, memory or math function, turn the knob to change the horizontal scale of the trace, effectively "zooming" in or out. By default, the knob adjusts values in 1, 2, 5, 10 step increments. Push the knob to change the action to fine increments; push it again to return to stepped increments.
+Vertical Controls
+Channel buttons turn on a channel that is off, or activate a channel that is already on. When the channel is active, pushing its channel button turns it off. A lit button shows the active channel.
+Offset knob adjusts the zero level of the trace (this makes it appear to move up or down relative to the center axis of the grid). The value appears on the trace descriptor box. Push it to reset Offset to zero.
+Gain knob sets Vertical Gain (V/div). The value appears on the trace descriptor box. By default, the knob adjusts values in 1, 2, 5, 10 step increments. Push the knob to change the action to fine increments; push it again to return to stepped increments.
+Dig button enables digital input through the Digital Leadset on -MS models.
+Math, Zoom, and Mem(ory) Buttons
+The Zoom button creates a quick zoom for each open channel trace. Touch the zoom trace descriptor box to display the zoom controls.
+The Math and Mem(ory) buttons open the corresponding setup dialogs.
+Cursor Controls
+Cursors identify specific voltage and time values on the waveform. The white cursor lines help make these points more visible. A readout of the values appears on the trace descriptor box.
+There are five preset cursor types, each with a unique appearance on the display. These are described in more detail in the Cursors section.
+Type selects the cursor type. Continue pressing to cycle through all cursor until the desired type is found. The type "Off" turns off the cursor display.
+Cursor knob repositions the selected cursor line when turned. Push the knob to select a different cursor line to adjust.
+Adjust and Intensity Controls
+The Adjust knob changes the value in any highlighted data entry field when turned. Pushing the Adjust knob toggles between coarse (large increment) or fine (small increment) adjustments.
+When more data is available than can actually be displayed, the Intensity button helps to visualize significant events by applying an algorithm that dims less frequently occurring samples. This feature can also be accessed from the Display Setup dialog.
+5
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Signal Interfaces
+Teledyne LeCroy instruments offer a variety of interfaces to input analog or digital signals. See the oscilloscope product page at teledynelecroy.com for a list of compatible input devices.
+ProBus Interface
+C1-C4 inputs utilize the ProBus interface. The ProBus interface contains a 6-pin power and communication connection and a BNC signal connection to the probe, with sense rings for detecting passive probes. It offers both 50  and 1 M input impedance, enabling it to provide power and control for a wide range of probes such as high impedance passive probes, high impedance active probes, current probes, high voltage probes, and differential probes. The ProBus interface completely integrates the probe with the channel. Upon connecting a Teledyne LeCroy probe, the probe type is recognized and some setup information, such as input coupling and attenuation, is performed automatically. This information is displayed on the Probe Dialog, behind the Channel (Cn) dialog. System (probe plus instrument) gain settings are automatically calculated and displayed based on the probe attenuation. The ProBus interface may have a BNC-terminated cable connected directly to it. Depending on the BNC connector used on the cable, the interface is rated for up to 2 GHz with 50  coupling or 1 GHz with 1 M coupling.
+Note: Operational bandwidth is equal to the maximum input frequency of your oscilloscope model. See the product datasheet.
+Other Analog Inputs
+EXT In can be used to input an external trigger pulse. This input has a simple BNC interface with no power supply. See your product datasheet for voltage and frequency ratings.
+Mixed Signal Inputs
+Digital Leadset
+The digital leadset shipped with the MSO option connects to the Mixed Signal Input on the front of the oscilloscope to input of up-to-16 lines of digital data. Physical lines can be preconfigured into different logical groups, Digitaln, corresponding to a bus and renamed appropriately depending on the group. The transitions for each line may be viewed through different displays. See Connecting the Digital Leadset for instructions.
+6
+
+Oscilloscope Overview and Set Up
+Probes
+The oscilloscope is compatible with the included passive probes and most Teledyne LeCroy active probes that are rated for the instrument's bandwidth. Probe specifications and documentation are available at teledynelecroy.com/probes.
+Passive Probes
+The passive probes supplied are matched to the input impedance of the instrument but may need further compensation. Follow the directions in the probe instruction manual to compensate the frequency response of the probes. If using other passive probes than those supplied, be sure to perform a low frequency calibration before using them to measure signal. You can use the signal from the Cal Out hook on the front of the oscilloscope.
+Active Probes
+Teledyne LeCroy offers a variety of active probes for use with your oscilloscope. Most active probes match probe to oscilloscope response automatically using probe response data stored in an on-board EEPROM. This ensures the best possible combined probe plus oscilloscope channel frequency response without the need to perform any deembedding procedure. Be aware that many active probes require a minimum oscilloscope firmware version to be fully operational. See the probe documentation.
+Micro SD Card
+The Micro SD Card acts as the oscilloscope's removable hard drive. Use it to store and easily share setup files, waveform files, LabNotebooks, and other user data. To remove the card, push in and release. The card should partially pop out, at which point it can be pulled out fully. To replace the card, push it into the slot until you hear it click.
+Note: When using the oscilloscope Disk Utilities, the Micro SD card is labeled Storage Card, while a connected USB drive is labeled USB Disk.
+7
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Positioning the Feet
+The WaveSurfer is equipped with rotating, tilting feet to allow four different viewing positions.
+To tilt the body back slightly for bench top viewing, pull the small flaps on the bottom of the feet away from the body of the oscilloscope. To tilt the body forward, rotate both feet to the back. This position is useful when placing the oscilloscope on a high shelf. Pulling out the flaps in this position increases the angle of the tilt.
+Connecting to Other Devices/Systems
+After start up, configure the oscilloscope connections using the menu options listed below.
+LAN
+The oscilloscope is preset to accept DHCP network addressing over a TCPIP connection. Connect an Ethernet cable from the port on the back panel to a network access device. Go to Utilities > Utilities Setup > Remote to find the IP Address. To set a Static IP address, touch Net Connections on the Remote dialog and enter the new IP address. Go to Utilities > Preference Setup > Email to configure email settings.
+Remote Control
+You can remote control the instrument using TCP/IP over LAN or a direct Ethernet connection. If using the LAN, be sure the instrument is on the same subnet as the controller.
+Note: Depending on the controller, you may have to use a cross-over cable when making a direct connection.
+The WaveSurfer also supports remote control via USBTMC . To change the remote control setting from the default TCP/IP, go to Utilities > Utilities Setup > Remote.
+USB Peripherals
+Connect peripherals (e.g., mouse, keyboard) to any USB host port on the front or back of the instrument. These connections are "plug-and-play" and do not require further configuration.
+External Monitor
+WaveSurfer 3000 supports external monitors with 1024 x 600 ppi resolution. Connect the monitor cable to the VGA video output on the back of the instrument. The connection is "plug-and-play" and does not require any further configuration.
+8
+
+Oscilloscope Overview and Set Up
+Printer
+WaveSurfer 3000 supports PictBridge-compliant printers. Connect the printer to any host USB port. Go to Utilities > Utillities Setup > Hardcopy to configure printer settings.
+Trigger Out
+To send a trigger out pulse to another device, connect a BNC cable from Aux Out on the back of he instrument to the other device.
+External Device (for Waveform Generation)
+Connect a BNC cable from the WaveSource Output on the back of the instrument to the device to which you wish to output a signal. Go to Utilities > WaveSource or touch the front panel WaveSource button to configure the signal.
+Note: WaveSource is optional and requires an activated license key.
+Powering On/Off
+Press the Power button to turn on the instrument. If the button is not easily accessible (e.g., in a rackmount), you can go to Utilities > Preferences and enable Power on AC. Then, the instrument will start whenever the AC power supply is turned on.
+Caution: Do not power on or calibrate with a signal attached.
+Powering on will automatically start all services and load the oscilloscope application software. After a min. warm up and calibration period, the oscilloscope will be fully operational. To power down, you can quickly press the Power button again, but the safest way to power down is to use the File > Shutdown menu option, which will always execute a proper shut down process and preserve settings. Holding the Power button for 7 seconds will execute a "hard" shut down (as on a computer), which we do not recommend doing because it does not allow the operating system to close properly, and setup data may be lost.
+Caution: Except for emergencies, never power off by pulling the power cord or turning off the AC supply without first shutting down the oscilloscope application properly. The Power button does not disconnect the instrument from the AC power supply. The only way to fully power down the instrument is to unplug the AC power cord or otherwise turn off the AC power supply. We recommend unplugging the instrument if it will remain unused for a long period of time.
+9
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Software Activation
+The oscilloscope software (firmware and standard applications) is active upon delivery. At power-up, the instrument loads the software automatically.
+Free firmware updates are available periodically. Visit the software download page of our website at teledynelecroy.com. You must register an account to download software.
+Registered users will receive an email notification when a new update is released. Follow the instructions in Firmware Update to download and install the software.
+If you decide to purchase an option, you will receive a license key via email that activates the optional features. See Options for instructions on activating optional software packages.
+Language Selection
+To change the language of the oscilloscope application:
+1. Go to Utilities > Preference Setup > Preferences and make a Language selection.
+2. Follow the prompt to restart the application.
+
+You can also select by touching the Language icon upon start up.
+
+when it appears to the far right of the menu bar
+
+10
+
+Using MAUI
+Using MAUI
+MAUI (Most Advanced User Interface) is Teledyne LeCroy's unique oscilloscope user interface.
+Touch Screen
+The oscilloscope features a capacitive touch screen that supports fluid, tablet-like response to gestures.
+Note: Use your finger or a capacitive stylus (not included) to interact with the touch screen. A regular stylus will not work.
+The entire display area is active. Many controls that display information also work as "buttons" to access other functions, and even the waveform traces can be manipulated. If you have a mouse installed, you can click anywhere you can touch to activate a control; in fact, you can alternate between clicking and touching, whichever is convenient for you. The touch screen is divided into the following major control groups:
+
+Menu Bar
+The top of the window contains a complete menu of functions. Making a selection here changes the dialogs displayed at the bottom of the screen. While many operations can also be launched from the front panel or descriptor boxes, the menu bar is the best way to access dialogs for Save/Recall, Display, Status, LabNotebook, Pass/Fail, optional Analysis packages and Utilities/Preferences.
+
+If an action can be "undone", the Undo button the state prior to the action.
+
+at the right of the menu bar restores the oscilloscope display to
+
+11
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Grids
+The grids display the waveform traces. Every grid is 8 vertical divisions representing the full number of vertical levels and 10 horizontal divisions. The value represented by each division depends on the Vertical and Horizontal Scale of the traces that appear on the grid. The grid region can be divided up to three times to show channel (Cn), math (Fn), and zoom (Zn) traces on different grids. In Auto Grid mode, it will divide automatically as needed when new types of traces are turned on. Two additional grid styles allow you to display XY traces, as well as voltage-time traces on separate grids. Regardless of the number and orientation of grids, every grid always represents the same number of Vertical levels. Therefore, absolute Vertical measurement precision is maintained.
+Grid Intensity
+You can adjust the brightness of the grid lines by going to Display > Display Setup and entering a new Grid Intensity percentage. The higher the number, the brighter and bolder the grid lines.
+Grid Indicators
+These indicators appear around or on the grid to mark important points on the display. They are matched to the color of the trace to which they apply. When multiple traces appear on the same grid, indicators refer to the foreground trace--the one that appears on top of the others.
+Trigger Time, a small triangle along the bottom (horizontal) edge of the grid, shows the time of the trigger. Unless Horizontal Delay is set, this indicator is at the zero (center) point of the grid. Delay time is shown at the top right of the Timebase descriptor box. Pre/Post-trigger Delay, a small arrow to the bottom left or right of the grid, indicates that a pre- or post-trigger Delay has shifted the Trigger Time indicator to a time not shown on the grid. All Delay values are shown on the Timebase Descriptor Box. Trigger Level at the right edge of the grid tracks the last triggered voltage level. If you change the level, a hollow triangle of the same color appears at the new level until it has triggered. The trigger level indicator is not shown if the triggering channel is not displayed. Zero Volts Level is located at the left edge of the grid. One appears for each open trace on the grid, sharing the number and color of the trace. Cursor markers appear over the grid to indicate the voltage and time being measured on the waveform. Dragand-drop cursor markers to quickly reposition them.
+12
+
+Using MAUI
+
+Descriptor Boxes
+Trace descriptor boxes appear just beneath the grid whenever a trace is turned on. They function to:
+l Inform--descriptors summarize the current trace settings and its activity status.
+l Navigate--touch the descriptor box once to activate the trace, twice to open the setup dialog.
+l Configure--drag-and-drop descriptor boxes to change source or copy setups (with OneTouch).
+Besides trace descriptor boxes, there are also Timebase and Trigger descriptor boxes summarizing the acquisition settings shared by all channels, which also open the corresponding setup dialogs.
+
+Channel Descriptor Box
+Channel trace descriptor boxes correspond to analog signal inputs. They show (clockwise from top left): Channel Number, Pre-processing list, Coupling, Vertical Scale (gain) setting, Vertical Offset setting, Sweeps Count (when averaging), Vertical Cursor positions, and Number of Segments (in Sequence mode).
+Codes are used to indicate pre-processing and coupling that has been applied to the input. The short form is used when several processes are in effect.
+Symbols on Descriptor Boxes
+
+Pre-Processing Type
+Deskew Bandwidth Limiting
+Coupling
+
+Long Form
+DSQ BWL DC50, DC1M, AC1M or GND
+
+Short Form
+DQ B D50, D1, A1 or G
+
+Other Trace Descriptor Boxes
+
+Similar descriptor boxes appear for math (Fn), zoom (Zn), and memory (Mn) traces. These descriptor boxes show any Horizontal scaling that differs from the signal timebase. Units will be automatically adjusted for the type of trace.
+
+Timebase and Trigger Descriptor Boxes
+The Timebase descriptor box shows: (clockwise from top right) Horizontal Delay, Time/div, Sample Rate, Number of Samples, and Sampling Mode (blank when in Real-time mode).
+Trigger descriptor box shows: (clockwise from top right) Trigger Source and Coupling, Trigger Level (V), Slope/Polarity, Trigger Type, Trigger Mode.
+Horizontal (time) cursor readout, including the time between cursors and the frequency, is shown beneath the TimeBase and Trigger descriptor boxes. See the Cursors section for more information.
+
+13
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Dialogs
+Dialogs appear at the bottom of the display for entering setup data. The top dialog will be the main entry point for the selected functionality. For convenience, related dialogs appear as a series of tabs behind the main dialog. Touch the tab to open the dialog.
+Right-hand Subdialogs
+At times, your selections will require more settings than can fit on one dialog, or the task invites further action, such as zooming a new trace. In that case, subdialogs will appear to the right of the dialog. These subdialog settings always apply to the object that is being configured on the tab to the left.
+Action Toolbar
+Several setup dialogs contain a toolbar at the bottom of the dialog. These buttons enable you to perform commonplace tasks--such as turning on a measurement--without having to leave the underlying dialog. Toolbar actions always apply to the active trace.
+Measure opens the Measure pop-up to set measurement parameters on the active trace. Zoom creates a zoom trace of the active trace. Math opens the Math pop-up to apply math functions to the active trace and create a new math trace. Decode opens the main Serial Decode dialog where you configure and apply serial data decoders and triggers. This button is only active if you have serial data software options installed. Store loads the active trace into the corresponding memory location (C1, F1 and Z1 to M1; C2, F2 and Z2 to M2, etc.). Find Scale performs a vertical scaling that fits the waveform into the grid. Label opens the Label pop-up to annotate the active trace.
+14
+
+Using MAUI
+Message Bar
+At the bottom of the oscilloscope display is a narrow message bar. The current date and time are shown at the far right. Status, error, or other messages are shown at the far left, where "Teledyne LeCroy" normally appears. You will see the word "Processing..." highlighted with red at the right of the message bar when the oscilloscope is processing your last acquisition or calculating. This will be especially evident when you change an acquisition setting that affects the ADC configuration while in Normal or Auto trigger mode, such as changing the Vertical Scale, Offset, or Bandwidth. Traces may briefly disappear from the display while the oscilloscope is processing.
+15
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+
+Touch Screen Actions
+Touch, drag, and swipe can be used to create and change setups with one touch. Just as you change the display by using the setup dialogs, you can change the setups by moving different display objects. Use the setup dialogs to refine touch screen actions to precise values.
+
+Activate
+
+Touch a trace or its descriptor box to activate it and bring it to the foreground. When the descriptor box appears highlighted in blue, front panel controls and touch screen gestures apply to that trace.
+
+Position Cursors
+To change cursor measurement time/level, drag cursor markers to new positions on the grid. The cursor readout will update immediately.
+
+Change Trigger
+To change the trigger level, drag the Trigger Level indicator to a new position on the Y axis. The Trigger descriptor box will show the new Level.
+
+Scroll
+To scroll long lists of values, swipe the selection dialog or table in an up or down direction.
+
+Pan Trace
+To pan a trace, activate it to bring it to the forefront, then drag the waveform trace right/left or up/down. If it is the source of any other trace, that trace will move, as well. For channel traces, the Timebase descriptor box will show the new Horizontal Delay value. For other traces, the zoom factor controls show the new Horizontal Center.
+To pan at an accelerated rate, swipe the trace right/left or up/down.
+
+Rectangle Zoom
+
+To create a new zoom trace, touch then drag diagonally to draw a rectangle around the portion of the trace you want to zoom. Touch the Zn descriptor box to open the zoom factor controls and adjust the zoom exactly. See Zooming for other ways to zoom traces.
+
+16
+
+Using MAUI
+Controlling Traces
+Traces are the visible representations of waveforms that appear on the display grid. They may show live inputs (Cn, Digitaln), a math function applied to a waveform (Fn), a stored memory of a waveform (Mn), a zoom of a waveform (Zn), or the processing results of special analysis software. Traces are a touch screen object like any other and can be manipulated. They can be panned, moved, labeled, zoomed and captured in different visual formats for printing. Each visible trace will have a descriptor box summarizing its principal configuration settings.
+Turning On/Off Traces
+Turn On/Off Analog Trace
+To turn on an analog channel trace, press the Front Panel channel button. To turn off the trace, press the front panel Channel button a second time, or touch the descriptor box to open the setup dialog and clear the Trace On checkbox.
+Turn On/Off Digital Trace
+To turn on digital traces, from the touch screen, choose Vertical > Digitaln Setup, then check Group on the Digitaln dialog. To turn off the traces, clear the Group checkbox.
+Turn On/Off Other Trace
+To turn on/off math or memory traces, check or clear the Trace On box on the respective setup dialogs.
+17
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Adjusting Traces
+To adjust Vertical Scale and Offset, or Horizontal Scale and Delay, just activate the trace and use the front panel knobs. To make other adjustments--such as units--touch the trace descriptor box twice to open the appropriate setup dialog.
+Many settings are adjusted by selecting from the pop-up that appears when you touch a control. When an entry field appears highlighted in blue after touching, it is active and can be adjusted by turning the front panel knobs. Fields that don't have a dedicated knob (as do Vertical Level and Horizontal Delay) can be modified using the Adjust knob. If you have a keyboard installed, you can type entries in an active (highlighted) data entry field. Or, you can touch it again, then "type" the entry by touching keys on the virtual keypad or keyboard. To use the virtual keypad, touch the soft keys exactly as you would a calculator. When you touch OK, the calculated value is entered in the field.
+18
+
+Using MAUI
+Labeling Traces
+The Label function gives you the ability to add custom annotations to the trace display. Once placed, labels can be moved to new positions or hidden while remaining associated with the trace.
+Create Label
+1. Select Label from the context menu, or touch the Label Action toolbar button on the trace setup dialog.
+2. On the Trace Annotation pop-up, touch Add Label. 3. Enter the Label Text. 4. Optionally, enter the Horizontal/Vertical Pos. (in same units as the trace) at which to place the label. The
+default position is 0 ns. Use Trace Vertical Position places the label immediately above the trace.
+Reposition Label
+Drag-and-drop labels to reposition them, or change the position settings on the Trace Annotation pop-up.
+Edit/Remove Label
+On the Trace Annotation pop-up, select the Label from the list. Change the settings as desired, or touch Remove Label to delete it. Clear View labels to hide all labels. They will remain in the list.
+19
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Zooming
+Zooms magnify a selected region of a trace by altering the horizontal scale relative to the source trace. They may be created in several ways, using either the front panel or the touch screen. The current settings for each zoom trace can be seen on the Zn dialogs. You can adjust zooms the same as any other trace by using the front panel Vertical and Horizontal knobs or the touch screen zoom factor controls. All enabled zooms open in the same grid at the same horizontal scale.
+Zoom Dialog
+Choosing Math > Zoom Setup from the menu bar opens a dialog summarizing all active and inactive zoom trace settings. Use the selection boxes to turn on/off zooms. There are also options to:
+l Reset Zoom, return all zooms to x1 magnification. l Simultaneously change Center and Horizontal Scale for all active zooms, either by setting the values on the
+dialog or touching the In and Out buttons.
+20
+
+Zn Dialog
+
+Using MAUI
+
+Each Zn dialog reflects the center and scale for that number zoom. Use the Zoom factor controls to adjust each zoom independently.
+Trace Controls
+Trace On shows/hides the zoom trace. It is selected by default when the zoom is created. Source lets you change the source of the zoom to any digital, math or memory trace while maintaining all other settings.
+Note: When using the front panel Quick Zoom button, Z1 through Z4 are assigned to C1 through C4 respectively. The Zn dialog is one way to create zooms for other types of traces, by changing the zoom source.
+Segment Controls
+These controls are used to select the segment(s) to be "zoomed" for display when sampling in Sequence Mode.
+Zoom Factor Controls
+l Out and In buttons increase/decrease zoom magnification and consequently change the Horizontal and Vertical Scale settings. Touch either button until you've achieved the desired level.
+l Var.checkbox enables zooming in single increments. l Horizontal Scale/div sets the time represented by each horizontal division of the grid. It is the equivalent of
+Time/div in channel traces. l Vertical Scale/div sets the voltage level represented by each vertical division of the grid; it's the equivalent of
+V/div in channel traces. l Horizontal/Vertical Center sets the time/voltage at the center of the grid. The horizontal center is the same for
+all channel zoom traces. l Reset Zoom returns the zoom to x1 magnification.
+Tip: On WaveSurfer oscilloscopes, all channel zooms (Z1-Z4) are displayed in the same grid at the same horizontal scale.
+21
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Creating Zooms
+Any type of trace can be zoomed by creating a new zoom trace (Zn) following the procedures here. All zoom traces open in the same grid, with the zoomed portion of the source trace left unshaded.
+Zoomed area of source trace left unshaded.
+Quick Zoom
+Use the front panel Zoom button to quickly create one zoom trace for each displayed channel trace. Quick zooms are created at the same vertical scale as the source trace and 10:1 horizontal magnification. Each channel is assigned to the equivalent numbered zoom trace (C1 to Z1, etc.). To turn off the quick zooms, press the Zoom button again.
+Manually Create Zoom
+To manually create a zoom of a channel trace, touch-and-drag diagonally to draw a rectangle around any part of the source trace. The horizontal area within the rectangle is expanded, while the vertical area is rescaled proportionally. The degree of vertical and horizontal magnification, therefore, depends on the size of the rectangle that you draw. Doing this over a zoom, math or memory trace rescales the same trace, rather than creating a new zoom. To zoom these types of traces, go to Math > Zoom Setup and choose it as the Source of Zn, or use the Zoom action button at the bottom of the trace setup dialog. You can also create new zooms by creating a Zoom math function. This method creates a new Fn trace, rather than a new Zn trace, but it can be rescaled in the same manner. It is a way to create more zooms than you have Zn slots available on your instrument.
+Adjust Zoom Scale
+The zoom's Horizontal units will differ from the signal timebase because the zoom is showing a calculated scale, not a measured level. This allows you to adjust the zoom factor using the front panel knobs or the zoom factor controls however you like without affecting the timebase (a characteristic shared with math and memory traces).
+Close Zoom
+New zooms are turned on and visible by default. If the display becomes too crowded, you can close a particular zoom and the zoom settings are saved in its Zn slot, ready to be turned on again when desired. To close the zoom, clear the Trace On box on the Zoom or Zn dialog.
+22
+
+Using MAUI
+Print/Screen Capture
+The front panel Print button captures an image of the touch screen and outputs it according to your Hardcopy settings. It can be used to create an image file of waveform traces, or send the image to a networked printer or email recipient.
+
+The Printer
+
+icon at the right of the Hardcopy dialog will also execute your print setting.
+
+Print to Image File
+Print may be used as a screen capture tool by going to Utilities > Utilities Setup > Hardcopy and selecting to print to File, then choosing a graphical format. Once configured, just press the Print button or Printer icon.
+You can also use the touch screen to generate a screen capture by choosing File > Print once Hardcopy has been set to print to file.
+
+Print to LabNotebook
+The front panel Print button can be configured to create a LabNotebook. This is a convenient way to create new entries as you work, which can later be edited or have other files appended.
+To configure the Print button for Notebook Entries, go to File > LabNotebook > Preferences tab and check Create Entry when Hardcopy Pressed.
+
+Note: The File menu Print option will continue to use whatever method you have set on the Utillities Hardcopy tab when invoked. Go to Utilities > Utilities Preferences > Hardcopy to make that selection.
+
+23
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Acquisition
+The acquisition settings include everything required to produce a visible trace on screen and an acquisition record that may be saved for later processing and analysis:
+l Vertical axis scale at which to show the input signal, and probe characteristics that affect the signal l Horizontal axis scale at which to represent time, sampling mode and sampling rate l Acquisition trigger mechanism Optional acquisition settings include bandwidth filters and pre-processing effects, vertical offset, and horizontal trigger delay, all of which affect the appearance and position of the waveform trace. All current acquisition settings can be viewed through the various Status dialogs. Access them by choosing the Status option from the Vertical, Timebase or Trigger menus.
+Auto Setup
+Auto Setup configures the essential acquisition settings based on the first input signal it finds, starting with C1. If nothing is connected to C1, it searches C2 and so forth until it finds a signal. Vertical Scale (Volts/div), Offset, Timebase (Time/div), and Trigger are set to a 50% Edge trigger on the first, non-zero-level amplitude, with the entire waveform visible for at least 10 cycles over 10 horizontal divisions. To run Auto Setup:
+1. Press the front panel Auto Setup button, or choose Auto Setup from the Vertical, Timebase, or Trigger menus (these all perform the same function).
+2. To confirm, press the Auto Setup button again, or use the touch screen display.
+Vertical
+Vertical, also called Channel, settings usually relate to voltage level and control traces along the Y axis. Note: While Digital settings can be accessed through the Vertical menu on oscilloscopes with mixed-signal capabilities, they are handled quite differently. See Digital.
+The amount of voltage displayed by one vertical division of the grid, or Vertical Scale (V/div), is most quickly adjusted by using the front panel Vertical knob. The Cn descriptor box always shows the current Vertical Scale setting. Detailed configuration for each trace is done on the Cn dialogs. 24
+
+Acquisition
+Cn (Channel) Dialog
+Full vertical setup is done on the Cn dialog. To access it, choose Vertical > Channeln Setup from the menu bar, or touch the Channel descriptor box. If a Teledyne LeCroy probe is connected, its Probe dialog appears to the right of the Cn dialog.
+Vertical Settings
+The Trace On checkbox turns on/off the channel trace. Volts/div sets the gain (sensitivity) in the selected vertical units, volts by default. Select Variable Gain for fine adjustment or leave the checkbox clear for fixed 1, 2, 5, 10-step adjustments. Offset adds a defined value of DC offset to the signal as acquired by the input channel. This may be helpful in order to display a signal on the grid while maximizing the vertical height (or gain) of the signal. A negative value of offset will "subtract" a DC voltage value from the acquired signal (and move the trace down on the grid) whereas a positive value will do the opposite. Touch Zero Offset to return to zero. A variety of Bandwidth filters are available. To limit bandwidth, select a filter from this field. Coupling may be set to DC 50 , DC1M, AC1M or GROUND.
+Caution: The maximum input voltage depends on the input used. Limits are displayed on the body of the instrument. Whenever the voltage exceeds this limit, the coupling mode automatically switches to GROUND. You then have to manually reset the coupling to its previous state. While the unit does provide this protection, damage can still occur if extreme voltages are applied.
+Invert changes the apparent polarity of the signal, substituting an equivalent negative value for a positive one, and vice versa, so that the waveform appears to be "flipped" on screen. Vertical Units may be changed from Volts (V) to Amperes (A). This is useful when using a third-party current probe (which is not auto-detected) or when probing across a current sensor/resistor.
+Probe Attenuation and Deskew
+Probe Attenuation values for third-party probes may be entered manually on the Cn dialog. The instrument will detect it is a third-party probe and display these fields. When a Teledyne LeCroy probe is connected to a channel input, the Attenuation field becomes a button to access the Probe dialog, a tab added to the right of the Cn tab. Enter Attenuation on the Probe dialog. Deskew adjusts the horizontal time offset by the amount entered in order to compensate for propagation delays caused by different probes or cable lengths. The valid range is dependent on the current timebase setting.
+25
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Probe Dialog
+The Probe Dialog immediately to the right of the Cn dialog displays the attributes of the probe connected to that channel and (depending on the probe type) allows you to control the probe from the touch screen.
+Caution: Remove probes from the circuit under test before initializing Auto Zero or DeGauss.
+Depending on the type of probe you have connected to the channel, you may see any of the following controls: Power On initiates power to active probes via the oscilloscope interface. LED Active turns on AutoColor ID if the probe has this feature. The LED on the probe body will light in the color of the channel to which the probe is connected. Auto Zero corrects for DC offset drifts that naturally occur from thermal effects in the amplifier of active probes. Teledyne LeCroy probes incorporate Auto Zero capability to remove the DC offset from the probe's amplifier output to improve the measurement accuracy. The Degauss control is activated for current probes. Degaussing eliminates residual magnetization from the probe core caused by external magnetic fields or by excessive input. It is recommended to always Degauss probes prior to taking a measurement. On oscilloscopes running MAUI version 8.5.1.1 or later, HVD3000 probes set attenuation relative to the oscilloscope's V/div setting and the Voltage Range selection:
+l Auto automatically raises attenuation when V/div is >7.9 or lowers attenuation when V/div is <7.9, allowing you to properly view the input waveform.
+l Lock to High locks attenuation to the highest setting, regardless of the V/div setting. Maintaining a high attenuation will allow small signals on larger voltage waveforms to be accurately measured.
+Use the Refresh button to update the attributes display.
+26
+
+Acquisition
+Timebase
+Timebase (Horizontal) settings control traces along the X axis. The timebase is shared by all channels. The time represented by each horizontal division of the grid, or Time/Division, is most easily adjusted using the front panel Horizontal knob. Full Timebase set up is done on the Timebase dialog, accessed either by choosing Timebase > Horizontal Setup from the menu bar or by touching the Timebase descriptor box.
+Timebase Set Up
+Sampling Mode
+The Sampling Mode determines how the instrument samples the input signal and renders it for display. See Sampling Modes for a description of each type.
+Timebase Mode
+Time/Division is the time represented by one horizontal division of the grid. Touch the Up/Down Arrow buttons on the Timebase dialog or turn the front panel Horizontal knob to adjust this value. The overall length of the acquisition record is equal to 10 times the Time/Division setting. Delay is the amount of time relative to the trigger event to display on the grid. Raising/lowering the Delay value has the effect of shifting the trace to the right/left. This allows you to isolate and display a time/event of interest that occurs before or after the trigger event.
+l Pre-trigger Delay, entered as a positive value, displays the acquisition time prior to the trigger event, which occurs at time 0 when in Real Time sampling mode. Pre-trigger Delay can be set up to the instrument's maximum sample record length; how much actual time this represents depends on the timebase. At maximum pre-trigger Delay, the trigger point is off the grid (indicated by the arrow at the lower right corner), and everything you see represents 10 divisions of pre-trigger time.
+l Post-trigger Delay, entered as a negative value, displays time following the trigger event. Post-trigger Delay can cover a much greater lapse of acquisition time than pre-trigger Delay, up to the equivalent of 10,000 divisions after the trigger event (it is limited at slower time/div settings and in Roll mode). At maximum post-trigger Delay, the trigger point is off the grid far left of the time displayed.
+Set to Zero returns Delay to zero.
+Memory
+Maximum Sample Points shows the maximum number of samples taken per acquisition. The actual number of samples acquired can be lower due to the other timebase settings.
+Note: To avoid aliasing and other waveform distortions, it is advisable (per Nyquist) to acquire at a sample rate at least twice the bandwidth of the input signal.
+27
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Sampling Modes
+The Sampling Mode determines how the instrument samples the input signal and renders it for display.
+Real Time Sampling Mode
+Real Time sampling mode is a series of digitized voltage values sampled on the input signal at a uniform rate. These samples are displayed as a series of measured data values associated with a single trigger event. By default (with no Delay), the waveform is positioned so that the trigger event is time 0 on the grid. The relationship between sample rate, memory, and time can be expressed as:
+Capture Interval = 1/(Sample Rate X Memory) Capture Interval/10 = Time Per Division
+Usually, on fast timebase settings, the maximum sample rate is used when in Real Time mode. For slower timebase settings, the sample rate is decreased so that the maximum number of data samples is maintained over time.
+RIS Sampling Mode
+RIS (Random Interleaved Sampling) allows effective sampling rates higher than the maximum single-shot sampling rate. It is available on timebases 10 ns/div.
+The maximum effective RIS sampling rate is achieved by making multiple single-shot acquisitions at maximum realtime sample rate. The bins thus acquired are positioned approximately 20 ps (50 GS/s) apart. The process of acquiring these bins and satisfying the time constraint is a random one. The relative time between ADC sampling instants and the event trigger provides the necessary variation. The system then interleaves these acquisitions to provide a waveform covering a time interval that is a multiple of the maximum single-shot sampling rate. However, the real-time interval over which the instrument collects the waveform data is much longer, and depends on the trigger rate and the amount of interleaving required.
+Because the instrument requires multiple triggers to complete an acquisition, RIS is best used on repetitive waveforms with a stable trigger. The number depends on the sample rate: the higher the sample rate, the more triggers are required.
+Note: RIS is not available when the oscilloscope is using another form of digital interleaving.
+Roll Sampling Mode
+Roll mode displays incoming points of slow timebase acquisitions so that the trace appears to "roll" continuously across the screen from right to left. The acquisition is complete when a trigger event is detected, at which point the next acquisition begins immediately.
+Parameters or math functions are updated only after each acquisition is complete, as new data becomes available. Therefore, Roll mode should not be used with Auto trigger mode, because as the acquisition is never "complete," parameters are not updated correctly.
+Timebase must be set sufficiently slow to enable Roll mode selection; increase Time/div to 50 ms/div or more to activate the Roll mode option on the Timebase dialog. Only Edge trigger is supported for Roll mode acquisitions.
+Note: Roll mode sampling is not available when using any form of digital interleaving. If processing time is greater than acquisition time, the roll mode buffer is overwritten. The instrument warns, "Channel data is not continuous in ROLL mode!!!" and rolling starts again.
+28
+
+Acquisition
+Sequence Sampling Mode
+In Sequence Mode sampling, the completed acquisition consists of a number of fixed-size segments each containing the trigger event. The instrument calculates the capture duration and number of sample points in each segment from the user-defined number of segments and total available memory. Acquired segments are arranged adjacent to one another, forming the waveform display of a typical acquisition. Sequence Mode is ideal for capturing specific events that may be separated by long time intervals. The instrument can acquire over long periods waiting for the trigger event, recording only the desired segments while ignoring the uninteresting periods between events. Measurements can be made on selected segments or on the entire acquisition sequence.
+Note: You cannot operate some Serial Decoders on Sequence Mode acquisitions.
+Sequence Mode Set Up
+The Sequence dialog appears behind the Timebase dialog only when Sequence Mode sampling is selected. Use it to define the number of fixed-size segments to be acquired.
+1. From the menu bar, choose Timebase > Horizontal Setup..., then Sequence Sampling Mode. 2. On the Sequence tab under Acquisition Settings, enter the Number of Segments to acquire. 3. To stop acquisition in case no valid trigger event occurs within a certain timeframe, check the Enable Timeout
+box and provide a Timeout value.
+Note: While optional, Timeout ensures that the acquisition completes in a reasonable amount of time and control is returned to the operator/controller without having to manually stop the acquisition, making it especially useful for remote control applications.
+4. To see the trigger times of those segments acquired, stop acquisition and touch Show Sequence Trigger Times. This will launch the Trigger Time tab of the Acquisition Status dialogs.
+When in Sequence sampling mode, you can view individual segments easily using the front panel Zoom button. A new zoom of the channel trace defaults to Segment 1. You can view other segments by changing the First and total Num(ber) of segments to be shown on the Zn dialog. Touch the Zn descriptor box to display the dialog.
+Tip: By setting Num to 1, you can use the front panel Adjust knob to scroll through each segment in order.
+Channel descriptor boxes indicate the total number of segments acquired in sequence mode. Zoom descriptor boxes show the total number of segments displayed. As with all other zoom traces, the zoomed segments are highlighted on the source trace.
+29
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+History Mode
+History Mode allows you to review any acquisition saved in the history buffer, which automatically stores all acquisition records until full. Not only can individual acquisitions be restored to the grid, you can "scroll" backward and forward through the history at varying speeds to capture changes in the waveforms over time. To access this feature, choose Timebase > History Mode, then select View History to enable the display. Each record is indexed and time-stamped, and you can choose to view the absolute time of acquisition or the time relative to when you entered History Mode. In the latter case, the last acquisition is time zero, and all others are stamped with a negative time. The maximum number of records stored depends on your acquisition settings and the total available memory. Entering History Mode automatically stops new acquisitions. To leave History Mode, restart acquisition by pressing one of the front panel Trigger Mode buttons.
+Note: History Mode does not work with Average or Sequence Mode, or ERES on the input.
+Oscilloscope in History mode.
+Replay Acquisition History
+Watching a "movie" of the history allows you to see waveform changes that are invisible during real-time acquisition. Use the buttons to navigate the history.
+l Top row buttons scroll: Fast Backward, Slow Backward, Slow Forward, Fast Forward. l Bottom row buttons step: Back to Start, Back One, Go to Index (row #), Forward One, Forward to End. Press Pause when you see something of interest, then use the History table to find the exact Index.
+Select Single Acquisition
+Select View Table to show the index of records. Select the row from the table or enter its Index number on the dialog.
+30
+
+Acquisition
+Digital (Mixed-Signal)
+When a mixed-signal device is connected to the oscilloscope, digital input setup options are added to the Vertical menu. There are set up dialogs for digital groups Digital1 to Digital4, which correspond to possible digital buses. You:
+l Choose which lines make up each digital group, what they are named and how they appear on the display l Set the logic determination thresholds
+
+Connecting the Digital Leadset
+
+The digital leadset enables input of up-to-16 lines of digital data. Physical lines can be configured into different logical groups, Digitaln, corresponding to a bus. The transitions for each line may be viewed through different display modes.
+The digital leadset features two digital banks with separate Threshold controls, making it possible to simultaneously view data from different logic families. Initially, logical lines are named and numbered the same as the physical lead , although any line can be renamed appropriately or re-assigned to any lead.
+Each flying lead has a signal and a ground connection. A variety of ground extenders and flying ground leads are available for different probing needs.
+
+Note: To achieve optimal signal integrity, connect the ground at the tip of the flying lead for each input used in measurements. Use the provided ground extenders or ground flying leads to ground the connection.
+To connect the leadset to the instrument, push the connector into the Mixed Signal interface below the front panel until you hear a click. After connecting the device, go on to set up your digital groups.
+To remove the leadset, press and hold the buttons on each side of the connector head, then pull out to release.
+
+31
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Digital Group Set Up
+Digital Group dialog when using Digital Leadset (MSO). A group defines the lines that comprise a bus or that you wish to view together. To set up a digital group:
+1. From the menu bar, choose Vertical > Digitaln Setup. 2. On the Digitaln set up dialog, check the boxes for all the lines that comprise the group. Touch the Right and
+Left Arrow buttons to switch between lead banks as you make line selections. 3. Choose a Display Mode (see below). Use the controls at the right of the dialog to define the Group Height and
+Vertical Position. 4. When you're finished defining the groups and display on the Digitaln dialog, open the Logic Setup dialog to
+define logic thresholds. 5. Check the Group box to start the display.
+Digital Display Set Up
+When a digital group is enabled, the Display Mode setting determines how the data appears on the display. Lines (default) shows a time-correlated trace indicating high, low, and transitioning points (relative to the Threshold) for every digital line in the group. Bus collapses the lines in a group into their Hex values. Line & Bus displays both types of digital trace. The Bus trace appears immediately below the Line traces.
+Digital1 (magenta) shows four lines at Vertical Position +4.0 (top of grid) and Group Height 4.0 divisions (half of grid). Digital4 (green) shows five digital lines and bus trace with the same Vertical Position and Group Height.
+32
+
+Acquisition The size and placement of the traces depend on the Vertical Position and Group Height settings. In Vertical Position, enter the number of divisions (positive or negative) relative to the zero line of the grid where the display begins.The top of the first trace appears at this position. In Group Height, enter the total number of grid divisions the entire display should occupy. All the selected traces (Line and Bus) will appear in this space. Individual traces are resized to fit the total number of divisions available. To close the display of digital traces, uncheck the Group box on the Digitaln dialog.
+Renaming Digital Lines
+The labels used to name each line can be changed to make the user interface more intuitive. Touch Label and select the type:
+l Data (default) appends "D." to the front of each line number. l Address appends "A." to the front of each line number. l Custom lets you create your own labels line by line. To use Custom labels: l Touch the Line number field below the corresponding checkbox. If necessary, use the Left/Right Arrow buttons to switch between banks. l Use the virtual keyboard to enter the name, then press OK.
+Renumbering Digital Lines
+Labels can also be "swapped" between lines. This procedure helps in cases where the physical lead number is different from the logical line number you would like to assign to that input. It can save time having to reattach leads or reconfigure groups.
+Example: A group is set up for lines 0-4, but lead 5 was accidentally attached to the probing point. By "swapping" line 5 with line 4, you do not need to change either the physical or the logical setup.
+1. Select a Label of Data or Address. 2. Touch the Line number field below the corresponding checkbox. If necessary, use the Left/Right Arrow
+buttons to switch between banks. 3. From the pop-up, choose the line with which you want to swap labels.
+Activity Indicators
+Activity indicators appear at the bottom of the Digitaln dialogs. They show which lines are High (up arrow), Low (down arrow), or Transitioning (up an down arrows) relative to the Logic Threshold value.
+33
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Digital Logic Set Up
+Digital logic determination is made according to the settings you make on the Logic Setup tab when defining digital groups.
+Note: If you are using digital inputs as decoder sources, be sure the logic setup you make here matches the levels you set on the decoder dialogs.
+Digital Leadset (MSO)
+For the low-speed digital leadset, logic determination level can be set per digital lead bank. You can use standard Logic Family TTL, ETL, CMOS 5V, CMOS 3.3V, CMOS 2.5V, PECL 5V or LVDS. Alternatively, by selecting Logic Family User Defined, you can define a custom logic Threshold voltage and Hysteresis. Pulses that fail to cross the Hysteresis band will not be determined to be logical 1 or 0.
+34
+
+Acquisition
+Trigger
+Triggers define the event around which digitized information is displayed on the grid. Different Trigger Types are used to select different events in the trigger source waveforms: edge voltages, pulse widths, high/low states, etc. These may be a single channel event or a complex pattern of events across several channels. On instruments with Mixed Signal capabilities, pattern triggers can be set on analog channels (including the External Trigger input), digital lines or a mix of both. In addition to the type, the Trigger Mode determines how the instrument behaves as it encounters trigger events: take a single acquisition and stop, holding on to the display of the last acquisition, or continuously take and display acquisitions. In both cases, when the previous acquisition has completed processing, the oscilloscope is again ready to acquire and the READY indicator is lit. If, while READY, the trigger circuit detects a signal that matches the trigger conditions, the oscilloscope triggers on the next matching event, and the TRIG'D indicator is lit. Unless modified by a pre- or post-trigger Delay, the trigger event appears at time 0 at the horizontal center of the grid, and a period of time equal to five divisions of the timebase is shown to the left and right of it. Delay shifts the acquisition "window" on screen, displaying a different portion of the waveform. An additional condition of Holdoff by time or events is available for Edge and Pattern triggers, including those that appear within Qualified triggers. Holdoff arms the trigger on the first matching event, inserts the holdoff count, then triggers on a subsequent event. Often, especially with repetitive signals, the initial arming event appears to the left of the trigger in "negative" acquisition time.
+Trigger Modes
+The Trigger Mode determines how often the instrument acquires. It is equivalent to how analog oscilloscopes "sweep," or refresh, the display. Trigger Mode can be set from the Trigger menu or from the front panel Trigger control group. In Single mode, when you choose Trigger > Single or press the front panel Single button, the oscilloscope readies, arms, and triggers provided all trigger conditions (including Holdoff) are met. It then stops and continues to display the last acquisition until a new one is taken. The oscilloscope remains armed unless manually stopped or triggered, and if a valid trigger does not occur, invoking Single a second time will force a trigger and display the acquisition. In Normal mode, operation is the same as in Single, except that the trigger automatically re-arms after the previous acquisition is complete, and data is continuously refreshed on the touch screen. Auto operates the same as Normal mode, except that a trigger is forced if the trigger event has not occurred within a preset timeout period. Stop ceases acquisition processing until you select one of the other three modes. The arming and Holdoff counters are cleared, even if there has not yet been a trigger since the previous acquisition.
+35
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Trigger Types
+The Trigger Type sets the triggering conditions. Edge triggers upon a achieving a certain voltage level in the positive or negative slope of the waveform. Width triggers upon finding a positive- or negative-going pulse width when measured at the specified voltage level. Pattern triggers upon a user-defined pattern of high and low voltage levels on selected inputs. On oscilloscopes with mixed-signal capability, it may be a digital logic pattern or a combined digital-analog pattern. If your oscilloscope does not have mixed-signal capability, the pattern can be set using analog channels alone. TV triggers on a specified line and field in standard (PAL, SECAM, NTSC, HDTV) or custom composite video signals. Serial triggers on the occurrence of user-defined serial data events. This type will only appear if you have installed protocol-specific serial trigger and decode options. Go to teledynelecroy.com/serialdata to download manuals.
+Smart Triggers
+Smart triggers allow you to apply Boolean logic conditions to the basic signal characteristics of level, slope, and polarity to determine when to trigger. First select Smart to show all the triggers in the group. Interval triggers upon finding a specific time between two consecutive edges of the same polarity. Use it to capture intervals that fall short of, or exceed, a specified range. Dropout triggers when a signal loss is detected. The trigger is generated at the end of the timeout period following the last trigger source transition. It is used primarily in Single acquisitions with pre-trigger Delay. Runt triggers when a pulse crosses a first threshold, but fails to cross a second threshold before re-crossing the first. Other defining conditions for this trigger are the edge (triggers on the slope opposite to that selected) and runt width. Slew Rate triggers when the rising or falling edge of a pulse crosses an upper and a lower level. The pulse edge must cross the thresholds faster or slower than a selected period of time.
+Other Triggers
+What are commonly known as External and Line triggers are not trigger types, per se, but alternative sources that may be used with several types of triggers, most usually Edge triggers that fire upon the occurrence of a particular edge and level of the trigger input. "External triggers" (Ext or Ext/5 source) look for the selected slope and level in an externally generated pulse that is input to the oscilloscope's Ext. In port. Select the Coupling and Impedance of the input signal.
+Note: Because the Ext. In port does not have an attenuation switch to handle different signal ranges, as do the analog channels, you must choose to use the full range (Ext source selection) or divide by 5 (EXT/5 source selection).
+"Line triggers" (Line source) are Edge triggers that fire at the occurrence of the 50% level of the selected slope on the AC power line connected to the oscilloscope.
+36
+
+Acquisition
+Trigger Set Up
+To open the Trigger dialog, press the front panel Trigger Setup button or touch the Trigger descriptor box. Different controls will appear depending on the Trigger Type selected (e.g., Slope for Edge triggers). Complete the settings shown after making your selection. The trigger condition is summarized in a preview window at the far right of the Trigger dialog. Refer to this to confirm your selections are producing the trigger you want.
+Source
+For most triggers, the Source is the analog channel or digital line to inspect for the trigger conditions. Pattern triggers may utilize multiple sources (such as a mix of analog and digital signals).
+Level
+For analog triggers, enter the voltage Level at which the triggering condition must occur. Use the Find Level button to set the level to the signal mean. Trigger types that require multiple crossings to define the triggering condition--such as Window, SlewRate and Runt-- will have Upper Level and Lower Level fields. For digital pattern triggers, the level is determined by the Logic Family that is set on the digital group. This can also be specified by a custom (User-Defined) crossing Threshold. Usually, there will be a separate Levels tab for these settings.
+Slope/Polarity
+For some triggers, such as Edge, you will be asked to select the waveform Slope (rising vs. falling) on which the triggering event may occur. For others, such as Width, the equivalent selection will be Polarity (positive vs. negative). Choosing a Slope of Either will cause the trigger to fire when the Level is reached on either edge of the waveform.
+Coupling
+For analog triggers, specify the type of signal Coupling at the input: l DC - Frequency components are coupled to the trigger circuit for high frequency bursts, or where the use of AC coupling would shift the effective trigger level. l AC - Capacitively coupled. DC levels are rejected, and frequencies below 50 Hz are attenuated. l LFREJ - Coupled through a capacitive high-pass filter network, DC is rejected and signal frequencies below 50 kHz are attenuated. For stable triggering on medium to high frequency signals. l HFREJ - DC coupled to the trigger circuit, and a low-pass filter network attenuates frequencies above 50 kHz (used for triggering on low frequencies).
+37
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Conditions (Smart Triggers)
+Smart triggers allow you to apply Boolean logic to refine the triggering condition beyond simply Level and Slope/Polarity. The values that satisfy the operators of Less Than, Less Than or Equal To, Greater Than, etc. can be set by entering an Upper Value and/or Lower Value. In some cases, it is possible to set a range of values that satisfy the condition. Depending on the trigger, the values may be either In Range or Out Range that is bounded by the upper/lower values. The extent of the range can often also be specified by using a Nominal and Delta value, rather than an absolute upper and lower value. In this case, the Nominal value sets the center of the range, and the Delta determines how many units plus/minus the Nominal value are included in the range. For Dropout triggers, the default is to Ignore Opposite Edge, setting the trigger on the dropout of the Positive or Negative edge within the given timeframe. Deselecting it has the effect of setting the trigger to fire on the dropout of Both edges.
+Patterns
+Pattern is the default trigger type when a digital input device is connected to the oscilloscope. A triggering logic pattern may be set on digital lines, analog channels, or a combination of both.
+1. On the Trigger dialog, select Pattern trigger type. Open the Digital Pattern dialog.
+2. Enter the hexadecimal value of the pattern in Hex. Lines will take a logical 1, 0, or X ("Don't Care") according to the pattern. Disabled lines will remain X. OR Touch the Dn button for each active line, and select whether it must be High or Low compared to the logic threshold. A logical 1 (High) or 0 (Low) now appears on the dialog. Leave Don't Care (X) selected for any line you wish to exclude from the pattern. Use the Left and Right Arrow buttons to display lines in other digital banks.
+3. To add analog channels to the pattern, touch the Left Arrow button until you see buttons for C1-C4. Touch the buttons and choose High, Low, or Don't Care to set the pattern.
+Note: Analog patterns always assume a logical "And" when combined with any digital pattern. Both conditions must be true for the trigger to fire.
+4. To set a Time Condition in which the pattern must occur once the trigger is armed, choose the operator: l Less Than to trigger only if the pattern occurs before the time set. l Greater Than to trigger only if the pattern occurs after the time set.
+38
+
+Acquisition l In Range to set a time window in which the pattern must occur. l Out Range to se a time window outside which the pattern must occur. 5. Open the Levels dialog and select a Logic Family for each digital bank from which you've selected lines. To set a custom threshold, choose Logic Family User Defined, then enter the Threshold voltage. 6. For analog channels, enter the threshold voltage for each channel in the pattern separately.
+TV Trigger
+TV triggers on a specified line and field in standard or custom composite video signals.
+1. Choose the Source signal input. 2. Choose the signal TV Standard. To use a custom signal, also enter the Frame Rate , # of Fields per line, # of
+Lines, and Interlace ratio. 3. Choose the Line and Field upon which to trigger.
+Serial Trigger
+The Serial trigger type will appear if you have installed serial data trigger and decode options. Select the Serial type then the desired Protocol to open the serial trigger setup dialogs. For setup instructions, download the software instruction manual at teledynelecroy.com/serialdata.
+39
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Qualified Trigger
+A Qualified trigger arms when the qualifying A event occurs on one signal, then fires when the B event occurs on another signal. In Normal trigger mode, it automatically resets after the B event and re-arms upon the next qualifying A event. It is useful for capturing time violations that occur between the state of two signals. On the Trigger dialog, select Qualified trigger type to display the controls.
+Event 'A'
+The A signal's transition above or below a given level--its validation--serves as the enabling, or qualifying, condition for the second signal. It may be either:
+l Edge-qualified once the validating Edge condition occurs on the A signal, with no further requirements. This is set up the same as any Edge trigger by defining the source, level, slope and coupling.
+l State-qualified, where the A signal amplitude must remain in a High/Low state until the B event occurs. After choosing, open the Event 'A' tab and set the qualifying conditions.
+Event 'B'
+The trigger event is always an Edge condition on the B signal, set by defining the source, level, slope and coupling. Open the Event 'B' tab to set the triggering conditions.
+Time Window
+A window can be set to constrain the time within which the B event must occur in relation to the A event in order for the trigger to fire. Use the When B Occurs buttons to trigger:
+l Any Time that B occurs after being qualified by A. l When B occurs in Less Than the time set after being qualified by A. l When B occurs in Greater Than the time set after being qualified by A. The time counter is restarted with every qualifying A event.
+40
+
+Acquisition
+Trigger Holdoff
+Holdoff is either a period of time or an event count that may be set as an additional condition for Edge and Pattern triggers. Holdoff disables the trigger temporarily, even if the other conditions are met. Use Holdoff to obtain a stable trigger for repetitive, composite waveforms. For example, if the number or duration of sub-signals is known, you can disable them by setting an appropriate Holdoff value.
+Hold Off by Time
+This is a period of time to wait after the arming event before triggering on the next event. The maximum allowed time is 20 seconds; Holdoff time is otherwise limited only by the input signal frequency, coupling, and the instrument's bandwidth. When a Holdoff by time is counted from the start of the acquisition, the oscilloscope readies, arms on the first event, holds for the specified time, then triggers on the next event. After one full acquisition has completed, the oscilloscope again readies, arms, holds, and triggers for the following acquisition.
+Positive Edge trigger with Holdoff by time counted from the start of acquisition. When a Holdoff by time is counted from the last trigger time, the oscilloscope immediately re-arms on the first event following the trigger and begins counting the Holdoff, rather than wait to complete the full acquisition. The Holdoff count continues even during the very brief time between acquisitions while the oscilloscope is processing. As soon as the Holdoff is satisfied and the oscilloscope is again ready, it triggers on the next event. The re-arming and Holdoff may occur in one acquisition, and the trigger in the next.
+Positive Edge trigger with Holdoff by time counted from the last trigger time. Note: Because there is only one trigger per acquisition, the trigger event will always belongs to the new acquisition. The processing time shown here is for purposes of illustration only. Regardless of where in the acquisition record the trigger event was found (first edge or last), the display will show time pre- and post-trigger based on your Time/Div and Delay settings.
+41
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Hold Off by Events
+Events refers to the number of times the trigger conditions have been met following the arming event. For example, if the Holdoff is two edges counted from the start of the acquisition, the oscilloscope readies, arms on the first edge, holds off for the next two, triggers on the fourth edge, then completes the acquisition. Because there must always be a first arming edge, it appears to be "Holdoff plus one."
+Positive Edge trigger with Holdoff by events counted from start of acquisition. As with Holdoff by time, when a Holdoff by events is counted from the last trigger time, the oscilloscope re-arms immediately following the trigger and begins the Holdoff count. If the count is satisfied by the time the oscilloscope is again ready, the trigger occurs on the next event at the start of the new acquisition.
+Positive Edge trigger with Holdoff by events counted from last trigger time.
+Holdoff Set Up
+To add Holdoff to an Edge or Pattern trigger, touch the Trigger descriptor box or press the front panel Trigger Setup button, then open the Holdoff tab.
+Choose to Holdoff by Time (clock) or Events, then enter the Time (S) or number of Events to wait before triggering. Choose to Start Holdoff Counter On either the current Acquisition Start time or the Last Trigger Time (time of trigger from previous acquisition).
+42
+
+Acquisition
+Viewing Acquisition Status
+All current acquisition settings can be viewed through the various Status dialogs. Access them by choosing the Status option from the Vertical, Timebase, Trigger, Math, or Analysis menus. The available options will depend on your model.
+43
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Display
+Display menu settings affect the number and style of grids that appear on screen and some of the visual characteristics of traces, such as persistence. Auto Grid is enabled by default. This feature divides the screen as needed when new traces open. WaveSurfer oscilloscopes may be divided into a maximum of three grids--one each for channels/memories, math functions, and zooms--that each represent the full number of vertical levels. All traces of the same type appear on the same grid. Two special grid layouts are available: XY Grid, which puts the oscilloscope in XY mode, and XY Single Grid, which creates one XY grid and one single grid for the rest of your traces. To display all types of traces on a single grid, choose Single Grid from the Display dialog.
+Display Set Up
+To access the Display dialog, choose Display > Display Setup. Open the Persistence dialog to apply persistence to the trace display.
+
+Grid Mode
+The Grid Mode setting determines the number and layout of display grids, each of which represents the full number of vertical levels. The selection icon shows the number and arrangement of grids.
+Only Auto, Single, XY Single and XY Dual are available on WaveSurfer oscilloscopes.
+
+Grid Mode
+Auto (default) Single XY XYSingle
+
+Number variable
+1 1 2
+
+Orientation landscape
+landscape portrait portrait
+
+Notes
+Automatically adds or deletes grids as traces turned on/off, up to the maximum supported All traces share one grid Single XY type grid One VT grid left, one XY grid right
+
+Note: Additional grid modes may become available with the installation of software options.
+
+Other Grid Settings
+To dim or brighten the background grid lines, touch Grid Intensity and enter a value from 0 to 100.
+On WaveSurfer oscilloscopes, Axis labels display the values associated with the top and bottom grid lines (calculated from Volts/div) and the time associated with the extreme left and right grid lines (calculated from the Time/div).
+
+44
+
+Display
+Trace Settings
+Choose a line style for traces: solid Line or disconnected sample Points. When more data is available than can actually be displayed given the number of vertical levels, Trace Intensity helps to visualize significant events by applying an algorithm that dims less frequently occurring samples. Touch Intensity and enter a value from 0 to 100.
+Intensity 40% (left) dims samples that occur  40% of the time to highlight the more frequent samples, vs. intensity 100% (right) which shows all samples the same.
+XY Plots
+XY plots display the phase shift between otherwise identical signals. They can be used to display either voltage or frequency on both axes, each axis now corresponding to a different signal input, rather than a different parameter. The shape of the resulting pattern reveals information about phase difference and frequency ratio.
+Note: The inputs can be any combination of channels, math functions or memories, but both sources must have the same X-axis scale. Choose an XY grid mode and select the sources for Input X and Input Y.
+45
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Persistence Display
+The Persistence feature retains waveform traces on the display for a set amount of time before allowing them to gradually "decay," similar to the analog-style display of old, phosphor screen oscilloscopes. The display is generated by repeated sampling of events over time and the accumulation of the sampled data into "persistence maps". Statistical integrity is preserved because the duration (decay) is proportional to the persistence population for each amplitude or time combination in the data. The different persistence modes show the most frequent signal path in three-dimensional intensities of the same color (Analog), or in a graded spectrum of colors (Color). Access the Persistence dialog from the Display dialog or by choosing Display > Persistence Setup.
+Turn On Persistence
+1. Check Persistence On. 2. Use the buttons to select a persistence mode:
+In Analog Mode, as a persistence data map develops, different intensities of the same color are assigned to the range between a minimum and a maximum population. The maximum population automatically gets the highest intensity, the minimum population gets the lowest intensity, and intermediate populations get intensities in between these extremes. Color Mode persistence works on the same principle as Analog persistence, but instead uses the entire color spectrum rather than intensities of a single hue: violet for minimum population, red for maximum population. 3. Select the Saturation level as a percentage of the total population. All populations above the saturation level are assigned the highest color intensity. At the same time, all populations below the saturation level are assigned the remaining intensities. Data populations are dynamically updated as data from new acquisitions is accumulated. A saturation level of 100% spreads the intensity variation across the entire distribution; at lower saturation levels, the intensity will saturate (become brighter) at a lower population, making visible those events rarely seen at higher saturation levels. 4. In Persistence Time, enter the duration (S) after which persistence data is erased from the display. 5. You can superimpose the last waveform over the persistence map by selecting Show Last Trace.
+Turn Off Persistence
+To turn off persistence and return to the regular trace style, clear the Persistence On checkbox.
+46
+
+Math and Measure
+Math and Measure
+Teledyne LeCroy offers a rich set of standard, pre-programmed tools for the "quickest time to insight" into the characteristics of acquired waveforms. Most instruments calculate measurements on all samples in an acquisition, enabling you to rapidly accumulate thousands or millions of parameter values. You can also apply a variety of mathematical functions to the input waveform trace and view the transformation in a math trace.
+Cursors
+Cursors are markers (lines, cross-hairs, and arrows) that identify horizontal and vertical values where they intersect the X or Y axis. Use cursors to make fast, accurate measurements of points on the waveform.
+Both cursors. The same cursor type is applied to all open traces.
+Cursor Types
+Horizontal Cursors
+Horizontal cursors are positioned at points on the x-axis and will measure the source trace horizontal and vertical values at that point. The Horizontal (Time) cursor displays two lines: X1 with the down-pointing arrow, and X2 with the up-pointing arrow. The readout below the Timebase and Trigger descriptors always shows:
+l The time where each cursor intersects the x-axis (X1 and X2) l The difference of X2 ­ X1 ((x) l The frequency in Hz calculated from the delta time (1/(x). The readout on the source trace descriptor box shows the difference in vertical value where each cursor intersects the source trace (shown by the arrows), calculated as: y@X2 ­ y@X1 = y. When the X1 arrow is higher than the X2 arrow, this will be a negative number, as it represents a drop (e.g., in voltage), even when X2 is positioned above the zero level. When the X1 arrow is lower than the X2 arrow, this will be a positive number, as it represents a rise. Two other Horizontal cursors are offered only in cases where the x-axis represents units other than time: The Horizontal (Frequency) cursor works the same as the Horizontal (Time) cursor, except that it is placed on waveforms that have frequency (Hz) on the x-axis, such as FFTs.
+47
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual The Horizontal (Event) cursor also works the same as the Horizontal (Time) cursor, but is placed only on Trend waveforms, where the x-axis represents the number of the measurement event. When horizontal cursors are not tracking, they can be moved to any position along the x-axis individually. The horizontal delta represents X2 ­ X1, which will be a positive number so long as X2 remains to the right of X1. If X2 is moved to the left of X1, this will now be a negative number.
+Tip: On instruments with OneTouch, when you drag the horizontal cursor readout from below the Timebase descriptor box onto a zoom trace grid or descriptor box, the cursors will automatically adjust position to reflect the difference in scale between the zoom and source traces.
+Vertical Cursors
+Vertical cursors intersect the y-axis and show the vertical value at that point (e.g., a voltage). These cursors can go "off trace" to show vertical scale values that are not represented in the acquisition. Vertical cursors have no horizontal readout below the Timebase descriptor, as they do not have an x-axis element. As they are set by divisions, they remain in the same position and do not "readjust" with changes in the scale of the underlying traces. The Vertical (Amplitude) cursor displays two lines: the dashed-dotted line is Y1, and the dashed line is Y2. The readout on the source trace descriptor box shows the vertical values where Y1 and Y2 intersect the y-axis, and the difference of Y1 ­ Y2 (y). As long as Y2 remains below Y1, this is a negative number, even if Y2 is positioned above the zero level. If Y2 is moved above Y1, it will become a positive number.
+Combination Cursors
+The Horizontal + Vertical option places both Vertical (Amplitude) and Horizontal (Time) cursors together. The readouts will be the same as when placing the cursors individually.
+48
+
+Math and Measure
+Apply and Position Cursors
+To turn on cursors, either: l From the menu bar, choose Cursors and select the desired cursor type from the drop-down list. l On the front panel, press the Cursor button to turn on cursors, then continue pressing to cycle through all the cursor types. Stop when the desired type is displayed. Note: There must be a trace on the grid for cursors to execute, although acquisition may be in process or stopped when you turn them on.
+To turn off cursors, either: l From the menu bar, choose Cursors > Off. l Continue cycling the Cursor button until you reach "Off" (the cursor lines disappear).
+To reposition a cursor: l Drag-and-drop the cursor marker to a new position. Indicators outside the grid show to which trace the cursor belongs when you have multiple traces on one grid. Use the Position data entry controls on the Standard Cursors dialog to place cursors precisely. l Alternatively, use the Front Panel Cursor knob. Push the knob until the correct cursor is selected, then turn the knob to move it. The third press of the Cursor knob selects both cursors so they will track together when the knob is turned. Tip: When there are multiple traces on the same grid, first bring the desired trace to the foreground by touching the trace or its descriptor box. The Cursor knob will only operate on the foreground trace.
+To track cursors, moving both lines together at a consistent distance, check Track on the Standard Cursors dialog. Drag the X1 or Y1 cursor marker, or select the set using the front panel controls and turn the Cursor knob. The delta readouts should show little or no change when tracking, although absolute readouts will change depending on the new position of the cursors. Moving the X2 or Y2 cursor will reset the relative distance and the delta, after which you can again track by moving the X1 or Y1 markers.
+49
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Standard Cursors Dialog
+These controls can be used instead of the front panel controls to turn on cursors or to refine the cursor position. Access the dialog by choosing Cursors > Cursors Setup from the menu bar.
+Cursor Type buttons select the type of cursor displayed on the grid. Off disables the cursor display. Refer to Cursor Types for a detailed explanation of what is shown with each option. The Position controls at the right-side of the Standard Cursors dialog display the current cursor location and can be used to set a new location.
+l X 1 and X 2 sets the position of Horizontal cursors. They may be entered as time or a fraction of a division. l Y 1 and Y 2 sets the position of Vertical cursors, entered as a fraction of a division. Track locks cursor lines so they move together, maintaining the same distance from each other. Only move X1 or Y1 to reposition the cursors. Moving X2 or Y2 will change the relative distance. Find places the cursors 2.5 divisions (negative and positive) from the trigger point on the first touch. On the second touch, it returns the cursor to its previous position.
+XY Cursors Dialog
+If your Grid Mode selection includes an XY trace display, an XY Cursors dialog appears behind the Standard Cursors dialog. Use it to exactly position and track cursors on XY traces, the same as you use the settings on the Standard Cursors dialog for time traces. The functionality is the same.
+50
+
+Math and Measure
+Measure
+Parameters are tools that give you access to a wide range of waveform properties, such as Rise Time, RMS voltage and Peak-Peak voltage. Parameter readouts are shown in a dynamic Measure table that appears below the waveform grids. All active measurements can be used as inputs to other processes, such as math functions, even when the Measure table is hidden from view. The history of a parameter can be graphed as a trend for statistical analysis.
+Measure Table
+The header of the Measure table shows the parameters configured for each measurement slot (P1-Pn). The value row of the Measure table shows the measurements taken for each parameter on the last acquisition. You may optionally calculate and display the statistical mean, min, max and sdev of all parameters. Statistics are calculated once per acquisition and accumulate over multiple acquisitions, up to the two billion value limit of the measurement buffer.
+Close setup dialogs when the Measure table is displayed to maximize the area available for viewing waveforms. To return to the Measure dialog when closed, touch anywhere in the table. Symbols in the status row of the Measure table indicate the following:
+OK: valid value returned. Warning: there is a problem with the signal or the setup that prevents measuring. Touch the parameter cell to see an explanation in the message bar. No Pulse/Insufficient Data: The software is unable to determine top and base. This may indicate that there is insufficient difference between the maximum and minimum for the software to detect a pulse, or there may be an insufficient number of points in the visible top or base of a pulse, such as when closely examining a step response. Underflow Condition: The bottom most (negative) sample point of the waveform falls below the ADC range. Probably, the bottom of the pulses appear to be cut off. Overflow Condition: The top most (positive) sample point of the waveform is above the ADC range. Probably, the top of the pulses appear to be cut off. Simultaneous Underflow and Overflow Condition: Both conditions are present at once.
+51
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Parameter Set Up
+The Measure Dialog gives quick access to measurement features. Besides configuring parameters, use the Measure dialog to show statistics and histicons, or to gate measurements.
+
+1. To open the Measure dialog, touch the Add New box and select Measurement, or choose Measure > Measure Setup from the menu bar.
+2. Check Show Table to display the readout. This is not required to take the measurement. 3. For each parameter (Pn):
+l Touch the Measure field and choose a measurement from the list. l Touch the Source field and choose the source trace to measure. This can be any type of input available
+to your instrument; all will appear on the Source pop-up selector. 4. Enter any other measurement settings that appear. 5. Optionally:
+l Gate parameters to limit measurements to only edges inside the gates. l Add Statistics and Histicons to the Measure Table. Touch Clear Sweeps to reset all measurement counters and restart all statistics. Touch Clear All Definitions to reset all parameters to "None".
+Caution: Definitions cannot be restored after clearing, you must repeat parameter set up.
+
+Statistics and Histicons
+Checking Statistics On on the Measure dialog adds the mean, min, max and sdev of each parameter to the measured value shown on the Measure table.
+Statistics for each parameter are calculated once per acquisition and accumulate until you either Clear Sweeps or the measurement buffer is full. The Num row of the Measure table shows the total number of measurements included in the Statistics calculation. If the measurement is gated, the statistics are calculated for only the data points between the gates, just as the parameter value itself will reflect the limits imposed by the gate.
+
+Mean
+
+The weighted mean of the parameter calculated over the number of times shown.
+
+Min
+
+The minimum value of the parameter measured over the number of times shown.
+
+Max
+
+The maximum value of the parameter measured over the number of times shown.
+
+Sdev
+
+The population standard deviation of the parameter calculated over the number of times shown.
+
+52
+
+Math and Measure
+
+Num
+
+For any parameter that computes once on an entire acquisition, Num represents the number of sweeps over which the statistics are computed.
+For any parameter that computes on every event within an acquisition, such as a full period, Num represents the number of events per sweep times the number of sweeps computed. Thus, for a Single acquisition of five periods, the Num shown for any per period measurements will be 5, as five measurements were made and the statistics reflect those five measurements. After another Single acquisition, Num will be 10, or five measurements times two sweeps. The statistics now reflect all 10 measurements.
+
+Histicons are miniature histograms of measurements that may be added to the Measure table . They let you see at a glance the statistical distribution of each parameter. Check Histicons on the Measure dialog.
+Histicons
+Histicons are miniature histograms of measurement parameters that appear on the measurement table. These thumbnail histograms let you see at a glance the statistical distribution of each parameter. Select the Histicons checkbox to turn on histicons.
+Gating Measurements
+All measurements are calculated on only that portion of the waveform trace that is visible on the grid and within the measurement gates. Any setting that moves the trace outside the observation window or makes it appear "clipped" will affect measurements.
+The default starting positions of the measurement gate posts are 0 div and 10 div, which coincide with the left and right edges of the grid, and the First and Last points. Therefore, the measurement gates initially enclose the entire visible acquisition. By moving the measurement gates, you can focus the measurement on the section of the acquisition of greatest interest. For example, if you "gate" six rising edges of a waveform, calculations are performed only on the six pulses bounded by the gate posts.
+The quickest way to set a gate is to drag the gate posts from the far left and right of the grid to the desired positions. You can refine this position to hundredths of a division by using the Gate Start and Stop fields on the Measure dialog. All parameters share the same gates, and all measurements will change when you drag either gate post to reposition the gate.
+Touch Default to return gates to the edge of the grid.
+
+53
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Using Trends
+The Trend math function plots a waveform composed of parameter measurements arranged in the order the measurements were made. The vertical units are the source parameter values, and the horizontal unit is the measurement number. The Trend contains a single value for each unique measurement, and therefore may not be time synchronous with the source waveform, where the same measured value may occur successively over time.
+Uses of Trends
+Trends are especially useful for visualizing the history of a parameter over an extended period of time or over multiple acquisitions. Think of Trend as a strip chart recorder for your instrument. Example applications of Trend include:
+l Data logging multiple circuit parameters l Power line monitoring l Measuring output regulation and ripple
+Plotting Trends
+Although a Trend plots parameter values, it is created as a Math function on the Function (Fn) dialogs. 1. Select the Trend Operator on the Fn setup dialog.
+2. Choose a computation Mode of All (measurements per acquisition) or Average (one measurement per acquisition).
+3. Enter the number of measured Values to Trend.
+54
+
+List of Standard Measurements
+
+Math and Measure
+
+Note: Unless otherwise stated, measurements are calculated according to IEEE standards. Additional measurements may be available depending on the software options installed.
+
+Amplitude ­ Difference between the upper and lower levels in two-level (bi-modal) signals, calculated using the formula for Top-Base. Differs from Peak-to-Peak (pkpk) in that noise, overshoot, undershoot and ringing do not affect the measurement. On signals that cannot be identified as bi-modal, such as triangle or saw-tooth waves, Amplitude returns the same value as Maximum ­ Minimum.
+Area ­ Integral of data. Computes the area of the waveform relative to the zero level. Values greater than zero contribute positively to the area; values less than zero contribute negatively.
+Base ­ Lower level in two-level (bi-modal) signals (the higher is Top), or lower of two most probable waveform states on waveforms that are not bi-modal. Base differs from Minimum in that noise, overshoot, undershoot and ringing do not affect the measurement. On signals that are not bi-modal (such as triangle waveforms), Base returns the same value as Minimum.
+Delay ­ Time from the acquisition trigger to the first 50% level crossing visible in the observation window. On acquisitions without a Timebase Delay setting, this is usually a negative number.
+Duty Cycle ­ Percent of period for which data are above or below the 50% level of the signal, using a hysteresis band of 22% of amplitude.
+Fall 80-20% ­ Duration of a pulse waveform's falling transition from 80% to 20% of the amplitude, measured for all falling transitions with the value for the last full pulse shown. On signals that do not have two major levels (such as triangle waveforms), the Top-Base measurement used to calculate the amplitude can default to maximum and minimum, giving less predictable results.
+Fall Time ­ Duration of a pulse waveform's falling transition from 90% to 10% of the Amplitude, measured for all falling transitions with the value for the last full pulse shown. On signals that do not have two major levels (such as triangle waveforms), the Top-Base measurement used to calculate the amplitude can default to maximum and minimum, giving less predictable results.
+Frequency ­ Reciprocal of each Period of a cyclic signal. Period is measured as time between every pair of 50% crossings on the rising edge, starting with the first rising transition after the left measurement gate.
+Maximum ­ Largest vertical value in a waveform. Unlike Top, does not assume the waveform has two levels.
+Mean ­ Average of vertical values in a waveform. Computed as centroid of distribution for a histogram of the data values.
+Minimum ­ Smallest vertical value in a waveform. Unlike Base, does not assume the waveform has two levels.
+Overshoot­ ­ Amount of overshoot following falling edges, represented as percentage of amplitude. Overshoot- is calculated using the formula (Base - Minimum)/Amplitude x 100. On signals that do not have two major levels (such as triangle waveforms), this measurement may not give predictable results.
+Overshoot+ ­ Amount of overshoot following rising edges, represented as a percentage of amplitude. Overshoot+ is calculated using the formula (Maximum - Top)/Amplitude x 100. On signals that do not have two major levels (such as triangle or saw-tooth waveforms), this measurement may not give predictable results.
+Peak to Peak ­ The difference between the maximum and minimum vertical values within the measurement gates. Unlike Amplitude, does not assume a waveform has two levels.
+
+55
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual Period ­ The time between 50% crossings on the rising edge, starting with the first transition after the left measurement gate. Period is measured for each adjacent pair, with values averaged to give the final result. Phase ­ Phase difference between analyzed and reference signals, measured from the 50% level of their rising edges. Rise 20-80% ­ Duration of a pulse waveform's rising transition from 20% to 80% of amplitude, measured for all rising transitions with the value for the last full pulse shown. On signals that do not have two major levels (such as triangle waves), the Top-Base measurement used to calculate rise can default to maximum and minimum, giving less predictable results. Rise Time ­ Duration of a pulse waveform's rising transition from 10% to 90% of amplitude, measured for all rising transitions with the value for the last full pulse shown. On signals that do not have two major levels (such as triangle waves), the Top-Base measurement used to calculate rise can default to maximum and minimum, giving less predictable results. RMS ­ Root Mean Square of the vertical values (between the measurement gates), calculated using the formula:
+Where: Vi = measured vertical values, and N = number of data points. Skew ­ Time of Clock2 edge (Source2) minus the time of previous Clock1 edge (Source1). Std Dev ­ Standard deviation of the vertical values between the measurement gates, using the formula:
+Where: Vi = measured vertical values, and N = number of data points. This is equivalent to the RMS for a zero-mean waveform. Also referred to as AC RMS. Top ­ Higher vertical value in two-level (bi-modal) signals (the lower is Base), or higher of two most probable waveform states in waveforms that are not bi-modal. Top differs from Maximum in that noise, overshoot, undershoot and ringing do not affect the measurement. On signals that are not bi-modal (e.g., triangle waves), Top returns the same value as Maximum. Width ­ Width of cyclic signal at 50% level and positive slope, using a hysteresis of 22% of amplitude, measured for all transitions with the value for the last full pulse shown. WidthN ­ Width of cyclic signal at 50% level and negative slope, using a hysteresis of 22% of amplitude, measured for all transitions with the value for the last full pulse shown.
+56
+
+Math and Measure
+Math
+Math function traces (Fn) display the result of applying a mathematical operation to a source trace. The output of a math function is always another trace, whereas the output of a measurement parameter is a tabular readout of the measurement. Math can be applied to any channel (Cn), zoom (Zn), or memory (Mn) trace. It can even be applied to another math trace, allowing you to chain operations (for example, trace F1 can show the average of C1, while trace F2 provides the integral of F1). In addition to the extensive math capabilities that are standard with every instrument, enhanced math analysis tools customized for various industries and applications are offered through optional software packages. To learn about math tools available in each optional package, see the product datasheets at teledynelecroy.com. If you have installed software options, the new capabilities are usually accessed through the Analysis menu, rather than the Math menu, although special math functions will be available when using the standard Math dialogs.
+Math Function Set Up
+Use the Function dialog to set up math function traces. Math functions take as input one or more channel, zoom, memory or math traces and output a new math trace (Fn). Any additional settings required for the operator will appear on a subdialog at the right of the screen.
+Setting Up New Functions
+1. From the menu bar choose Math > Math Setup, then open one of the Fn tabs.
+Tip: You can select Fn Setup right from the Math menu.
+2. In Operator1, choose the math operation to perform. 3. The choice of operator drives the number of Source fields you will see displayed. Make a selection in each
+field, or drag the source channel descriptor box to the field. A Summary of the function you are building appears on the dialog. Refer to this to be sure your sources are in the proper order to yield the function you want (e.g., C1-C2 vs. C2-C1). 4. If the operator you've selected has any other configurable settings, you'll see a subdialog of the same name as the operator. Touch the tab to open the dialog and make any further settings. These are explained on the dialog. 5. Check Trace On to display the new math trace. Following acquisition, you should see a new math waveform appear on the oscilloscope display.
+57
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Adjusting Memory or Math Traces
+Unlike channel traces, the scale of memory (Mn) or math function (Fn) traces can be adjusted directly without having to create a separate zoom trace. The same set of zoom factor controls used for zoom traces appear on the Zoom subdialog, but in this context they only rescale the active math or memory trace rather than create a new zoom. This applies to any trace that is created as a math function (Fn) trace, including traces generated through analysis options and graphs. You can, if you wish, create a separate zoom trace from a memory or function trace the same as you would normally create a zoom (draw a selection box, etc.). In this case, you choose one of the zoom locations (Zn) in which to draw the trace, but the source trace remains at the original scale.
+Math Dialog
+Once a math function has been created and saved on the Function (Fn) dialog, use the main Math dialog to quickly enable/disable it. You can also use this dialog to quickly turn on/off zoom traces.
+To open the Math dialogs, from the menu bar choose Math > Math Setup. Select the On checkbox next to each function you wish to display. To change the function, touch the Fn button. To erase all functions from their locations, touch Reset All. To restart the counter on cumulative functions (like Average), touch Clear Sweeps.
+58
+
+Math and Measure
+Average Function
+The summed or continuous average of all data samples from multiple acquisitions can be displayed as a new waveform trace using the Average function.
+
+Setting Up an Average Function
+1. Follow the usual steps to set up a math fuction, selecting Average from the Basic Math submenu. 2. On the Average subdialog, choose Summed or Continuous. 3. Touch Sweeps and provide a the number of sweeps to average.
+
+Summed Averaging
+Summed Averaging is the repeated addition, with equal weight, of successive source waveform records. If a stable trigger is available, the resulting average has a random noise component lower than that of a single-shot record. Whenever the maximum number of sweeps is reached, the averaging process stops. In Summed averaging, you specify the number of acquisitions to be averaged. The averaged data is updated at regular intervals.
+An even larger number of records can be accumulated simply by changing the number in the dialog. However, the other parameters must be left unchanged or a new averaging calculation will be started. You can pause averaging by changing the trigger mode to Stop. The instrument resumes averaging when you resume the trigger.
+You can reset the accumulated average by pushing the Clear Sweeps button or by changing an acquisition parameter such as input gain, offset, coupling, trigger condition, timebase, or bandwidth limit. The number of current averaged waveforms of the function, or its zoom, is shown in the acquisition status dialog. When summed averaging is performed, the display is refreshed at a reduced rate to increase the averaging speed (points/events per second).
+
+Continuous Averaging
+Continuous Averaging, the default setting, is the repeated addition, with unequal weight, of successive source waveforms. It is particularly useful for reducing noise on signals that drift very slowly in time or amplitude. The most recently acquired waveform has more weight than all the previously acquired ones: the continuous average is dominated by the statistical fluctuations of the most recently acquired waveform. The weight of `old' waveforms tends to zero (following an exponential rule) as the number of new waveforms increases.
+You determine the importance of new data vs. old data by assigning a weighting factor. The formula for continuous averaging is: new average = (new data + weight * old average)/(weight + 1)
+By setting a Sweeps value, you establish a fixed weight that is assigned to the old average once the number of sweeps is reached. For example, for a sweeps (weight) value of 4:
+
+Sweep
+1 (no old average yet) 2 3 4 5 6
+
+New Average =
+(new data +0 * old average)/(0 + 1) = new data only (new data + 1*old average)/(1 + 1) = 1/2 new data +1/2 old average (new data + 2 * old average)/(2 + 1) = 1/3 new data + 2/3 old average (new data + 3 * old average)/(3 + 1) = 1/4 new data + 3/4 old average (new data + 4 * old average)/(4 + 1) = 1/5 new data + 4/5 old average (new data + 4 * old average)/(4 + 1) = 1/5 new data + 4/5 old average Etc.
+
+Note: The number of sweeps averaged is displayed at the bottom of the trace descriptor box.
+
+59
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+ERes Function
+ERes (Enhanced Resolution) filtering increases vertical resolution, allowing you to distinguish closely spaced voltage levels. The instrument's ERes function is similar to smoothing the signal with a simple, moving-average filter, but is more efficient concerning bandwidth and pass-band filtering. Use ERes:
+l On single acquisitions or where the data is slowly repetitive (and you cannot use averaging).
+l To reduce noise on noticeably noisy signals when you do not need to perform noise measurements.
+l As a low-pass filter. The ERes filter rejects high-frequency components from the signal. The higher the bit enhancement, the lower the resulting bandwidth.
+l When performing high-precision voltage measurements (e.g., zooming with high vertical gain).
+
+Setting Up an ERes Function
+1. Follow the usual steps to set up a math function, selecting Eres from the Filter submenu. 2. Touch the Trace On checkbox. 3. On the Eres subdialog, select the number of bits of improvement from the pop-up menu.
+
+How ERes Is Applied
+The instrument's ERes feature improves vertical resolution by a fixed amount for each filter. This real increase in resolution occurs whether or not the signal is noisy, or whether it is single-shot or repetitive. The signal-to-noise ratio (SNR) improvement depends on the form of the noise in the original signal. ERes filtering decreases the bandwidth of the signal, filtering out some of the noise.
+
+The instrument's constant phase finite impulse response (FIR) filters provide fast computation, excellent step response in 0.5 bit steps, and minimum bandwidth reduction for resolution improvements of between 0.5 and 3 bits. Each step corresponds to a bandwidth reduction factor of two, allowing easy control of the bandwidth resolution trade-off.
+
+Resolution Increase
+0.5 1.0 1.5 2.0 2.5 3.0
+
+-3 dB Bandwidth (x Nyquist)
+0.5 0.241 0.121 0.058 0.029 0.016
+
+Filter Length (Samples)
+2 5 10 24 51 117
+
+With low-pass filters, the actual SNR increase obtained in any particular situation depends on the power spectral density of the noise on the signal.
+The improvement in SNR corresponds to the improvement in resolution if the noise in the signal is white (evenly distributed across the frequency spectrum). If the noise power is biased towards high frequencies, the SNR improvement will be better than the resolution improvement.
+The opposite may be true if the noise is mostly at lower frequencies. SNR improvement due to the removal of coherent noise signals--feed-through of clock signals, for example--is determined by the fall of the dominant frequency components of the signal in the passband. This is easily ascertained using spectral analysis. The filters have a precisely constant zero-phase response. This has two benefits. First, the filters do not distort the relative position of different events in the waveform, even if the events' frequency content is different. Second, because the
+
+60
+
+Math and Measure
+waveforms are stored, the delay normally associated with filtering (between the input and output waveforms) can be exactly compensated during the computation of the filtered waveform.
+The filters have been given exact unity gain at low frequency. ERes should therefore not cause overflow if the source data is not overflowed. If part of the source trace were to overflow, filtering would be allowed, but the results in the vicinity of the overflowed data--the filter impulse response length--would be incorrect. This is because in some circumstances an overflow may be a spike of only one or two samples, and the energy in this spike may not be enough to significantly affect the results. It would then be undesirable to disallow the whole trace.
+Note: While ERes improves the resolution of a trace, it cannot improve the accuracy or linearity of the original quantization. The pass-band causes signal attenuation for signals near the cut-off frequency. The highest frequencies passed may be slightly attenuated. Perform the filtering on finite record lengths. Data is lost at the start and end of the waveform and the trace ends up slightly shorter after filtering. The number of samples lost is exactly equal to the length of the impulse response of the filter used: between 2 and 117 samples. Normally this loss (just 0.2 % of a 50,000 point trace) is not noticed. However, you might filter a record so short that no data is output. In that case, however, the instrument would not allow you to use the ERes feature.
+FFT Function
+For a large class of signals, you can gain greater insight by looking at spectral representation rather than time description. Signals encountered in the frequency response of amplifiers, oscillator phase noise and mechanical vibration analysis, for example, are easier to observe in the frequency domain.
+If sampling is done at a rate fast enough to faithfully approximate the original waveform (usually five times the highest frequency component in the signal), the resulting discrete data series will uniquely describe the analog signal. This is of particular value when dealing with transient signals, which conventional swept spectrum analyzers cannot handle.
+While FFT has become a popular analysis tool, some care must be taken with it. In most instances, incorrect positioning of the signal within the display grid will significantly alter the spectrum, producing effects such as leakage and aliasing that distort the spectrum. An effective way to reduce these effects is to maximize the acquisition record length. Record length directly controls the effective sampling rate and therefore determines the frequency resolution and span at which spectral analysis can be carried out.
+Setting Up an FFT Function
+1. Follow the usual steps to set up a math function, selecting FFT from the Frequency Analysis submenu.
+2. Open the FFT subdialog.
+3. Choose an Output type.
+4. If your Output Type is Power Spectrum, also enter Line Impedence. By default, the FFT function assumes a termination of 50 Ohms. If an external terminator is being used, this setting can be changed to properly calculate the FFT based on the new termination value.
+5. Optionally, choose a weighting Window (see below).
+6. Check the Suppress DC box to make the DC bin go to zero. Otherwise, leave it unchecked.
+Choosing a Window
+If you think of an FFT as synthesizing a bank of parallel band-pass filters, weighting functions control the filter response shape and affect noise bandwidth as well as side lobe levels. The window type defines the bandwidth and
+61
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+shape of the equivalent filter to be used in the FFT processing.
+The choice of window is dictated by the signal's characteristics. Rectangular windows provide the highest frequency resolution and are useful for estimating the type of harmonics present in the signal. Because the rectangular window decays as a (SinX)/X function in the spectral domain, slight attenuation will be induced. Functions with less attenuation (Flat Top and Blackman-Harris) provide maximum amplitude at the expense of frequency resolution, whereas Hamming and Von Hann are good for general purpose use with continuous waveforms.
+
+Window Type Rectangular
+Hanning (Von Hann) & Hamming Flat Top Blackman-Harris
+
+Applications and Limitations
+Normally used when the signal is transient (completely contained in the time-domain window) or known to have a fundamental frequency component that is an integer multiple of the fundamental frequency of the window. Signals other than these types will show varying amounts of spectral leakage and scallop loss, which can be corrected by selecting another type of window. Reduces leakage and improves amplitude accuracy. However, frequency resolution is also reduced.
+Provides excellent amplitude accuracy with moderate reduction of leakage, but with reduced frequency resolution. Reduces leakage to a minimum, but with reduced frequency resolution.
+
+FFT Window Filter Parameters
+
+Window Type
+Rectangular Von Hann Hamming Flat Top Blackman-Harris
+
+Highest Side Lobe (dB)
+-13 -32 -43 -44 -67
+
+Scallop Loss (dB)
+3.92 1.42 1.78 0.01 1.13
+
+ENBW (bins)
+1.0 1.5 1.37 3.43 1.71
+
+Coherent Gain (dB)
+0.0 -6.02 -5.35 -11.05 -7.53
+
+62
+
+Math and Measure
+Rescale Function
+The Rescale function allows you to create a new function trace that rescales another trace by applying a multiplication factor (a) and additive constant (b). You can also use it as a way to view the function source in a different unit of measure.
+Setting Up a Rescale Function
+1. Follow the usual steps to set up a math function, selecting Rescale from the Functions submenu. 2. Touch the Rescale subdialog tab. 3. To modify the scale of output:
+l Check the First multiply by: box and enter the number of units equal to 1 V (a, the multiplication factor). l Touch then add: and enter b, the additive constant. 4. To change the output unit of measure from that of the source waveform: l Check Override units. l In Output enter the code for the new unit of measure. You can combine units following these rules: l For the quotient of two units, use the character "/" l For the product of two units, use the character "." l For exponents, append the digit to the unit without a space (e.g., "S2" for seconds squared)
+Note: Some complex units are automatically converted to simple units. For example, V.A is W).
+Units of Measure
+Units are automatically rescaled up or down within the list of standard, SI prefixes based on the relative size of the signal. For example a 1000 V reading is shown as 1 kV, while .1 V is shown as 100 mV. When the multiplication factor is 1 V = 1 Pascal, a 10 millivolt (mV) reading is displayed as 10 mPa rather than .001 Pa or 100e-3 Pa. Following are the supported SI units of measure and the mnemonics used to represent them on the Rescale dialog.
+Note: These same mnemonics can be used in remote control scripts. Specify only the base unit in code, do not add prefixes.
+
+Note: Time and dimensionless units are available only for certain measurements and for use in code where relevant.
+
+Category Mass
+
+Unit
+gram slug
+
+Mnemonic
+G SLUG
+
+63
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+
+Category Volume Angle
+Force/Weight Velocity Acceleration Pressure
+Temperature Energy Rotating Machine
+
+Unit
+liter cubic meter cubic inch cubic foot cubic yard radian arcdegree arcminute arcsecond cycle revolution turn Newton grain ounce pound meters/second inches/second feet/second yards/second miles/second meters/second2 inches/second2 feet/second2 standard gravity Pascal bar atmosphere, technical atmosphere, standard Torr pounds/square inch degrees Kelvin degrees Celsius degrees Fahrenheit Joule British Thermal Unit calorie radians/second frequency (Hertz) revolutions/second revolutions/minute torque N·m torque in·oz torque in·lb torque ft·lb power, mechanical (Watt) horsepower
+
+Mnemonic
+L M3 IN3 FT3 YARD3 RAD DEG MNT SEC CYCLE REV TURN N GR OZ LB M/S IN/S FT/S YARD/S MILE/S M/S2 IN/S2 FT/S2 GN PAL BAR AT ATM TORR PSI K CEL FAR J BTU CAL RADPS HZ RPS RPM NM INOZ INLB FTLB W HP
+
+64
+
+Category Magnetic Electrical
+Time Dimensionless
+
+Unit
+Weber Tesla inductance (Henry) magnetic field strength permeability Ampere Volt Watt power, apparent power, reactive power factor capacitance (Farad) Coulomb Ohm Siemen electrical field strength electrical displacement field permittivity conductivity second minute hour day week percent percent min-max decibel decibel milliwatt decibel Volt decibel millivolt decibel microvolt decibel microampere decibel referred to carrier decade unit interval Q-scale bit byte baud least significant bit poise parts per million pixel division event sample segment sweep
+
+Mnemonic
+WB T H A/M HENRYPM A V W VA VAR PF F C OHM SIE V/M CPM2 FARADPM SIEPM S MIN HOUR DAY WEEK PCT PCTMNMX DB DBM DBV DBMV DBUV DBUA DBC DECADE UI Q BIT BYTE BAUD LSB POISE PPM PIXEL DIV EVENT SAMPLE SEG SWEEP
+
+Math and Measure 65
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+List of Standard Math Operators
+Note: The installation of software options on the oscilloscope may add math operators to this list.
+Absolute - Calculates distance away from zero for every point in the waveform. For values greater than zero, this is the same as the value. For values less than zero, the magnitude without regard to its sign is used. Average - Calculates either a summed or continuous average of a selected number of sweeps. See Average Function. The maximum number of sweeps is determined by the oscilloscope model and memory. Derivative - Calculates the derivative of adjacent samples using the formula: (next sample value ­ current sample value) / (horizontal sample interval) Difference - For every point in the waveform, subtracts the value of Source2 from the value of Source1. Source1 and Source2 must have the same horizontal and vertical units and scale. Envelope - Calculates highest and lowest vertical values of a waveform at each horizontal value for a specified number of sweeps. ERes - Applies a noise reduction and smoothing filter by adding a specified number of bits. See Enhanced Resolution. FFT - Computes a frequency spectrum with optional Rectangular, Von Hann, Flat Topp, Hamming, Blackman-Harris, and Hanning windows. Calculates up to 1 MS of acquisition on WaveSurfer and HDO4000 oscilloscopes. See FFT. Floor - Calculates the lowest vertical values of a waveform at each horizontal value for a specified number of sweeps. Integral - Calculates the linearly rescaled integral (with multiplier and adder) of a waveform input starting from the left edge of the screen using the formula: (current sample value + next sample value) * (horizontal sample interval). Each calculated area is summed with the previous sum of areas. The multiplier and adder are applied before the integration function. Invert - For every point in the waveform, the inverse of that point is calculated. Product - For every point in the waveform, the value of Source1 is multiplied by the value of Source 2. Source1 and Source2 must have the same horizontal units and scale. Ratio - For every point in the waveform, divides the value of Source1 by the value of Source2. Source1 and Source2 must have the same horizontal units and scale. Reciprocal - For every point in the waveform, calculates the inverse using the formula: 1 / (sample value). Rescale - For every point in the waveform, multiplies the sample value by the specified Multiplier, then adds the specified Additive Constant value. See Rescale Function. Roof - Calculates the highest vertical value at each sample point for a specified number of sweeps. Square - For every point in the waveform, calculates the square of the sample value. Square Root - For every point in the waveform, calculates the square root of the sample value. Sum - For every point in the waveform, adds the value of Source1 to the value of Source 2. Source1 and Source2 must have the same horizontal and vertical units and scale.
+66
+
+Math and Measure Trend - Produces a waveform composed of a series of measurement parameter values in the order the measurements were taken. The vertical units are those of the source parameter; the horizontal unit is measurement number. The trend contains a single value for each unique measurement. Zoom - Produces a magnified trace of a selected portion of the input waveform. See Zooming Traces.
+67
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Memories
+The instrument is equipped with internal memory slots (Mn) to which you can copy any waveform that is active on the grid. This is a convenient way to store an acquisition for later viewing and analysis. Memories can be used as source inputs for most oscilloscope math and measurements, allowing you to compare historical data to a live acquisition or perform "what if" modeling on saved acquisitions.
+Saving Memories
+Store memories on the Memory dialogs (Mn). Memories are created at the same scale as the source trace, but they can be adjusted independently by using the zoom factor controls that appear next to the Mn dialogs.
+Save Waveform to Memory
+Tip: Try to choose an empty slot, as anything currently stored in that location will be overwritten. All memories will state if they are empty or an acquisition is stored there.
+On oscilloscopes with OneTouch, touch the Add New box and choose Memory. Drag the descriptor box of the trace you wish to store onto the Mn descriptor box. Or
+1. Press the front panel Mem button or choose Math > Memory Setup. 2. Touch the Mn tab corresponding to the memory slot you wish to use. 3. In Copy from Waveform, choose the source trace to copy to memory. 4. Touch Copy Now. 5. Optionally, check Trace On to immediately display the memory.
+Import External Waveform Files into Memory
+Trace (.trc) files saved on other Teledyne LeCroy instruments can also be imported into internal memory using the waveform recall feature. Choose File > Recall Waveform and to recall the file to an internal memory. Then, you can use the Memories dialog to place them on the display.
+Note: On WaveSurfer 3000/3000z oscilloscopes, the removable MicroSD card serves as internal memory for saving .trc files.
+68
+
+Math and Measure
+Restoring Memories
+The Memories dialog is a convenient panel for restoring saved memories to the display. Access the Memories dialog by pressing the front panel Mem button or choosing Math > Memory Setup. Check On next to the memory trace you wish to display. A description of the memory showing the source channel and creation time appears next to each Mn on the dialog. Touch Clear All Memories to empty the memory banks.
+Caution: Memories cannot be restored once they have been erased.
+69
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Analysis Tools
+Analysis tools complement the standard math/measurements to help you understand the behavior of waveforms.
+Standard Tools
+WaveScan searches single or multiple acquisitions for events that meet specific criteria. Pass/Fail Testing shows whether waveforms meet mask test limits.
+Optional Tools
+Many optional software packages may be purchased for specialized uses, such as power analysis or serial message trigger and decode. In most cases, these options are added to the Analysis menu. Complete documentation for software options can be found at teledynelecroy.com/support/techlib under Manuals > Software Options. In addition, context-sensitive Help for many options available on your platform can be found in the MAUI Support site under the Analysis menu.
+WaveScan
+The WaveScan® Search and Find tool enables you to search for unusual events in a single capture, or to scan for a particular event in many acquisitions over a long period of time. Each Scan Mode is optimized to find a different type of event. Results are time stamped, tabulated, and can be viewed individually. You customize the presentation by choosing different WaveScan displays, called Scan Views.
+Note: The instrument reverts to Real-time sampling mode when WaveScan is enabled.
+WaveScan window with different scan "views" turned on.
+70
+
+Setting Up WaveScan
+Set up your source channel and triggers before setting up the scan.
+
+Analysis Tools
+
+1. Press the front panel Stop button to stop acquisition. 2. Choose Analysis > WaveScan and check Enable. 3. Choose the Source waveform. 4. Choose the Scan Mode and enter values for any additional settings that appear at the right of the dialog
+based on your selection. 5. Select each Scan View in which you wish to display results by checking the box at the bottom of the dialog.
+Each view selected is displayed simultaneously. 6. Optionally, choose a Trigger Action to take when an event is found that meets your scan criteria.
+Tip: Despite the name, these actions occur only when the WaveScan criteria are met, not with every acquisition trigger. Pulse AUX Output will send a pulse over the AUX Out connector.
+7. Restart acquisition.
+Scan Modes
+The Scan Mode determines the type of search to be performed. Select the Mode along with the Source trace to be searched on the main WaveScan dialog. For each mode, different controls appear on the WaveScan dialog, providing additional inputs to the search criteria. Make the appropriate entries in these fields before starting the search.
+Edge Mode
+Edge Mode is used for detecting the occurrence of edges. Events that meet the threshold level are captured and tabulated. When the acquisition is stopped, scan filters can be applied to the edges to find specific characteristics. Edge Mode settings are:
+l Slope. Choose Pos, Neg, or Both. l Level is (set in...). Choose Percent or Absolute. l Percent/Absolute Level. Enter a threshold value as a percentage of Top to Base or voltage level.
+Non-monotonic Mode
+Non-monotonic Mode looks for edges that cross a threshold more than once between high and low levels. All events that meet the criteria of slope, hysteresis, and level are presented in a table and highlighted in the source trace. The value displayed in the table is the difference of the max. and min. of the non-monotonicity. This can be confirmed with cursors. The hysteresis value is used to eliminate noise. A non-monotonicity is detected only when its amplitude
+71
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+is greater than the hysteresis. Therefore, when setting a hysteresis level, set a value that is greater than the amplitude of the noise. Settings are:
+l Slope. Choose Pos, Neg, or Both. l Hysteresis is (set in...). Choose Division, Percent, Absolute. l Division/Percent/Absolute. Enter hysteresis level in the selected unit. l Levels are (set in...). Choose Percent, Absolute, or Pk-Pk%. l High/Low Level. Enter top and bottom thresholds in the selected unit.
+Runt Mode
+Runt Mode looks for pulses that fail to cross a specified threshhold. You can search for positive-going or negativegoing runts, or both. An adjustable hysteresis band is provided to eliminate noise. In the case of negative-going runt pulses, the value displayed in the table is the difference (delta) of the high level of the signal and the runt amplitude (i.e., where the runt bottoms out). This can be confirmed by placing cursors on the runt pulse and reading the delta Y value in the trace labels. In the case of positive-going runt pulses, the value displayed in the table is the absolute value of the amplitude of the runt pulse. Runt Mode settings are:
+l Runt Type. Choose Both, Pos, or Neg. l Hysteresis. Enter the hysteresis level as a percentage or voltage. l Low/High Threshold. Enter the levels as a percentage or voltage. l Absolute Levels. Check this box to enter levels as absolute voltage instead of percentage.
+Measurement Mode
+Measurement Mode is used for applying filters to measurements to find those that meet your defined criteria, helping to isolate particular events within many samples. Markers appear over the source trace to indicate the location of measurement, while the table displays values for the selected parameter that meet the criteria. Measurement Mode settings are:
+l Measurement. Choose the measurement parameter you wish to search. l Filter Method. Choose the operator that indicates the desired relationship to the Filter Limit. Only
+measurements that meet this criteria are returned. l Filter Limit. Enter the value that completes the filter criteria. Alternatively, you can use the Filter Wizard to create the filter criteria.
+Bus Pattern Mode
+Bus Pattern Mode (only on Mixed Signal models) is used for finding 2- to 16-bit patterns across the digital lines where PLL is not a concern. Bus Pattern Mode settings are:
+l Viewing. Choose to enter the pattern as Binary or Hex(adecimal). l Binary/Hex. Enter the digital pattern to find in binary or hexadecimal code.
+For binary patterns, enter the state the line should be in as 1=high, 0=low, X=not included in pattern, starting from highest to lowest number line. An 8-line bus is assumed. For example, to set the pattern D2=1, D1=0 and
+72
+
+Analysis Tools D0=1 for 8-line bus D0-D7, you can just enter "101" on the keypad, and the software will complete the full pattern XXXXX101. If you wish to set the pattern on D7, D6 and D5, enter 101XXXXX. l Num. Patterns to detect. Enter a whole number of pattern locations to mark on the acquisition.
+Scan Views
+Scan Views are different ways to view your WaveScan results. Just check the boxes at the bottom of the WaveScan dialog for those views you wish to display simultaneously. Additional controls for Zoom view are on the Zn dialog. If you turn on a zoom from that dialog, you must turn it off from there, too.
+Source Trace
+By default, the source trace is displayed in the top grid, with markers indicating points that meet the search criteria.
+Table
+Table view displays a table of measurements relevant to your chosen Search Mode next to the source trace. Times view adds columns to the table showing Start and Stop Times for each event.
+Zoom
+Zoom view works exactly as it does elsewhere in the oscilloscope software, creating a new trace that is a magnified section of the source trace. A WScanZn tab appears by default when you launch WaveScan.
+WaveScan Search
+Search is used to find events in zoom (Zn) traces that match user-defined criteria. To search within WaveScan: 1. Select the Zoom view. 2. After stopping the acquisition, open the WScanZ1 dialog that appears behind the WaveScan dialog. 3. Use the Prev and Next buttons to move back or forward within the trace to the events that matched your Scan Modes criteria. Or If you know the WaveScan table index (row) number of the event you wish to find, enter it in Idx.
+73
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+PASS/FAIL Testing
+A mask defines an area of the grid against which a source Channel, Zoom, or Math trace is compared. Test conditions are associated with the mask, defining how the waveform is to be compared to the masked area (e.g., some/all values fall within, some/all values fall outside), and a pass or fail result is returned indicating the condition was found to be true or false. Mask testing can be done using a pre-defined mask or a mask created from a waveform with user-defined vertical and horizontal tolerances.
+Note: You cannot run PASS/FAIL tests on Sequence Mode or Roll Mode acquisitions.
+Access Mask Test Dialogs
+Choose Analysis > Pass/Fail Setup to display the Pass/Fail dialog. To the right are the Load Mask and Make Mask subdialogs where you make and manage masks.
+Make Mask
+Use this procedure to create a new mask based on a live waveform. The mask covers the area of the waveform plus the boundaries you enter.
+1. Open the Make Mask subdialog. 2. If desired, enter a new Destination File Name and path, or touch Browse and select a previous file to overwrite.
+The file name should end with the .msk extension. 3. Touch the Ver Delta and Hor Delta fields and enter boundary values using the pop-up Virtual Keypad or the
+front panel Adjust knob. 4. Touch Make from Trace.
+74
+
+Load Mask
+Use this procedure in lieu of Make Mask if you have a pre-defined mask file. 1. Open the Load Mask subdialog. 2. Touch File and select the mask. 3. Check View Mask to display the mask over the trace.
+
+Analysis Tools
+
+Remove a Mask from the Display
+Touch the Delete Mask button at the left of the Pass/Fail dialog.
+
+Run Test
+1. On the main section of the Pass/Fail dialog, select the condition of the signal that, when "True", constitutes a "Pass" (samples are All In(side mask), All Out(side mask), etc.).
+2. Select any actions to take when the test produces this result: l Save a waveform file l Stop the test l Sound an Alarm l Emit a Pulse from Aux Out(put) l Capture the screen and process it according to your Hardcopy setting l Create a LabNotebook Entry
+3. Choose to turn Markers Off or On. When "On", points where the signal intersects the mask are marked by a red circle.
+4. Check the Testing box at the far left of the Pass/Fail dialog. The results of your test will appear in a table below the grid as soon as there is a fresh acquisition.
+
+75
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Save / Recall
+The Save/Recall dialog displays a series of shortcut buttons launching the various Save/Recall functions. You can use these buttons or the tabs to navigate to the other Save/Recall dialogs.
+Save Setups
+Save Setups allows you to quickly save up-to-six panel settings to internal storage, while Recall Setups restores them with a touch. If desired, you can also save panel settings as an .LSS file. a different location, such as a USB drive. You can recall them from the same. Choose File > Save Setup... from the menu bar.
+Save Setup to Memory
+1. Touch one of the Setup data entry controls and enter a name for the memory. 2. Touch the corresponding Save button directly to the left of the Setup field. The save date/time is displayed above the Setup data entry control.
+Save Setup to File
+1. In Save Panel to File, touch Browse and navigate to the desired folder (Storage Card or USB Disk). Tip: If the instrument is networked, you can touch Save Panel to File and enter the full Windows network address of another location in which to save the file. The instrument must have access to this directory. If this path remains on the Save Setups dialog when the oscilloscope is turned off, you will be asked for log on credentials to this directory when the oscilloscope is rebooted.
+2. Enter a File name, or choose a existing file to overwrite. Touch OK. 3. On the Save Setups dialog, touch Save Now!
+76
+
+Save / Recall
+Recall Setups
+Recall Setups restores setups saved to one of the internal memory locations, or enables you to import a setup file. Choose File > Recall Setup... from the menu bar.
+Recall Setup from Memory
+Touch one of the six Recall buttons under Recall From Internal Setup.... Note: If a setup has been stored to a location, it is labeled with the save date/time. Otherwise, the slot is labeled Empty.
+Recall Setup from File
+1. In Recall panel from file, touch Browse and navigate to the desired folder. 2. Select the setup file and touch OK. 3. On the Recall Setups dialog, touch Recall Now!
+77
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Save Waveforms
+The Save Waveform function saves trace data to either an internal memory location, or to a trace file. The source waveform can be any type of trace; a channel, math function, zoom, or even another memory. Use Recall Waveform to restore these previously saved waveforms to the display.
+Note: Only files saved in binary format (.TRC) can be recalled to the touch screen. By default, trace files are saved to the MicroSD card, although you can choose another location, such as a USB drive. The file name is autogenerated from the <source trace><trace title><number in sequence> (e.g., C1test000001). Choose File > Save Waveform from the menu bar.
+Save Waveform To Memory
+1. Touch Memory. 2. Choose the Source trace you are saving. 3. Choose the Destination location. 4. Touch Save Now!
+Save Waveform To File
+1. Touch File. 2. Choose the Source waveform. 3. Optionally, touch Trace Title to change the root file name of your waveforms.
+Caution: The instrument appends a sequence number to each file. To use numbers as other identifiers, place them at the beginning, or place an alpha character after the number (e.g., XYZ32a). 4. Touch Data Format and select a file format: l Binary, Teledyne LeCroy's binary file format (.trc). Binary results in the smallest possible file size, and is necessary for recalling waveforms to Teledyne LeCroy instruments.
+Note: Binary files can be converted to ASCII using Teledye LeCroy utilities such as ScopeExplorer or WaveStudio. l ASCII text file (.txt extension).
+78
+
+Save / Recall l MATLAB text file (.dat extension). l Excel text file (.csv extension). l MathCad text file (.prn extension). l Audio .wav file. 5. Depending on your file format selection, you may also need to specify a SubFormat: l Word (Binary) represents samples in the output file with 16 bits. Always use this options unless Byte
+mode is "pre." l Byte (Binary) represents samples in the output file with 8 bits. This option can result in a loss of output
+file resolution. l Auto (Binary) looks at the data and automatically selects either Word or Byte subformat. l Amplitude only (Text) includes amplitude data for each sample, but not time data. l Time and Amplitude (Text) includes both types of data for each sample. l With Header (Text) includes a file header with scaling information. 6. If you selected ASCII format, also touch Delimiter and select a delimiter character from the pop-up menu. 7. In Save Files in Directory, touch Browse and navigate to the desired location (Storage Card or USB Disk). Touch OK.
+Tip: If the instrument is networked, touch Save Files in Directory and enter the full Windows network address of another location in which to save the file. The instrument must have access to this directory. If this path remains on the Save Waveform dialog when the oscilloscope is turned off, you will be asked for log on credentials to this directory when the oscilloscope is rebooted. 8. On the Save Waveform dialog, touch Save Now!
+79
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Recall Waveforms
+Use Recall Waveform to restore previously saved waveform files to the display. Note: Only files saved in binary format (.TRC) can be recalled to the touch screen.
+Choose File > Recall Waveform from the menu bar.
+Recall Waveform From Memory
+1. Touch Memory. 2. Touch Source and choose a memory location from the Select Source pop-up. 3. Touch Destination and select a location into which to open the recalled memory. 4. Mark Show on Recall to display the trace on the grid. 5. Touch Recall Now!
+Recall Waveform From File
+1. Touch File. 2. Touch Recall files from directory and enter the path to the waveform folder, or touch Browse and navigate to
+the folder. 3. Use the Up /Down Arrows to cycle through the available files until the desired file is selected.
+Optionally, touch Show only files to apply a search filter (channels, math functions, or memory) to the list of available files.
+Note: The filter only applies to the files that will appear in the "Next File Will Be Recalled From..." list. It does not impact the Browse function. 4. Mark Show on Recall to display the trace on the grid. 5. Touch Recall Now!
+80
+
+Save / Recall
+Save Table Data
+The Save Table function saves tabular measurement data displayed on screen to an Excel or ASCII file. By default, files are saved on the MicroSD card, although you can choose a USB drive. Access the Save Table dialog by choosing File > Save Table from the menu bar.
+1. Leave the default Source selection All Displayed. 2. Optionally touch Table Title and enter a new root file name.
+Caution: Numbers you place at the end of this name are truncated because the instrument appends a sequence number to each file. Place numbers at the beginning, or place an alpha character after the number (e.g., XYZ32a). 3. Touch Data Format and choose from ASCII (.txt) or Excel (.csv) format. 4. If you selected ASCII format, also touch Delimiter and choose a character. 5. In Save Files in Directory, touch Browse and navigate to the desired folder (Storage Card or USB Disk). Select it and touch OK. Tip: If the instrument is networked, you can touch Save Files in Directory and enter the full Windows network address of another location in which to save the file. The instrument must have access to this directory. If this path remains on the Save Table dialog when the oscilloscope is turned off, you will be asked for log on credentials to this directory when the oscilloscope is rebooted. 6. On the Save Table dialog, touch Save Now!
+81
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Auto Save
+Data that appears on the oscilloscope display--such as waveforms, measurement readouts and decoder data--can be very dynamic and difficult to read from the oscilloscope unless you stop the acquisition. The Auto Save enables you to automatically store waveform and table data to a file that can be recalled to the oscilloscope later or saved permanently to external storage. To automatically save data to a file after each new trigger, choose an Auto Save option on the Save Waveform and Save Table dialogs: Wrap (old files overwritten) or Fill (no files overwritten). By default, waveform files and table data are stored on the MicroSD Card. Choose Wrap only if you're not concerned about files persisting on the instrument. If you choose Fill, plan to periodically delete or move files off the instrument.
+Caution: To extend the file count past 999, try reformatting the MicroSD Card exFAT with a default cluster size of 32 kB.
+82
+
+Save / Recall
+LabNotebook
+The LabNotebook feature allows you to save Notebook Entries containing all setups, a capture of all displayed waveforms and waveform data, to which you may add custom annotations. Notebook Entries are stored in an internal database and are available to be recalled to the touch screen at any time. A keyword filter makes it easy to find and recall a specific Notebook Entry. The Flashback Recall feature instantly recalls the setups and waveforms saved with individual Notebook Entries, enabling you to restore the exact state of the instrument at a later date for additional analysis.
+Create Notebook Entry
+A Notebook Entry is a snapshot of the instrument at the moment it is taken: it captures the waveforms, their setups, and any measurements in process. As each new entry is created, it is added to the current database of Notebook entries. All entries are accessible from the LabNotebook dialog, from which they can be recalled to the screen through Flashback Recall.
+1. Choose File > LabNotebook to open the LabNotebook dialog.
+2. Touch Create. 3. Optionally, Enter Report Title and Description.
+The default title is the date and time stamp. Note: By default, you will be prompted to title and annotate notebook entries as they are created. You can configure LabNotebook preferences so that these steps are skipped in order to streamline the creation process. To update entries at a later time, select the entry from the list of Notebook Entries, then open the tab of the same name that appears behind the LabNotebook dialog.
+83
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Manage Notebook Entries
+First select the entry from the My Notebook Entries list.
+Edit Notebook Entries
+1. Select the entry from the My Notebook Entries list. 2. Go to the second tab labeled with the entry name.
+3. Modify the Title or Description.
+Delete Notebook Entries
+Use the Delete button on the LabNotebook tab to remove selected Notebook Entries, or Delete All to clear all of My Notebook Entries.
+Note: Unless you have previously backed up the notebook, deleted entries cannot be restored.
+Flashback Recall
+Once a Notebook Entry is made, you can recall it at any time using Flashback Recall. The recall includes waveforms and panel settings, so you can analyze the inputs that resulted in that capture.
+1. Choose File > LabNotebook to open the LabNotebook dialog. 2. Select the Notebook Entry from the list. 3. Touch the Flashback Recall button. 4. To exit Flashback Recall, touch the Undo button at the far right of the menu bar. Some result data not included in Flashback Recall are: l Persistence data (although it is saved in with the Notebook Entry). l Floating point waveforms resulting from certain math operations that have much higher resolution than 16-
+bits. This extra resolution is not preserved when traces are recalled using Flashback. l Cumulative Measurements in process when Flashback Recall is entered. When Flashback is used, they lose
+their history and show instead only the results from the stored waveforms, not including any data taken from interim acquisitions.
+84
+
+Save / Recall
+LabNotebook Preferences
+To modify the behavior of the LabNotebook tool, change settings on the LabNotebook Preferences dialog:
+Prompt for Entry Title Before Saving will cause a pop-up for entering a custom Title and Description to appear when a new entry is created. You can elect to name notebook entries using only the date/timestamp by leaving this box unchecked. Use Print Colors saves the waveforms on a white background. This option helps save ink/toner when printing entries. Hardcopy Area determines how much of the screen image is included in the report: Grid Area Only, or entire DSO Window.
+85
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Utilities & Preferences
+The settings in this group allow you to customize the appearance and performance of the oscilloscope. There are also multi-instrument functions that augment the oscilloscope capabilities.
+Utilities Dialog
+Hardcopy (Print) Setup, Date/Time Setup and System Status buttons open their corresponding setup dialogs. Update Firmware opens a dialog for installing the oscilloscope firmware. The Service button to the far right of the dialog launches a section of the application reserved for qualified Teledyne LeCroy service personnel. An access code is required to enter this section.
+Status
+The Utilities Status dialog displays information about your instrument including model number, serial number, firmware version, and installed hardware and software options. Choose Utilities > Utilities Setup from the menu bar, then touch the Status tab. Or Choose Support > About from the menu bar.
+86
+
+Utilities & Preferences
+Remote Control
+The Remote dialog contains settings to configure remote control of the instrument and also network access. Supported remote control protocols are:
+l TCPIP (Ethernet). If you choose this option for remote control, also install Teledyne LeCroy's VICP drivers on the controller. These are included in the VICP Passport plug-in, available free from the software download page at teledynelecroy.com under Oscilloscope Downloads > Software Utilities. The instrument uses Dynamic Host Configuration Protocol (DHCP) as its default addressing protocol, although you can manually assign a static IP address.
+l USBTMC. Connect a cable to the USBTMC port on the back of the oscilloscope. l GPIB. To activate this option, connect the USB2-GPIB adapter to any host USB port.
+Note: See the MAUI Oscilloscopes Remote Control and Automation Manual for full instructions on making the remote connection and sending remote commands. The steps shown here are only those performed on the oscilloscope to enable the connection.
+Assign Static IP Address/Name Server
+Before starting, consult with your Network Administrator regarding the oscilloscope's network address, subnet, default gateway and name server.
+1. Connect a keyboard to the front panel USB port. 2. From the menu bar, choose Utilities > Utilities Setup, then touch the Remote tab. 3. On the Remote dialog, touch Net Connections. 4. Touch the icon to the right of the Make New Connections icon. 5. On the Ethernet Driver Settings dialog, choose Specify an IP Address if setting a static IP; leave Obtain an IP
+address via DHCP if assigning a Name Server. 6. Touch the IP Address field, and use the keyboard to enter the address. Repeat for Subnet Mask and Default
+Gateway. Alternatively, touch the Name Server tab and enter the DNS server address. 7. Touch the window close boxes to return to the oscilloscope application.
+87
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Enter Network ID
+The network file sharing capabilities require that the oscilloscope have access to the network domain and shares. Use the Network ID settings to enter network credentials. Once credentials have been saved, the oscilloscope should connect to the network seamlessly; you do not need to re-enter credentials unless you wish to change them.
+Note: These may be the credentials of any valid domain user (e.g., your own logon); they do not have to be unique to the oscilloscope. Consult with your Network Administrator.
+1. Connect a keyboard to the front panel USB port. 2. From the menu bar, choose Utilities > Utilities Setup, then touch the Remote tab. 3. On the Remote dialog, touch Network ID. 4. On the Owner Properties dialog, enter the network User Name, Password, and Domain Name. 5. Reboot the oscilloscope after entering or changing the Network ID.
+Hardcopy Settings
+Hardcopy settings control how the oscilloscope Print function behaves. Print captures an image of the oscilloscope display, but there are several options as to what it does with the image next:
+l Send to a hardcopy printer l "Print" to a file that can be saved to an internal or external drive l Send to E-Mail Each option is set up on the Utilities Hardcopy dialog. You can further set up a default print color scheme and capture area. From the menu bar, choose File > Print Setup... or Utilities > Utilities Setup > HardCopy.
+Send to Printer
+Follow these steps to configure output to a printer. To print immediately, touch the Print er button at the far right of the dialog.
+Note: : WaveSurfer 3000 oscilloscopes support PictBridge-compatible printers. Printers can be connected via LAN (Ethernet) or USB.
+1. On the Utilities Hardcopy dialog, choose Printer. 2. Choose a page Orientation: portrait or landscape. 3. Optionally, choose print Colors and a Hardcopy Area.
+88
+
+Print to File
+1. On the Hardcopy dialog, choose File. 2. Choose the output File Format. 3. Enter a File Name. This will form the basis of all filenames, until you change it.
+
+Utilities & Preferences
+
+Note: Numbers you add to the end of the filename will be truncated, as the instrument appends numbers to this name with each new file. To add your own identifying numbers, place them at the front of the name.
+
+4. To save the file on a USB drive instead of the internal storage card, touch Browse next to Directory and choose USB Disk.
+
+Tip: If the oscilloscope is networked, you can touch on Save Files in Directory and enter the full Windows network address of another location in which to save the file. The oscilloscope must have access to this directory. If this path remains on the Hardcopy dialog when the oscilloscope is turned off, you will be asked for log on credentials to this directory when the oscilloscope is rebooted.
+
+5. Optionally, choose a color scheme and hardcopy (print) area.
+Send to E-Mail
+Follow this procedure to e-mail capture files to a preset address. The e-mail connection is set up in Utilities > Preferences Setup > E-Mail.
+1. On the Hardcopy dialog, choose E-Mail.
+2. Choose the output File Format.
+3. If you wish to be able to include messages with the files as they are sent, check Prompt for message to send with mail.
+4. Optionally, choose a color scheme and hardcopy (print) area.
+5. To go on and set up the e-mail connection, touch Configure E-Mail Server and recipient. This will take you to the Preferences E-Mail dialog.
+Choose Print Color Scheme
+To change the color of your print output, touch the Color button on the Hardcopy dialog and choose from:
+l Standard(default) - prints objects on a black background, as they appear on the display.
+l Print - prints objects on a white background. This option saves ink.
+Set Print Area
+To limit which part of the touch screen is captured, touch Hardcopy Area on the Hardcopy dialog and choose from:
+l Grid Area Only - omits dialogs and menus and prints only the grids.
+l DSO Window - prints the dialogs with the grids.
+
+89
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Cal Output
+Calibration Output
+Configure the type and frequency of the signal output from the Cal Out hook on the front of the oscilloscope. The signal is a 3 V square wave that may be used to compensate probes.
+Touch Off to disable the calibration signal.
+Auxiliary Output
+Use these settings to turn on/off the pulse from the Aux Out port on the back of the oscilloscope. Aux Out outputs a 3.3 V TTL pulse to another device following either a trigger or Pass/Fail event. Also select the Pulse Action on the Pass/Fail dialog to send a pulse for Pass/Fail testing.
+90
+
+Utilities & Preferences
+Date/Time
+Date/Time settings control the instrument's timestamp. These numbers appear in the message bar and on tables/records internal to the oscilloscope application, such as History Mode and WaveScan.
+Manual Method
+Enter the Hour, Minute, Second, Day, Month, and Year, then touch the Validate Changes button.
+Internet Method
+This method uses the Simple Network Time Protocol (SNTP) to read the time from time-a.nist.gov. The instrument must be connected to an internet access device through a LAN (Ethernet) port. If your oscilloscope has an active internet connection, simply touch the Set from Internet button.
+Time Zone
+Select a Time Zone. Check Auto Daylight Savings Time to automatically reset the timestamp when daylight savings occurs in the selected time zone.
+91
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Options
+Many optional software packages are available to extend the Analysis functions of the instrument. When you purchase an option, you will receive a key code by email that activates the new functionality. Use the oscilloscope Options dialog to activate options by installing the key code.
+Note: This dialog also displays the ScopeID and Serial #, which may need to be supplied when purchasing an option. To install a key code: 1. From the menu bar, choose Utillities > Utilities Setup, then open the Options tab.
+2. Touch Add Key. The Virtual Keyboard appears onscreen. 3. Use the Virtual Keyboard to type the key code in the Enter Option Key field.
+Note: For oscilloscopes using firmware version 8.1.x.x or earlier, the legacy 16-digit key code must be used. 4. Touch OK or press Enter to enter the information. The key code is added to the list of Installed Option Keys. Tip: You can use the Up/Down buttons to scroll the list of keys. The software option that each key activates is displayed below the list. 5. If finished, choose Yes to restart the oscilloscope application, or click Cancel to enter additional option keys. Restart the oscilloscope after entering the last key code. 6. After restarting, check the list of installed software options by choosing Help > About from the menu bar. If the installed options are not listed, then a firmware upgrade may be required. The latest firmware is available on our website at: Resources > Software Downloads. If you have any problems installing key codes on your Teledyne LeCroy oscilloscope, please call 1-800-5-LeCroy (1800-553-2769) or email support@teledynelecroy.com for further assistance.
+92
+
+Utilities & Preferences
+Disk Utilities
+Use the Disk Utilities dialog to manage files and folders on your instrument's hard drive. Disk Space information is shown at the far right of the dialog for convenience. Access the Disk Utilities dialog by selecting Utilities > Disk Utilities from the menu bar.
+Delete a Single File
+1. Touch the Delete button. 2. Browse to the current folder containing the file. 3. Browse to the file to be deleted, or use the Up and Down arrow buttons to scroll through the files in the folder. 4. With the desired file selected, touch Delete File.
+Delete All Files in a Folder
+1. Touch the Delete button. 2. Browse to the current folder containing the file. 3. With the desired folder selected, touch Empty Folder.
+Create a New Folder
+1. Touch Create. 2. Touch Current folder and provide the full path to the new folder, including the folder name. 3. Touch Create Folder.
+Copy Folder/File
+1. Touch Copy. 2. Browse to and select the folder or File To Be Copied. 3. Browse to and select the Destination Folder for the copy. 4. Touch Copy Folder or Copy File.
+93
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Back Up Files
+Touch Backup to back up the entire contents of the hard drive to a removable storage device. If a USB drive is installed, you can choose to back up to USB or to the removable Storage Card (MicroSD Card). Otherwise, Storage Card is the default.
+Sanitize Instrument
+Touch Sanitize to delete all user data (setups, waveform files, screen captures, LabNotebook entries, etc.) from the oscilloscope hard drive.
+Note: The Sanitize function does not affect the MicroSD Card. The card can be removed before or after sanitizing for storage in a secure facility.
+94
+
+Preferences Dialog
+
+Utilities & Preferences
+
+On the main Preferences dialog:
+Power on AC will turn on the oscilloscope and launch the software as soon as you connect to AC power, without having to first press the Power button.
+Audible Feedback controls the instrument's audio output. Select this box to hear a beep each time you touch a screen or front panel control.
+Language sets the language used on the touch screen display.
+Calibration
+To ensure the instrument maintains specified performance, it is factory set to perform a calibration during warm-up. We recommend that you warm up the oscilloscope for at least 20 minutes prior to use to give the instrument time to complete calibration procedures.
+Manually calibrate the oscilloscope when:
+l It is used in temperatures that differ from the previous calibration temperature by more than 5° C. OR
+l It has been more than one month since the previous calibration.
+Go to Utilities > Calibration Setup.
+The Calibration dialog shows the oscilloscope's calibration status and recommended actions.
+
+There are two options for manual calibration: Calibrate Current Setting--the oscilloscope is calibrated at the current vertical and horizontal setting.This calibration is valid for this setting for the current temperature ± 5° C and takes under 30 seconds. Calibrate All--all possible combinations of vertical and horizontal settings are calibrated at the current temperature. This calibration is valid for the current temperature ± 5° C and takes about 120 minutes.
+Caution: It is required that all inputs be removed from the oscilloscope prior to performing calibration.
+95
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Acquisition
+The Acquisition preference settings determine how traces behave as Vertical Offset or Horizontal Delay changes. Choose Utilities > Preference Setup to open the Acquisition dialog.
+Offset Setting constant in: l Volts keeps the amount of Offset in the amount of Volts specified, regardless of the V/div setting. As the Offset is adjusted, the trace will appear to move up or down relative to the zero level. l Div(isions) keeps the Vertical Offset level indicator stationary. The waveform remains on the grid as you change V/div, but your Offset value will change.
+Delay Setting constant in: l Time keep the Horizontal Delay at the amount of time specified, regardless of the Time/div setting. The Horizontal Delay indicator moves relative to the 0 point at the center of the grid. l Div(isions) keeps the Horizontal Delay indicator stationary. The trigger point remains on the grid as you increase the timebase; whereas, if Time is selected, the trigger point could move off the grid. Note: Whenever Div is selected, values are scaled proportional to the change in gain or timebase, thereby keeping the division of the grid constant.
+Trigger Counter Setting is selected by default. It clears the trigger counter each time a new acquisition command is sent. It is only made active for deselection when trigger Holdoff is set. Select Disable Hardware Accerlerated View to disable the fast update of the display.
+96
+
+E-Mail
+Use the E-mail dialog to set up e-mail on the oscilloscope.
+
+Utilities & Preferences
+
+1. Enter the network name of your SMTP Server. 2. In Originator Address (From:), enter the instrument's e-mail address. 3. If desired, enter a Default Recipient Address (To:) All email sent from the oscilloscope will go to this address
+unless manually changed. 4. Click Send Test Mail to send a confirmation message to ensure proper e-mail configuration.
+Miscellaneous
+These other Preference settings are located on the Miscellaneous dialog.
+
+To add the Teledyne LeCroy logo to print output, check Print Teledyne LeCroy Logo When Printing Grid Area Only. This identifies the instrument as the source of the image.
+Check Enable HTTP Screen Capture to enable remote capture of the touch screen display over a netowrk. This setting is required to use the instrument with the WaveStudio software.
+
+97
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+WaveSource Automatic Waveform Generator
+The WaveSource Automatic Waveform Generator allows you to output custom sine, square, triangle, pulse, DC, noise, and arbitrary waveforms from the oscilloscope.
+Connect a BNC cable from the WaveSource output on the back of the oscilloscope to the external device. Output is continuous once WaveSource is enabled.
+Output Standard Waveform
+1. Choose Utilities > WaveSource or touch the front panel WaveSource button. 2. Select the Load level. 3. Choose a Waveform type. 4. Depending on the type, waveforms may be configured using different groups of Settings (e.g., Frequency or
+Period, but not both). When you see buttons offering this choice, first select the group of settings to use. 5. Adjust parameters (e.g., Frequency) by touching the field and turning the front panel Adjust knob, or touch
+twice and use the soft keypad to enter new values. Touch Default Setup to restore the default parameters. 6. Check Enable to begin output.
+Import and Output Arbitrary Waveform
+The Arbitrary waveform feature enables you to import waveforms via file, then output this waveform from the function generator. Waveform files must be saved in .csv format (using Excel®, WaveStationTM, etc.) to be imported into WaveSource. Use the Save Waveform file fuction to save waveforms from the oscilloscope for output via WaveSource. To import an external file, first save it to a USB drive or transfer it directly to the WaveSurfer storge card if your oscilloscope is networked.
+98
+
+Utilities & Preferences 1. Choose Utilities > WaveSource or touch the front panel WaveSource button. 2. Select the Load level. 3. Choose Waveform type ARB. 4. Touch Browse next to the File Name field and browse to the location of the arbitrary waveform file on either
+the Storage Card or the USB Disk. Select the file and touch OK. 5. Touch Upload. 6. Check Enable to begin output.
+Note: When outputting Arbitrary waveforms, the Frequency shown on the WaveSource dialog is the pattern repetition rate, not the actual Frequency of the source waveform from which the waveform file was created.
+Calibrate Function Generator
+Touch the Calibrate button to start the internal calibration of the Function Generator. Caution: Remove all cables before starting the calibration.
+99
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Digital Voltmeter
+The Digital Voltmeter option activates an integrated 4-digit digital voltmeter and 5-digit frequency counter that operates through the same probes already attached to the oscilloscope channels. Use it to view real-time measurements through a dedicated user interface display that continues even when your triggering system is stopped.
+Note: You do not need to display the source channel trace to see the voltage readout on the DVM descriptor box and dialog.
+DVM Readout
+DVM Descriptor Box
+A. AutoScale indicator; "A" when on, blank when off B. Mode C. Input channel measured D. Voltage readout, color coded to match input channel
+DVM Dialog
+A. Last measured voltage B. Histogram of measured voltage C. Vertical range (in -/+ divisions) of signal D. Amplitude and Frequency readout
+100
+
+Utilities & Preferences
+Set Up DVM
+1. From the menu bar, choose Utilities > DVM. 2. Mark Enable to turn on the DVM function. 3. Touch Source and select the input channel to be measured. 4. Touch Mode and choose the waveform parameter to display on the readout. Options are:
+l DC l DC RMS l AC RMS l Frequency 5. Optionally, turn on AutoRange, which automatically adjusts the Vertical range and offset of the waveform as the amplitude changes so that measurements are always taken at the optimal resolution. When this option is selected, the letter A appears on the DVM descriptor readout.
+101
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Maintenance
+Topics in this section describe procedures for keeping the instrument in optimal working condition.
+Cleaning
+Clean only the exterior of the instrument using a soft cloth moistened with water or an isopropyl alcohol solution. Do not use harsh chemicals or abrasive elements. Under no circumstances submerge the instrument or allow moisture to penetrate it. Dry the instrument thoroughly before connecting a live voltage source.
+Caution: Unplug the power cord before cleaning. Do not attempt to clean internal parts.
+Fuse Replacement
+Disconnect the power cord before inspecting or replacing the fuse. Open the fuse holder (located at the rear of the instrument below the AC power inlet) using a small, flat-bladed screwdriver. Replace the old fuse with a new 5 x 20 mm T-rated 3.15 A/250 V fuse. Close the fuse holder before powering on.
+Caution: For continued fire protection at all line voltages, replace the fuse with one of the specified type and rating only. Always disconnect the power cord before replacing the fuse.
+Restart/Reboot Instrument
+To restart the oscilloscope application, choose File > Exit from the menu bar, then touch the Start DSO desktop shortcut. To reboot the instrument, which includes restarting the Windows OS:
+1. From within the oscilloscope application, choose File > Shutdown. 2. Wait 10 seconds after the oscilloscope has fully shut down, then press the Standby Power button on the front
+of the instrument. Note: There is no File > Shutdown option on WaveRunner 8000-R oscilloscopes. Use the Standby Power button.
+102
+
+Maintenance
+MAUITM Firmware Update for Windows CE Oscilloscopes
+This procedure is only for oscilloscopes running the Microsoft Compact Embedded (CE) operating system. Teledyne LeCroy frequently releases free firmware updates containing new product features and bug fixes. The installer updates multiple components including the oscilloscope application, required DLLs, drivers, and low-level microcode for integrated circuits on the oscilloscope. The firmware update procedure does not modify or delete any user data (setups, waveforms, screen captures, calibration constants, etc.) stored on the oscilloscope MicroSD card. Release Notes are provided for each new version. They can be found on the series download page where you downloaded the installer.
+1. Visit the firmware download page. 2. Select your oscilloscope series and model number. 3. Enter your registration login information, or create a new account. 4. Click the download link, and choose to Save the installer to a USB storage device. 5. Insert the USB device into one of the ports on the front of the oscilloscope. 6. Go to Utilities > Utilities Setup and choose Update Firmware. 7. Browse to the installer file in the USB Disk folder, then click Upgrade. 8. When installation is complete, choose Reboot Now.
+Caution: The installation may take several minutes, depending on the length of time since your last upgrade. Do not power down the oscilloscope at any point during the installation process.
+103
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Technical Support
+Live Support
+Registered users can contact their local Teledyne LeCroy service center at the number listed on our website. You can also submit Technical Support requests via the website at: teledynelecroy.com/support/techhelp
+Resources
+Teledyne LeCroy publishes a free Technical Library on its website. Manuals, tutorials, application notes, white papers, and videos are available to help you get the most out of your Teledyne LeCroy products. Visit: teledynelecroy.com/support/techlib The Datasheet published on the product page contains the detailed product specifications.
+Service Centers
+For a complete list of offices by country, including our sales & distribution partners, visit: teledynelecroy.com/support/contact Teledyne LeCroy 700 Chestnut Ridge Road Chestnut Ridge, NY, 10977, USA teledynelecroy.com Sales and Service: Ph: 800-553-2769 / 845-425-2000 FAX: 845-578-5985 contact.corp@teledynelecroy.com Support: Ph: 800-553-2769 customersupport@teledynelecroy.com
+104
+
+Maintenance
+
+Returning a Product for Service
+Contact your local Teledyne LeCroy service center for calibration or other service. If the product cannot be serviced on location, the service center will give you a Return Material Authorization (RMA) code and instruct you where to ship the product. All products returned to the factory must have an RMA.
+Return shipments must be prepaid. Teledyne LeCroy cannot accept COD or Collect shipments. We recommend airfreighting. Insure the item you're returning for at least the replacement cost.
+1. Remove all accessories from the instrument.
+2. Label the instrument with: l The RMA l Name and address of the owner l Description of failure or requisite service
+3. Pack the instrument in its original shipping box, or an equivalent carton with adequate padding to avoid damage in transit. Do not include the manual.
+4. Mark the outside of the box with the shipping address given to you by Teledyne LeCroy. Be sure to add the following: l ATTN: <RMA code assigned by Teledyne LeCroy> l FRAGILE
+5. If returning a product to a different country: contact Teledyne LeCroy Service for instructions on completing your import/export documents.
+Extended warranty, calibration, and upgrade plans are available for purchase. Contact your Teledyne LeCroy sales representative to purchase a service plan.
+For a complete list of Teledyne LeCroy offices by country, including our sales and distribution partners, visit: teledynelecroy.com/support/contact
+Teledyne LeCroy 700 Chestnut Ridge Road Chestnut Ridge, NY, 10977, USA
+
+Sales and Service:
+Ph: 800-553-2769 / 845-425-2000 FAX: 845-578-5985 contact.corp@teledynelecroy.com
+
+Support:
+Ph: 800-553-2769 customersupport@teledynelecroy.com
+
+105
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Warranty
+THE WARRANTY BELOW REPLACES ALL OTHER WARRANTIES, EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS, OR ADEQUACY FOR ANY PARTICULAR PURPOSE OR USE. TELEDYNE LECROY SHALL NOT BE LIABLE FOR ANY SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, WHETHER IN CONTRACT OR OTHERWISE. THE CUSTOMER IS RESPONSIBLE FOR THE TRANSPORTATION AND INSURANCE CHARGES FOR THE RETURN OF PRODUCTS TO THE SERVICE FACILITY. TELEDYNE LECROY WILL RETURN ALL PRODUCTS UNDER WARRANTY WITH TRANSPORT PREPAID. The product is warranted for normal use and operation, within specifications, for a period of three years from shipment. Teledyne LeCroy will either repair or, at our option, replace any product returned to one of our authorized service centers within this period. However, in order to do this we must first examine the product and find that it is defective due to workmanship or materials and not due to misuse, neglect, accident, or abnormal conditions or operation. The instrument's firmware has been thoroughly tested and is presumed to be functional. Nevertheless, it is supplied without warranty of any kind covering detailed performance. Teledyne LeCroy shall not be responsible for any defect, damage, or failure caused by any of the following: a) attempted repairs or installations by personnel other than Teledyne LeCroy representatives or b) improper connection to incompatible equipment, or c) for any damage or malfunction caused by the use of non-Teledyne LeCroy supplies. Furthermore, Teledyne LeCroy shall not be obligated to service a product that has been modified or integrated where the modification or integration increases the task duration or difficulty of servicing the instrument. Spare and replacement parts, and repairs, all have a 90-day warranty. Products not made by Teledyne LeCroy are covered solely by the warranty of the original equipment manufacturer.
+106
+
+Certifications
+Teledyne LeCroy certifies compliance to the following standards as of the time of publication.
+
+Maintenance
+
+European Council
+The instrument bears this mark to indicate it conforms to all applicable European Council standards. Please see the EC Declaration of Conformity document shipped with your product for current certifications.
+EMC Directive
+The instrument meets the intent of EC Directive 2014/30/EU for Electromagnetic Compatibility. Compliance was demonstrated to the following specifications as listed in the Official Journal of the European Communities:
+EN IEC 61326-1:2021 EMC requirements for electrical equipment for measurement, control and laboratory use
+EN IEC 61326-2-1:2021 Particular requirements for sensitive test and measurement equipment for EMC unprotected applications 1, 2, 3
+1 To ensure compliance with all applicable EMC standards, use high-quality shielded interface cables.
+2 Emissions which exceed the levels required by this standard may occur when the instrument is connected to a test object.
+3 This product is intended for use in nonresidential areas only. Use in residential areas may cause electromagnetic interference.
+Low Voltage Directive
+The instrument meets intent of EC Directive 2014/35/EU for Product Safety. Compliance was demonstrated to the following specifications as listed in the Official Journal of the European Communities:
+EN 61010-1:2010+A1:2019 Safety requirements for electrical equipment for measurement, control and laboratory use­Part 1: General requirements
+EN 61010-2:030:2021 Safety requirements for electrical equipment for measurement, control, and laboratory use­ Part 2-030: Particular requirements for testing and measuring circuits
+The design of the instrument has been verified to conform to the following limits:
+Mains Supply Connector: Overvoltage Category II, instrument intended to be supplied from the building wiring at utilization points (socket outlets and similar)
+Measuring Circuit Terminals: No rated measurement category. Terminals not intended to be connected directly to the mains supply.
+Unit: Pollution Degree 2, operating environment where normally only dry, non-conductive pollution occurs. Temporary conductivity caused by condensation should be expected.
+End-of-Life Handling/ WEEE
+The instrument bears this mark to indicate that it complies with the applicable European Union requirements to Directives 2012/19/EU and 2013/56/EU on Waste Electrical and Electronic Equipment (WEEE) and Batteries.
+The instrument is subject to disposal and recycling regulations that vary by country and region. Many countries prohibit the disposal of waste electronic equipment in standard waste receptacles. For more information about proper disposal of your Teledyne LeCroy product, visit teledynelecroy.com/recycle.
+
+107
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Restriction of Hazardout Substances (RoHS)
+Unless otherwise specified, all materials and processes are compliant with RoHS Directive 2011/65/EU in its entirety, inclusive of any further amendments or modifications of said Directive.
+European Contact:*
+Teledyne GmbH, European Division Im Breitspiel 11c D-69126 Heidelberg, Germany Tel: + 49 6221 8270
+
+United Kingdom
+The instrument bears this mark to indicate conformity with health, safety, and environmental protection standards for products sold within Great Britain (England, Wales and Scotland).The design of the product has been verified to conform to the applicable harmonized standards and technical specifications, and with the relevant Union harmonization legislation.
+
+Australia and New Zealand
+The instrument bears this mark to indicate it complies with the EMC provision of the Australian Communication and Media Authority (ACMA) Radio Communications Act:
+
+AS/NZS CISPR 11:2015, Radiated and Conducted Emissions, Group 1, Class A.
+
+AUSTRALIA / NEW ZEALAND CONTACTS:*
+RS Components Pty Ltd. Suite 326 The Parade West Kent Town, South Australia 5067
+
+RS Components Ltd. Unit 30 & 31 Warehouse World 761 Great South Road Penrose, Auckland, New Zealand
+
+* Visit teledynelecroy.com/support/contact for the latest contact information.
+
+United States and Canada
+The oscilloscope has been certified by Underwriters Laboratories (UL) to conform to the following safety standards and bears the UL/cUL Listing Mark:
+UL 61010-1 Third Edition ­ Safety standard for electrical measuring and test equipment.
+UL 61010-2-030 Ed. 2-2018 ­ Particular requirements for equipment having testing or measuring circuits.
+CAN/CSA-C22.2 No. 61010-1-12 ­ Safety requirements for electrical equipment for measurement, control and laboratory use.
+CAN/CSA-C22.2 No. 61010-2-030:18 ­ Particular requirements for equipment having testing or measuring circuits
+
+China
+
+Unless otherwise specified, all materials and processes are compliant with the latest requirements of China RoHS 2.
+
+108
+
+Intellectual Property
+All patents pertaining to the WaveSurfer 3000z can be found on our website at:
+teledynelecroy.com/patents/
+
+Maintenance
+
+109
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+Index
+A acquisition
+pre-processing 13 sampling mode 27 settings 96 action toolbar 14 altitude 2 analog inputs 6 persistence 46 attenuation 6 auto save 78, 81 auto zero 26 averaging 59-60 B backup 76, 78, 81, 94 bandwidth limiting 13, 25 BNC connectors 6 C calibration 9, 105 channel 24 descriptor box 13 frequency 7 cleaning 102 color 85 persistence 46 compliance 107 cooling 2 coupling 6, 13, 25
+110
+
+cursor 47 controls 50 readout 13
+D de-embedding 7 degauss 26 delay 27, 96
+post-trigger 27 pre-trigger 27 derated voltage 2 descriptor box 11 deskew 13, 25 dialogs 14 display 44 controls 44 grid 44 persistence 46 E EC compliance 107 email 84 enhanced resolution 60 external trigger 6 F FFT 61 filtering bandwidth 25 noise 60 firmware 10 version 86 Flashback Recall 83-84 frequency 60 response 7, 61
+
+G gain 25, 96 gating measurements 53 GPIB 87 grid 35
+intensity 44 style 44 H histograms 53 holdoff 41 horizontal controls 27 humidity 2 I impedance 6 import .trc files 80 setup panels 77 input impedance 6 inputs analog 6 intensity grid 44 interfaces 6 ProBus 6 inversion 25 IP address 87 L labelling traces 19, 83 LabNotebook 11, 83-85 language selection 10
+
+M math 57-58
+descriptor box 13 function setup 57 operators 57 measurements 51 cursors 47 gating 53 graphing 54 histicons 53 readout 51 saving 81 statistics 52 measurements; status 51 measuring terminals 2 memory 68-69 descriptor box 13 memory length 27 MicroSD card 94 N notebooks 83-84 O offset 96 operating environment 2 options 10, 92 P persistence 46 trace styles 46 position trace 21 post-trigger delay 27 power standby 9
+
+Index 111
+
+WaveSurfer 3000z Oscilloscopes Operator's Manual
+pre-processing 13 pre-trigger delay 27 preferences 95 printing 84, 97 probes 7
+settings 26 ProBus interface 6 R real-time sampling mode 28 recall
+LabNotebooks 84 setup panels 77 waveforms 80 remote control 97 removable hard drive 94 reports 83, 85 rescaling 63 restart/reboot 102 restore waveforms 69 returns 105 RH 2 RIS sampling mode 28 RoHS 108 roll sampling mode 28 S sample points 27 sample rate 27-28 sampling mode 27 real-time 28 RIS 28 roll 28
+112
+
+sequence 29 sanitize 94 save
+data 81, 83 setup panels 76, 83 waveforms 68, 78 search 70 sequence sampling mode 29 service 104-105 setup panels 76-77, 83 software options 10, 92 sound 95 support 104-105 system on/off 9 status 86 T technical support 104-105 temperature 2 timebase 27, 96 controls 27 descriptor box 13 touch screen language 10 traces activating 17 copy 68 label 19, 83 line style 45 persistence 46 recall 80
+
+save 78 turn on/off 17 TRC files 68, 78, 80 trend 54 trigger 35 controls 35, 41 counter 41, 96 delay 27 descriptor box 13 holdoff 41 time 41 U UL compliance 108 undo 11 units 63 utilities 86 V vertical 24 offset 25 resolution 60 sensitivity 24-25 W waveform files 68, 78, 80 WaveScan 70 WaveStudio 97 Windows networking 76, 79, 81 X XY plots 45 Z zoom 16, 20 controls 21 descriptor box 13
+
+undo 11
+
+Index
+
+113
+
+

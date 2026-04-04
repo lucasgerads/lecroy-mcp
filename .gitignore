@@ -1,0 +1,23 @@
+# Virtual environments
+venv*/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Claude Code
+.claude/
+CLAUDE.md
+
+# Lucas
+LUCAS.md
+
+# Captured data files (generated output)
+screenshots/
+waveforms/
+*.png
+*.csv
+
+#Setup files
+.mcp.json

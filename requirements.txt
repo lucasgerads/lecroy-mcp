@@ -1,0 +1,4 @@
+mcp[cli]>=1.0.0
+pyvisa>=1.13.0
+pyvisa-py>=0.7.0
+pillow>=10.0.0
