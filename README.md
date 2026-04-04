@@ -5,21 +5,9 @@ Tested on a WaveSurfer 3024Z with MAUI firmware.
 
 ## Requirements
 
-- Python 3.10+
+- [uv](https://docs.astral.sh/uv/) installed
 - A LeCroy oscilloscope connected over LAN
 - The scope's IP address
-
-## Installation
-
-```bash
-pip install -e .
-```
-
-Or without installing:
-
-```bash
-pip install -r requirements.txt
-```
 
 ## MCP configuration
 
@@ -30,27 +18,15 @@ Add to your MCP client config (e.g. Claude Code's `.mcp.json`):
   "mcpServers": {
     "lecroy-scope": {
       "type": "stdio",
-      "command": "lecroy-mcp",
+      "command": "uvx",
+      "args": ["lecroy-mcp"],
       "env": { "PYTHONUNBUFFERED": "1" }
     }
   }
 }
 ```
 
-If running without installing, point `command` at `server_stdio.py` directly:
-
-```json
-{
-  "mcpServers": {
-    "lecroy-scope": {
-      "type": "stdio",
-      "command": "python",
-      "args": ["server_stdio.py"],
-      "env": { "PYTHONUNBUFFERED": "1" }
-    }
-  }
-}
-```
+`uvx` will automatically download and run the server — no manual installation needed.
 
 ## Usage
 
@@ -76,6 +52,16 @@ Profiles are included for:
 - MDA800A, SDA
 
 Unknown models fall back to conservative defaults.
+
+## Manual installation
+
+If you prefer not to use `uvx`:
+
+```bash
+pip install lecroy-mcp
+```
+
+Then use `lecroy-mcp` as the command in your MCP config instead of `uvx lecroy-mcp`.
 
 ## Notes
 
