@@ -1,7 +1,6 @@
 # lecroy-mcp
 
 MCP server for controlling LeCroy oscilloscopes via SCPI over LAN (VXI-11) or USB.
-Tested on a WaveSurfer 3024Z with MAUI firmware.
 
 ## Requirements
 
@@ -18,8 +17,7 @@ Add to your MCP client config (e.g. Claude Code's `.mcp.json`):
     "lecroy-scope": {
       "type": "stdio",
       "command": "uvx",
-      "args": ["lecroy-mcp"],
-      "env": { "PYTHONUNBUFFERED": "1" }
+      "args": ["lecroy-mcp"]
     }
   }
 }
@@ -35,7 +33,6 @@ Set `LECROY_HOST` in the env block and the server auto-connects on startup:
 
 ```json
 "env": {
-  "PYTHONUNBUFFERED": "1",
   "LECROY_HOST": "192.168.1.111"
 }
 ```
@@ -46,14 +43,13 @@ Use `LECROY_RESOURCE` for full control, including USB connections:
 
 ```json
 "env": {
-  "PYTHONUNBUFFERED": "1",
   "LECROY_RESOURCE": "USB0::0x05FF::0x1023::12345::INSTR"
 }
 ```
 
 ### Option 3 — Manual connection
 
-Leave the env block as-is and connect from within the MCP session:
+Leave out the env block and connect from within the MCP session:
 
 1. `scope_scan` — auto-detect LeCroy scopes on the local network
 2. `scope_list_resources` — list all VISA resources (LAN + USB)
@@ -63,7 +59,6 @@ Optionally set `LECROY_SUBNET` to hint the scan range:
 
 ```json
 "env": {
-  "PYTHONUNBUFFERED": "1",
   "LECROY_SUBNET": "192.168.1.0/24"
 }
 ```
@@ -126,5 +121,19 @@ Then use `lecroy-mcp` as the command in your MCP config instead of `uvx lecroy-m
 
 ## Notes
 
-- Requires `pyvisa-py` backend — NI-VISA is not supported (breaks screenshot capture)
+- Requires `pyvisa-py` backend — NI-VISA is currently not supported (breaks screenshot capture)
 - All VISA access is serialized via a threading lock; parallel MCP tool calls are safe
+
+## Troubleshooting
+
+**Diagnostic messages not appearing in MCP logs**
+
+If you are not seeing server log output (e.g. auto-connect status or errors) in your MCP client's log viewer, add `PYTHONUNBUFFERED` to the env block:
+
+```json
+"env": {
+  "PYTHONUNBUFFERED": "1"
+}
+```
+
+This disables Python's output buffering so log messages are flushed immediately. It is not required for normal operation.
