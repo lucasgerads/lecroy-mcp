@@ -228,30 +228,57 @@ def scope_scan(subnet: str = "") -> str:
     """
     import socket
     import ipaddress
+    from concurrent.futures import ThreadPoolExecutor, as_completed
 
     effective_subnet = subnet or _SUBNET
 
-    if not effective_subnet:
-        # Auto-detect: get local IP and assume /24
+    if effective_subnet:
+        subnets_to_scan = [effective_subnet]
+    else:
+        # Auto-detect: collect all active IPv4 interfaces and derive /24 subnets
+        subnets_to_scan = []
         try:
-            s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-            s.connect(("8.8.8.8", 80))
-            local_ip = s.getsockname()[0]
-            s.close()
-            effective_subnet = str(ipaddress.ip_network(local_ip + "/24", strict=False))
-        except Exception as e:
-            return f"ERROR: Could not determine local subnet: {e}\nProvide a subnet explicitly, e.g. scope_scan('192.168.1.0/24')"
+            import psutil  # optional — fall back gracefully if not installed
+            for addrs in psutil.net_if_addrs().values():
+                for addr in addrs:
+                    if addr.family == socket.AF_INET and not addr.address.startswith("127."):
+                        net = ipaddress.ip_network(addr.address + "/24", strict=False)
+                        subnets_to_scan.append(str(net))
+        except ImportError:
+            pass
 
-    try:
-        results = LeCroyScope.scan_network(effective_subnet)
-    except Exception as e:
-        return f"ERROR: {e}"
+        if not subnets_to_scan:
+            # Fallback: use default-route interface only
+            try:
+                s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+                s.connect(("8.8.8.8", 80))
+                local_ip = s.getsockname()[0]
+                s.close()
+                subnets_to_scan = [str(ipaddress.ip_network(local_ip + "/24", strict=False))]
+            except Exception as e:
+                return f"ERROR: Could not determine local subnet: {e}\nProvide a subnet explicitly, e.g. scope_scan('192.168.1.0/24')"
 
-    if not results:
-        return f"No LeCroy oscilloscopes found on {effective_subnet}."
+    # Scan all subnets in parallel
+    all_results = []
+    seen = set()
+    with ThreadPoolExecutor(max_workers=len(subnets_to_scan)) as ex:
+        futures = {ex.submit(LeCroyScope.scan_network, s): s for s in subnets_to_scan}
+        for f in as_completed(futures):
+            try:
+                for resource, idn in f.result():
+                    if resource not in seen:
+                        seen.add(resource)
+                        all_results.append((resource, idn))
+            except Exception:
+                pass
 
-    lines = [f"Found {len(results)} LeCroy instrument(s) on {effective_subnet}:"]
-    for resource, idn in results:
+    scanned = ", ".join(subnets_to_scan)
+
+    if not all_results:
+        return f"No LeCroy oscilloscopes found (scanned: {scanned})."
+
+    lines = [f"Found {len(all_results)} LeCroy instrument(s) (scanned: {scanned}):"]
+    for resource, idn in all_results:
         lines.append(f"  {resource}")
         lines.append(f"    {idn}")
     lines.append("\nUse scope_connect('<resource string>') to connect.")
