@@ -1,13 +1,12 @@
 # lecroy-mcp
 
-MCP server for controlling LeCroy oscilloscopes via SCPI over LAN (VXI-11).
+MCP server for controlling LeCroy oscilloscopes via SCPI over LAN (VXI-11) or USB.
 Tested on a WaveSurfer 3024Z with MAUI firmware.
 
 ## Requirements
 
 - [uv](https://docs.astral.sh/uv/) installed
-- A LeCroy oscilloscope connected over LAN
-- The scope's IP address
+- A LeCroy oscilloscope connected over LAN or USB
 
 ## MCP configuration
 
@@ -28,17 +27,59 @@ Add to your MCP client config (e.g. Claude Code's `.mcp.json`):
 
 `uvx` will automatically download and run the server — no manual installation needed.
 
+## Connection options
+
+### Option 1 — Pre-configure the IP address (recommended for LAN)
+
+Set `LECROY_HOST` in the env block and the server auto-connects on startup:
+
+```json
+"env": {
+  "PYTHONUNBUFFERED": "1",
+  "LECROY_HOST": "192.168.1.111"
+}
+```
+
+### Option 2 — Pre-configure a full resource string (LAN or USB)
+
+Use `LECROY_RESOURCE` for full control, including USB connections:
+
+```json
+"env": {
+  "PYTHONUNBUFFERED": "1",
+  "LECROY_RESOURCE": "USB0::0x05FF::0x1023::12345::INSTR"
+}
+```
+
+### Option 3 — Manual connection
+
+Leave the env block as-is and connect from within the MCP session:
+
+1. `scope_scan` — auto-detect LeCroy scopes on the local network
+2. `scope_list_resources` — list all VISA resources (LAN + USB)
+3. `scope_connect("TCPIP0::192.168.1.111::inst0::INSTR")` — connect directly
+
+Optionally set `LECROY_SUBNET` to hint the scan range:
+
+```json
+"env": {
+  "PYTHONUNBUFFERED": "1",
+  "LECROY_SUBNET": "192.168.1.0/24"
+}
+```
+
 ## Usage
 
-Once connected to your MCP client, start with:
+Once connected, you have tools for:
 
-1. `scope_list_resources` — find the VISA address of your scope
-2. `scope_connect("TCPIP0::192.168.1.x::inst0::INSTR")` — connect
-3. `scope_identify` — confirm communication
-
-From there you have tools for channel setup, trigger, timebase, measurements,
-waveform capture, screenshots, math functions, and the built-in WaveSource
-generator.
+- Channel setup (scale, offset, coupling, bandwidth limit)
+- Trigger configuration (mode, source, level, edge)
+- Timebase and memory depth
+- Automated measurements (PKPK, FREQ, RMS, RISE, DUTY, etc.)
+- Waveform capture (JSON or CSV)
+- Screenshots
+- Math functions (FFT, INTG, DIFF, etc.)
+- WaveSource built-in generator (WaveSurfer 3000Z and similar)
 
 ## Supported models
 

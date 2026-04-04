@@ -25,6 +25,7 @@ to send raw VBS strings; use the dedicated scope_wavesource_* tools instead.
 
 import csv
 import json
+import os
 import sys
 import threading
 from datetime import datetime
@@ -35,6 +36,11 @@ import docs as _docs
 
 mcp = FastMCP("lecroy-scope")
 
+# Optional env vars for auto-connect and scan hint (set in .mcp.json env block)
+_HOST     = os.environ.get("LECROY_HOST")      # e.g. "192.168.1.111"
+_RESOURCE = os.environ.get("LECROY_RESOURCE")  # e.g. "USB0::0x05FF::0x1023::12345::INSTR"
+_SUBNET   = os.environ.get("LECROY_SUBNET")    # e.g. "192.168.1.0/24"
+
 # Module-level singleton — one persistent VISA connection per server process.
 _scope = LeCroyScope()
 
@@ -44,6 +50,20 @@ _scope = LeCroyScope()
 # binary waveform/screenshot transfer can interleave with a text query and
 # corrupt both responses (or crash the server process entirely).
 _visa_lock = threading.Lock()
+
+# Auto-connect if a host or resource string was provided via environment.
+if _RESOURCE:
+    try:
+        _scope.connect(_RESOURCE)
+        print(f"Auto-connected to {_RESOURCE}", file=sys.stderr, flush=True)
+    except Exception as e:
+        print(f"Auto-connect failed ({_RESOURCE}): {e}", file=sys.stderr, flush=True)
+elif _HOST:
+    try:
+        _scope.connect(f"TCPIP0::{_HOST}::inst0::INSTR")
+        print(f"Auto-connected to {_HOST}", file=sys.stderr, flush=True)
+    except Exception as e:
+        print(f"Auto-connect failed ({_HOST}): {e}", file=sys.stderr, flush=True)
 
 
 def _run(fn):
@@ -163,11 +183,15 @@ def scope_help(topic: str = "") -> str:
 
 @mcp.tool()
 def scope_list_resources() -> str:
-    """List all VISA instrument resources visible on this computer.
+    """List all VISA instrument resources visible on this computer (LAN and USB).
 
     Use this to find the resource string for scope_connect.
     A LAN-connected LeCroy typically appears as:
         TCPIP0::192.168.1.111::inst0::INSTR
+    A USB-connected LeCroy typically appears as:
+        USB0::0x05FF::0x1023::<serial>::INSTR
+
+    If nothing appears, try scope_scan to search the network directly.
 
     Transport: local
     """
@@ -176,11 +200,62 @@ def scope_list_resources() -> str:
         if not resources:
             return (
                 "No VISA resources found. Check the oscilloscope is powered on and connected.\n"
-                "Try connecting directly: scope_connect('TCPIP0::192.168.1.111::inst0::INSTR')"
+                "Try scope_scan to search the network, or connect directly:\n"
+                "  scope_connect('TCPIP0::192.168.1.111::inst0::INSTR')"
             )
         return "\n".join(resources)
     except Exception as e:
         return f"ERROR: {e}"
+
+
+@mcp.tool()
+def scope_scan(subnet: str = "") -> str:
+    """Scan the network for LeCroy oscilloscopes.
+
+    More reliable than scope_list_resources for LAN-connected scopes —
+    probes each host directly rather than relying on broadcast discovery.
+
+    Scans all hosts in the subnet for port 111 (VXI-11 portmapper) in
+    parallel, then queries *IDN? on responsive hosts and filters for LeCroy
+    instruments.
+
+    Args:
+        subnet: CIDR subnet to scan, e.g. '192.168.1.0/24'.
+                Defaults to LECROY_SUBNET env var if set, otherwise
+                auto-detected from the local network interface.
+
+    Transport: local (TCP socket probe + SCPI *IDN? per candidate)
+    """
+    import socket
+    import ipaddress
+
+    effective_subnet = subnet or _SUBNET
+
+    if not effective_subnet:
+        # Auto-detect: get local IP and assume /24
+        try:
+            s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            s.connect(("8.8.8.8", 80))
+            local_ip = s.getsockname()[0]
+            s.close()
+            effective_subnet = str(ipaddress.ip_network(local_ip + "/24", strict=False))
+        except Exception as e:
+            return f"ERROR: Could not determine local subnet: {e}\nProvide a subnet explicitly, e.g. scope_scan('192.168.1.0/24')"
+
+    try:
+        results = LeCroyScope.scan_network(effective_subnet)
+    except Exception as e:
+        return f"ERROR: {e}"
+
+    if not results:
+        return f"No LeCroy oscilloscopes found on {effective_subnet}."
+
+    lines = [f"Found {len(results)} LeCroy instrument(s) on {effective_subnet}:"]
+    for resource, idn in results:
+        lines.append(f"  {resource}")
+        lines.append(f"    {idn}")
+    lines.append("\nUse scope_connect('<resource string>') to connect.")
+    return "\n".join(lines)
 
 
 @mcp.tool()

@@ -299,11 +299,67 @@ class LeCroyScope:
 
     @staticmethod
     def list_resources() -> list[str]:
-        """Return all VISA resources visible on this PC."""
+        """Return all VISA resources visible on this PC (LAN and USB)."""
         rm = pyvisa.ResourceManager("@py")
         resources = list(rm.list_resources())
         rm.close()
         return resources
+
+    @staticmethod
+    def scan_network(subnet: str, timeout_s: float = 0.5) -> list[tuple[str, str]]:
+        """Scan a subnet for LeCroy oscilloscopes via VXI-11.
+
+        Probes all hosts in the subnet for port 111 (Sun RPC portmapper,
+        always open on VXI-11 instruments) in parallel, then queries *IDN?
+        on each responsive host. Returns only LeCroy instruments.
+
+        Args:
+            subnet:    CIDR notation, e.g. '192.168.1.0/24'
+            timeout_s: Socket probe timeout per host (default 0.5 s)
+
+        Returns:
+            List of (resource_string, idn) tuples for each LeCroy found.
+        """
+        import ipaddress
+        import socket
+        from concurrent.futures import ThreadPoolExecutor, as_completed
+
+        def probe(ip: str) -> str | None:
+            try:
+                s = socket.socket()
+                s.settimeout(timeout_s)
+                s.connect((ip, 111))
+                s.close()
+                return ip
+            except Exception:
+                return None
+
+        network = ipaddress.ip_network(subnet, strict=False)
+        responsive = []
+        with ThreadPoolExecutor(max_workers=64) as ex:
+            futures = {ex.submit(probe, str(ip)): ip for ip in network.hosts()}
+            for f in as_completed(futures):
+                result = f.result()
+                if result:
+                    responsive.append(result)
+
+        found = []
+        for ip in responsive:
+            resource = f"TCPIP0::{ip}::inst0::INSTR"
+            try:
+                rm = pyvisa.ResourceManager("@py")
+                inst = rm.open_resource(resource)
+                inst.timeout = 2000
+                inst.write_termination = "\n"
+                inst.read_termination = "\n"
+                idn = inst.query("*IDN?").strip()
+                inst.close()
+                rm.close()
+                if "LECROY" in idn.upper():
+                    found.append((resource, idn))
+            except Exception:
+                pass
+        return found
 
     # =========================================================================
     # Raw SCPI access
