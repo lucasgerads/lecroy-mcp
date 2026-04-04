@@ -1108,6 +1108,8 @@ def scope_wavesource_set_shape(shape: str) -> str:
 
     Args:
         shape: Sine, Square, Triangle, Pulse, DC, Noise, or Arb.
+               For a sawtooth/ramp, use Triangle and set symmetry to 0 or 100
+               via scope_wavesource_set_symmetry.
 
     Transport: VBS (app.WaveSource.Shape)
     """

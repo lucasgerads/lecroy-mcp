@@ -94,6 +94,26 @@ Profiles are included for:
 
 Unknown models fall back to conservative defaults.
 
+## Updating
+
+With `uvx`, use the `@latest` tag to force the newest version:
+
+```bash
+uvx lecroy-mcp@latest
+```
+
+Or update the `args` in your `.mcp.json` to always pull the latest:
+
+```json
+"args": ["lecroy-mcp@latest"]
+```
+
+With pip:
+
+```bash
+pip install --upgrade lecroy-mcp
+```
+
 ## Manual installation
 
 If you prefer not to use `uvx`:
