@@ -2,6 +2,8 @@
 
 MCP server for controlling LeCroy oscilloscopes via SCPI over LAN (VXI-11) or USB.
 
+![Demo](https://raw.githubusercontent.com/lucasgerads/lecroy-mcp/main/docu/assets/demo.gif)
+
 ## Requirements
 
 - [uv](https://docs.astral.sh/uv/) installed
@@ -27,27 +29,7 @@ Add to your MCP client config (e.g. Claude Code's `.mcp.json`):
 
 ## Connection options
 
-### Option 1 — Pre-configure the IP address (recommended for LAN)
-
-Set `LECROY_HOST` in the env block and the server auto-connects on startup:
-
-```json
-"env": {
-  "LECROY_HOST": "192.168.1.111"
-}
-```
-
-### Option 2 — Pre-configure a full resource string (LAN or USB)
-
-Use `LECROY_RESOURCE` for full control, including USB connections:
-
-```json
-"env": {
-  "LECROY_RESOURCE": "USB0::0x05FF::0x1023::12345::INSTR"
-}
-```
-
-### Option 3 — Manual connection
+### Option 1 — Manual connection
 
 Leave out the env block and connect from within the MCP session:
 
@@ -60,6 +42,26 @@ Optionally set `LECROY_SUBNET` to hint the scan range:
 ```json
 "env": {
   "LECROY_SUBNET": "192.168.1.0/24"
+}
+```
+
+### Option 2 — Pre-configure the IP address (recommended for LAN)
+
+Set `LECROY_HOST` in the env block and the server auto-connects on startup:
+
+```json
+"env": {
+  "LECROY_HOST": "192.168.1.111"
+}
+```
+
+### Option 3 — Pre-configure a full resource string (LAN or USB)
+
+Use `LECROY_RESOURCE` for full control, including USB connections:
+
+```json
+"env": {
+  "LECROY_RESOURCE": "USB0::0x05FF::0x1023::12345::INSTR"
 }
 ```
 
