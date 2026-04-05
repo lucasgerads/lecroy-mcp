@@ -31,7 +31,7 @@ Add to your MCP client config (e.g. Claude Code's `.mcp.json`):
 
 ### Option 1 — Manual connection
 
-Leave out the env block and connect from within the MCP session:
+Copy the MCP client config from above as-is and connect from within the Claude session:
 
 1. `scope_scan` — auto-detect LeCroy scopes on the local network
 2. `scope_list_resources` — list all VISA resources (LAN + USB)
@@ -40,8 +40,17 @@ Leave out the env block and connect from within the MCP session:
 Optionally set `LECROY_SUBNET` to hint the scan range:
 
 ```json
-"env": {
-  "LECROY_SUBNET": "192.168.1.0/24"
+{
+  "mcpServers": {
+    "lecroy-scope": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["lecroy-mcp"],
+      "env": {
+        "LECROY_SUBNET": "192.168.1.0/24"
+      }
+    }
+  }
 }
 ```
 
@@ -50,8 +59,15 @@ Optionally set `LECROY_SUBNET` to hint the scan range:
 Set `LECROY_HOST` in the env block and the server auto-connects on startup:
 
 ```json
-"env": {
-  "LECROY_HOST": "192.168.1.111"
+{
+  "mcpServers": {
+    "lecroy-scope": {
+      ...
+      "env": {
+        "LECROY_HOST": "192.168.1.111"
+      }
+    }
+  }
 }
 ```
 
@@ -60,8 +76,15 @@ Set `LECROY_HOST` in the env block and the server auto-connects on startup:
 Use `LECROY_RESOURCE` for full control, including USB connections:
 
 ```json
-"env": {
-  "LECROY_RESOURCE": "USB0::0x05FF::0x1023::12345::INSTR"
+{
+  "mcpServers": {
+    "lecroy-scope": {
+      ...
+      "env": {
+        "LECROY_RESOURCE": "USB0::0x05FF::0x1023::12345::INSTR"
+      }
+    }
+  }
 }
 ```
 
