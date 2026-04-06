@@ -2,7 +2,7 @@
 
 MCP server for controlling LeCroy oscilloscopes via SCPI over LAN (VXI-11) or USB.
 
-![Demo](https://raw.githubusercontent.com/lucasgerads/lecroy-mcp/main/docu/assets/demo.gif)
+![Demo](https://raw.githubusercontent.com/lucasgerads/lecroy-mcp/main/docu/assets/demo_optimized.gif)
 
 ## Requirements
 
