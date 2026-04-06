@@ -60,6 +60,17 @@ Status registers
 ALL_STATUS?         — read STB, ESR, INR, DDR, CMR, EXR, URR simultaneously
 INR?                — internal state change register (bit 0 = new acquisition ready)
 
+Scope-side setup for LAN (VXI-11)
+----------------------------------
+If the connection fails, verify the scope settings:
+  1. On the scope: Utilities → Utility → Remote
+  2. Under "Control from", LXI (VXI11) must be enabled.
+     TCPIP (VICP) is LeCroy's proprietary protocol — it is NOT supported.
+  3. Confirm the IP address matches the resource string used in scope_connect.
+     The IP is shown on the same Remote panel.
+  4. After a power cycle, the VXI-11 server takes ~60 s to restart — wait
+     before attempting to connect.
+
 IEEE 488.2 block data format
 -----------------------------
 Binary responses use #N<length><data> header:

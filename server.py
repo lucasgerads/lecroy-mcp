@@ -964,7 +964,7 @@ def scope_set_cursor_type(cursor_type: str) -> str:
 # =============================================================================
 
 @mcp.tool()
-def scope_screenshot(image_format: str = "PNG", area: str = "DSOWINDOW") -> str:
+def scope_screenshot(image_format: str = "PNG", area: str = "DSOWINDOW", background: str = "WHITE") -> str:
     """Capture the oscilloscope screen and save as a timestamped image file.
 
     Files are always saved to a 'screenshots/' subfolder with an auto-generated
@@ -974,6 +974,7 @@ def scope_screenshot(image_format: str = "PNG", area: str = "DSOWINDOW") -> str:
     Args:
         image_format: BMP, JPEG, PNG, or TIFF (default PNG)
         area:         DSOWINDOW (default), GRIDAREAONLY, or FULLSCREEN
+        background:   WHITE (default) or BLACK to preserve the dark screen theme
 
     Transport: SCPI (HARDCOPY_SETUP + SCREEN_DUMP, binary read)
     """
@@ -985,7 +986,7 @@ def scope_screenshot(image_format: str = "PNG", area: str = "DSOWINDOW") -> str:
         folder = os.path.join(os.getcwd(), "screenshots")
         os.makedirs(folder, exist_ok=True)
         dest = os.path.join(folder, f"scope_{ts}.{image_format.lower()}")
-        data = _scope.get_screenshot(image_format, area)
+        data = _scope.get_screenshot(image_format, area, background)
         # Normalize to standard RGB PNG so the Anthropic API can always read it
         img = Image.open(io.BytesIO(data)).convert("RGB")
         img.save(dest, image_format.upper())

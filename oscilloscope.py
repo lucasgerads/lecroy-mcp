@@ -658,7 +658,7 @@ class LeCroyScope:
     # Screenshot
     # =========================================================================
 
-    def get_screenshot(self, image_format: str = "PNG", area: str = "DSOWINDOW") -> bytes:
+    def get_screenshot(self, image_format: str = "PNG", area: str = "DSOWINDOW", background: str = "WHITE") -> bytes:
         """Capture the screen and return raw image bytes.
 
         Some firmware versions prefix the image with an IEEE 488.2 block header:
@@ -671,7 +671,7 @@ class LeCroyScope:
         self._require_connected()
         self._inst.write(
             f"HARDCOPY_SETUP DEV,{image_format.upper()},FORMAT,LANDSCAPE,"
-            f"BCKG,WHITE,DEST,REMOTE,AREA,{area.upper()}"
+            f"BCKG,{background.upper()},DEST,REMOTE,AREA,{area.upper()}"
         )
         self._inst.write("SCREEN_DUMP")
 

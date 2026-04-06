@@ -27,6 +27,22 @@ Add to your MCP client config (e.g. Claude Code's `.mcp.json`):
 
 `uvx` will automatically download and run the server — no manual installation needed.
 
+## Oscilloscope setup (LAN / VXI-11)
+
+![Scope Setup](https://raw.githubusercontent.com/lucasgerads/lecroy-mcp/main/docu/assets/ScopeSetup.png)
+
+This server communicates over the standard VXI-11 protocol. Before connecting, enable it on the scope:
+
+1. On the scope, go to **Utilities → Utilities Setup ... → Remote**
+2. In the **Control from** section, enable **LXI (VXI11)**
+3. Note the **IP Address** shown — you will need it for the connection string
+
+The scope's IP can be assigned via DHCP or configured statically under **Utilities → Utility → Remote → Net Connections**.
+
+> **Note:** The **TCPIP (VICP)** option shown in the same panel uses LeCroy's proprietary protocol and is currently not supported by this server. Only **LXI (VXI11)** is required.
+
+
+
 ## Connection options
 
 ### Option 1 — Manual connection
@@ -114,6 +130,16 @@ Profiles are included for:
 
 Unknown models fall back to conservative defaults.
 
+## Manual installation
+
+If you prefer not to use `uvx`:
+
+```bash
+pip install lecroy-mcp
+```
+
+Then use `lecroy-mcp` as the command in your MCP config instead of `uvx lecroy-mcp`.
+
 ## Updating
 
 With `uvx`, use the `@latest` tag to force the newest version:
@@ -134,15 +160,6 @@ With pip:
 pip install --upgrade lecroy-mcp
 ```
 
-## Manual installation
-
-If you prefer not to use `uvx`:
-
-```bash
-pip install lecroy-mcp
-```
-
-Then use `lecroy-mcp` as the command in your MCP config instead of `uvx lecroy-mcp`.
 
 ## Notes
 

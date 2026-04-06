@@ -19,5 +19,8 @@ waveforms/
 *.png
 *.csv
 
+# Re-include documentation assets
+!docu/**/*.png
+
 #Setup files
 .mcp.json
