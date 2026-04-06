@@ -178,3 +178,17 @@ If you are not seeing server log output (e.g. auto-connect status or errors) in 
 ```
 
 This disables Python's output buffering so log messages are flushed immediately. It is not required for normal operation.
+
+## Tested with
+
+| Component | Details |
+|-----------|---------|
+| Oscilloscope | Teledyne LeCroy WaveSurfer 3024Z |
+| Operating system | Windows 10, Windows 11, Linux Mint |
+| MCP client | Claude Code |
+
+This server should also work with other MCP-compatible clients such as OpenAI Codex, GitHub Copilot, and Google Gemini, and on other operating systems such as macOS. Reports and contributions for additional configurations are welcome.
+
+## Disclaimer
+
+Teledyne LeCroy and LeCroy are registered trademarks of Teledyne LeCroy, Inc. This project is an independent open-source tool and is not affiliated with, endorsed by, or sponsored by Teledyne LeCroy, Inc. All product and company names are trademarks or registered trademarks of their respective holders.
