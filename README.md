@@ -29,7 +29,6 @@ Add to your MCP client config (e.g. Claude Code's `.mcp.json`):
 
 ## Oscilloscope setup (LAN / VXI-11)
 
-![Scope Setup](https://raw.githubusercontent.com/lucasgerads/lecroy-mcp/main/docu/assets/ScopeSetup.png)
 
 This server communicates over the standard VXI-11 protocol. Before connecting, enable it on the scope:
 
@@ -41,7 +40,7 @@ The scope's IP can be assigned via DHCP or configured statically under **Utiliti
 
 > **Note:** The **TCPIP (VICP)** option shown in the same panel uses LeCroy's proprietary protocol and is currently not supported by this server. Only **LXI (VXI11)** is required.
 
-
+![Scope Setup](https://raw.githubusercontent.com/lucasgerads/lecroy-mcp/main/docu/assets/ScopeSetup.png)
 
 ## Connection options
 
