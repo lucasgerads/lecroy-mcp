@@ -382,6 +382,16 @@ class LeCroyScope:
             raise InstrumentError(f"Invalid math function {func}. Must be 1–{n}.")
         return f"F{func}"
 
+    def _trace(self, channel) -> str:
+        """Return SCPI prefix for an analog channel (int → 'C1') or math channel (str 'F1' → 'F1')."""
+        if isinstance(channel, str) and channel.upper().startswith("F"):
+            try:
+                func_num = int(channel[1:])
+            except ValueError:
+                raise InstrumentError(f"Invalid math channel: {channel!r}")
+            return self._fn(func_num)
+        return self._ch(int(channel))
+
     def _mem(self, slot: int) -> str:
         """Validate memory slot (1–4) and return prefix like 'M1'."""
         if slot not in (1, 2, 3, 4):
@@ -634,6 +644,21 @@ class LeCroyScope:
                 result[k] = "N/A"
         return result
 
+    def set_math_zoom(self, func: int, center: float, per_div: float) -> None:
+        """Set horizontal display zoom for a math trace via VBS."""
+        self._require_connected()
+        self._fn(func)  # validate
+        self._inst.write(f"VBS 'app.Math.F{func}.Zoom.HorCenter = {center}'")
+        self._inst.write(f"VBS 'app.Math.F{func}.Zoom.HorScale = {per_div}'")
+
+    def get_math_zoom(self, func: int) -> dict:
+        """Read horizontal display zoom settings for a math trace via VBS."""
+        self._require_connected()
+        self._fn(func)  # validate
+        center  = self._inst.query(f"VBS? 'Return=app.Math.F{func}.Zoom.HorCenter'").strip()
+        per_div = self._inst.query(f"VBS? 'Return=app.Math.F{func}.Zoom.HorScale'").strip()
+        return {"center": center, "per_div": per_div}
+
     # =========================================================================
     # Memory / Reference waveforms
     # =========================================================================
@@ -722,7 +747,7 @@ class LeCroyScope:
 
         results = []
         for channel in channels:
-            ch = self._ch(channel)
+            ch = self._trace(channel)
 
             raw = self._inst.query_binary_values(
                 f"{ch}:WF? DAT1",

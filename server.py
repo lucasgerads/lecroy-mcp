@@ -861,16 +861,47 @@ def scope_measure_all(channel: int) -> str:
 def scope_set_math(func: int, equation: str) -> str:
     """Define a math waveform function.
 
+    Available operators (all MAUI scopes):
+
+      Arithmetic:
+        ABS(C1)            absolute value
+        INVERT(-C1)        negation
+        SQR(C1)            square
+        SQRT(C1)           square root
+        RECIPROCAL(C1)     1/x
+        RESC(C1)           rescale (scale + offset + change units)
+        C1+C2              sum of two channels
+        C1-C2              difference
+        C1*C2              product
+        C1/C2              ratio
+
+      Signal processing:
+        FFT(C1)            Fast Fourier Transform — use TYPE parameter to select
+                           POWERSPECTRUM (dBm), MAGNITUDE, PHASE, REAL, IMAGINARY.
+                           WINDOW options: VONHANN, HAMMING, FLATTOP,
+                           BLACKMANHARRIS, RECTANGULAR.
+                           Example: EQN,"FFT(C1)",TYPE,POWERSPECTRUM,WINDOW,VONHANN
+        INTG(C1)           integral
+        DERI(C1)           derivative (adjacent-sample subtraction)
+        AVG(C1)            averaging — add AVERAGETYPE,SUMMED or CONTINUOUS
+        ERES(C1)           enhanced resolution (smoothing, 0.5–3 extra bits)
+
+      Envelope / extrema:
+        FLOOR(C1)          minimum value at each X over N sweeps
+        ROOF(C1)           maximum value at each X over N sweeps
+
+      Parameter-based (use a measurement parameter Pn as source):
+        TREND(P1)          trend plot of parameter values over time
+        HIST(P1)           histogram of parameter values
+
+      Display only:
+        ZOOMONLY(C1)       zoom display without computation
+
+    After setting an FFT, use scope_set_math_zoom to zoom the frequency axis.
+
     Args:
         func:     Math function number 1–4
-        equation: Math expression, e.g.:
-                    'C1+C2'      — sum of channels 1 and 2
-                    'C1-C2'      — difference
-                    'C1*C2'      — product
-                    'FFT(C1)'    — Fast Fourier Transform
-                    'INTG(C1)'   — integral
-                    'DIFF(C1)'   — derivative
-                    'SQRT(C1)'   — square root
+        equation: Math expression string, e.g. 'FFT(C1)' or 'C1+C2'
 
     Transport: SCPI
     """
@@ -905,6 +936,42 @@ def scope_math_info(func: int) -> str:
         for k, v in info.items():
             lines.append(f"  {k:12s}: {v}")
         return "\n".join(lines)
+    return _run(_fmt)
+
+
+@mcp.tool()
+def scope_set_math_zoom(func: int, center: float, per_div: float) -> str:
+    """Set the horizontal display zoom for a math trace.
+
+    Useful for zooming into a specific frequency range on an FFT trace without
+    changing the FFT computation itself.
+
+    Units depend on the math function type:
+      - FFT traces: Hz (e.g. center=1250, per_div=250 shows 0–2500 Hz on 10 divs)
+      - Time-domain math traces: seconds
+
+    Args:
+        func:    Math function number 1–4
+        center:  Center value (Hz for FFT, seconds for time-domain math)
+        per_div: Scale per division
+
+    Transport: VBS (app.Math.Fn.Zoom.HorCenter, app.Math.Fn.Zoom.HorScale)
+    """
+    return _run(lambda: _scope.set_math_zoom(func, center, per_div))
+
+
+@mcp.tool()
+def scope_math_zoom_info(func: int) -> str:
+    """Read the current horizontal zoom settings for a math trace.
+
+    Args:
+        func: Math function number 1–4
+
+    Transport: VBS (app.Math.Fn.Zoom.HorCenter, app.Math.Fn.Zoom.HorScale)
+    """
+    def _fmt():
+        z = _scope.get_math_zoom(func)
+        return f"Math F{func} zoom:\n  center : {z['center']}\n  per_div: {z['per_div']}"
     return _run(_fmt)
 
 
@@ -1062,17 +1129,20 @@ def scope_capture_channels(channels: list, max_points: int = 10000) -> str:
     scope_stop before this tool.
 
     Saves to 'waveforms/' with an auto-generated filename,
-    e.g.: waveforms/C1C2_20260329_153042.npz
+    e.g.: waveforms/C3F1_20260329_153042.npz
 
-    The .npz file contains arrays: time_s, c1, c2, ... (one per channel).
+    The .npz file contains arrays: time_s, c3, f1, ... (one per channel).
+    Analog channels use keys like c1, c2; math channels use f1, f2, etc.
 
     Load in Python with:
         import numpy as np
         d = np.load('/path/to/file.npz')
-        time_s, c1, c2 = d['time_s'], d['c1'], d['c2']
+        time_s, c3, f1 = d['time_s'], d['c3'], d['f1']
 
     Args:
-        channels:   List of channel numbers, e.g. [1, 2] or [3, 4]
+        channels:   List of analog channel numbers (e.g. [1, 2]) and/or math
+                    channel strings (e.g. ["F1", "F2"]). Mixed lists are supported,
+                    e.g. [3, "F1"] captures C3 and the F1 math trace together.
         max_points: Maximum samples per channel (default 10000, evenly downsampled).
 
     Transport: SCPI (binary WF? DAT1 transfer + INSPECT? WAVEDESC scaling)
@@ -1085,19 +1155,25 @@ def scope_capture_channels(channels: list, max_points: int = 10000) -> str:
         time_arr = [round(i * dt, 12) for i in range(n)]
         arrays = {"time_s": time_arr}
         for wf in waveforms:
-            arrays[f"c{wf['channel']}"] = wf["voltages"]
+            ch = wf["channel"]
+            key = str(ch).lower() if isinstance(ch, str) else f"c{ch}"
+            arrays[key] = wf["voltages"]
         ts = datetime.now().strftime("%Y%m%d_%H%M%S")
-        ch_tag = "".join(f"C{c}" for c in channels)
+        def _tag(c):
+            return str(c).upper() if isinstance(c, str) else f"C{c}"
+        ch_tag = "".join(_tag(c) for c in channels)
         folder = os.path.join(os.getcwd(), "waveforms")
         os.makedirs(folder, exist_ok=True)
         dest = os.path.join(folder, f"{ch_tag}_{ts}.npz")
         np.savez(dest, **arrays)
+        def _key(c):
+            return str(c).lower() if isinstance(c, str) else f"c{c}"
         return json.dumps({
             "data_file":        dest,
             "channels":         channels,
             "num_points":       n,
             "sample_interval_s": dt,
-            "traces":           ["time_s"] + [f"c{c}" for c in channels],
+            "traces":           ["time_s"] + [_key(c) for c in channels],
         })
     return _run(_save)
 
