@@ -187,7 +187,7 @@ This disables Python's output buffering so log messages are flushed immediately.
 | Operating system | Windows 10, Windows 11, Linux Mint |
 | MCP client | Claude Code |
 
-This server should also work with other MCP-compatible clients such as OpenAI Codex, GitHub Copilot, and Google Gemini, and on other operating systems such as macOS. Reports and contributions for additional configurations are welcome.
+This server should also work with other MCP-compatible clients such as OpenAI Codex and Google Gemini Code Assist, and on other operating systems such as macOS. Reports and contributions for additional configurations are welcome.
 
 ## Disclaimer
 
