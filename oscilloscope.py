@@ -692,46 +692,65 @@ class LeCroyScope:
     # =========================================================================
 
     def get_waveform(self, channel: int, max_points: int = 10000) -> dict:
-        """Capture waveform samples via binary transfer.
+        """Capture waveform samples via binary transfer (single channel).
 
         Returns dict: channel, num_points, sample_interval_s,
-        csv (voltages), vertical_gain, vertical_offset.
+        voltages (list of floats), vertical_gain, vertical_offset.
+        """
+        return self.get_waveforms([channel], max_points)[0]
+
+    def get_waveforms(self, channels: list, max_points: int = 10000) -> list:
+        """Capture one or more channels in a single VISA setup sequence.
+
+        Sets COMM_ORDER and COMM_FORMAT once, then reads each channel in
+        sequence. Reading all channels within one call guarantees they come
+        from the same acquisition snapshot (no new trigger between reads).
+        For absolute alignment on a fast-running scope, stop acquisition
+        first with scope_stop.
+
+        Returns a list of dicts, one per channel, each containing:
+          channel, num_points, sample_interval_s, voltages (list),
+          vertical_gain, vertical_offset.
         """
         self._require_connected()
-        ch = self._ch(channel)
-
         self._inst.write("COMM_ORDER LO")
         self._inst.write("COMM_FORMAT DEF9,WORD,BIN")
 
-        raw = self._inst.query_binary_values(
-            f"{ch}:WF? DAT1",
-            datatype="h",
-            is_big_endian=False,
-            container=list,
-        )
-
-        desc = self._inst.query(f"{ch}:INSPECT? WAVEDESC").strip()
-
-        def parse(key):
+        def _parse(desc, key):
             m = re.search(rf"{key}\s*:\s*([+-]?\d+\.?\d*[eE]?[+-]?\d*)", desc, re.IGNORECASE)
             return float(m.group(1)) if m else 0.0
 
-        v_gain = parse("VERTICAL_GAIN")
-        v_off  = parse("VERTICAL_OFFSET")
-        h_int  = parse("HORIZ_INTERVAL")
+        results = []
+        for channel in channels:
+            ch = self._ch(channel)
 
-        step = max(1, len(raw) // max_points)
-        samples = raw[::step]
-        voltages = [round(s * v_gain - v_off, 6) for s in samples]
+            raw = self._inst.query_binary_values(
+                f"{ch}:WF? DAT1",
+                datatype="h",
+                is_big_endian=False,
+                container=list,
+            )
 
-        return {
-            "channel":           channel,
-            "num_points":        len(voltages),
-            "sample_interval_s": h_int * step,
-            "csv":               ",".join(str(v) for v in voltages),
-            "vertical_gain":     v_gain,
-            "vertical_offset":   v_off,
-        }
+            desc = self._inst.query(f"{ch}:INSPECT? WAVEDESC").strip()
+
+            v_gain = _parse(desc, "VERTICAL_GAIN")
+            v_off  = _parse(desc, "VERTICAL_OFFSET")
+            h_int  = _parse(desc, "HORIZ_INTERVAL")
+
+            step = max(1, len(raw) // max_points)
+            samples = raw[::step]
+            voltages = [round(s * v_gain - v_off, 6) for s in samples]
+
+            results.append({
+                "channel":           channel,
+                "num_points":        len(voltages),
+                "sample_interval_s": h_int * step,
+                "voltages":          voltages,
+                "vertical_gain":     v_gain,
+                "vertical_offset":   v_off,
+            })
+
+        return results
 
     # =========================================================================
     # WaveSource built-in generator  (VBS automation — not raw SCPI)

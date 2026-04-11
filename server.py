@@ -29,6 +29,12 @@ import os
 import sys
 import threading
 from datetime import datetime
+from importlib.metadata import version as _pkg_version, PackageNotFoundError
+
+try:
+    _SERVER_VERSION = _pkg_version("lecroy-mcp")
+except PackageNotFoundError:
+    _SERVER_VERSION = "unknown"
 
 from mcp.server.fastmcp import FastMCP
 from oscilloscope import LeCroyScope, InstrumentError
@@ -321,7 +327,7 @@ def scope_connection_status() -> str:
             "1. Call scope_list_resources to discover instruments.\n"
             "2. Call scope_connect with the resource string."
         )
-    return _run(lambda: f"Connected: {_scope._resource_string}\nIDN: {_scope.identify()}")
+    return _run(lambda: f"Connected: {_scope._resource_string}\nIDN: {_scope.identify()}\nlecroy-mcp version: {_SERVER_VERSION}")
 
 
 @mcp.tool()
@@ -999,19 +1005,101 @@ def scope_screenshot(image_format: str = "PNG", area: str = "DSOWINDOW", backgro
 # =============================================================================
 
 @mcp.tool()
-def scope_get_waveform(channel: int, max_points: int = 500) -> str:
-    """Capture waveform data from a channel and return it as JSON.
+def scope_get_waveform(channel: int, max_points: int = 10000) -> str:
+    """Capture waveform data from a channel and save it as a .npz file.
+
+    Use this when you need the time-domain signal (plotting, export, detailed
+    analysis). For scalar results like peak voltage, frequency, or RMS, prefer
+    scope_measure — it is faster and uses all scope points without any transfer.
+
+    Saves to a 'waveforms/' subfolder with an auto-generated filename,
+    e.g.: waveforms/C1_20260329_153042.npz
+
+    Returns JSON with the file path and metadata — the raw voltage values
+    are not embedded in the result. Load the file in Python with:
+        import numpy as np
+        d = np.load('/path/to/file.npz')
+        time_s, voltage_v = d['time_s'], d['voltage_v']
 
     Args:
         channel:    Channel number 1–4
-        max_points: Maximum samples to return (default 500, evenly downsampled).
-
-    Returns JSON with: num_points, sample_interval_s, csv (voltages),
-    vertical_gain, vertical_offset.
+        max_points: Maximum samples to capture (default 10000, evenly downsampled).
 
     Transport: SCPI (binary WF? DAT1 transfer + INSPECT? WAVEDESC scaling)
     """
-    return _run(lambda: json.dumps(_scope.get_waveform(channel, max_points), indent=2))
+    def _save():
+        import numpy as np
+        data = _scope.get_waveform(channel, max_points)
+        voltages = data["voltages"]
+        dt = data["sample_interval_s"]
+        time_arr = [round(i * dt, 12) for i in range(len(voltages))]
+        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+        folder = os.path.join(os.getcwd(), "waveforms")
+        os.makedirs(folder, exist_ok=True)
+        dest = os.path.join(folder, f"C{channel}_{ts}.npz")
+        np.savez(dest, time_s=time_arr, voltage_v=voltages)
+        return json.dumps({
+            "data_file":        dest,
+            "channel":          channel,
+            "num_points":       len(voltages),
+            "sample_interval_s": dt,
+            "traces":           ["time_s", "voltage_v"],
+        })
+    return _run(_save)
+
+
+@mcp.tool()
+def scope_capture_channels(channels: list, max_points: int = 10000) -> str:
+    """Capture multiple channels atomically and save to a single .npz file.
+
+    Use this when you need time-domain signals from multiple channels (plotting,
+    cross-channel analysis, export). For scalar results like peak voltage or
+    frequency, prefer scope_measure — no waveform transfer needed.
+
+    All channels are read within a single VISA lock hold (one COMM setup,
+    sequential reads), so the waveforms come from the same acquisition
+    snapshot. For guaranteed alignment on a fast-running scope, call
+    scope_stop before this tool.
+
+    Saves to 'waveforms/' with an auto-generated filename,
+    e.g.: waveforms/C1C2_20260329_153042.npz
+
+    The .npz file contains arrays: time_s, c1, c2, ... (one per channel).
+
+    Load in Python with:
+        import numpy as np
+        d = np.load('/path/to/file.npz')
+        time_s, c1, c2 = d['time_s'], d['c1'], d['c2']
+
+    Args:
+        channels:   List of channel numbers, e.g. [1, 2] or [3, 4]
+        max_points: Maximum samples per channel (default 10000, evenly downsampled).
+
+    Transport: SCPI (binary WF? DAT1 transfer + INSPECT? WAVEDESC scaling)
+    """
+    def _save():
+        import numpy as np
+        waveforms = _scope.get_waveforms(channels, max_points)
+        dt = waveforms[0]["sample_interval_s"]
+        n  = waveforms[0]["num_points"]
+        time_arr = [round(i * dt, 12) for i in range(n)]
+        arrays = {"time_s": time_arr}
+        for wf in waveforms:
+            arrays[f"c{wf['channel']}"] = wf["voltages"]
+        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+        ch_tag = "".join(f"C{c}" for c in channels)
+        folder = os.path.join(os.getcwd(), "waveforms")
+        os.makedirs(folder, exist_ok=True)
+        dest = os.path.join(folder, f"{ch_tag}_{ts}.npz")
+        np.savez(dest, **arrays)
+        return json.dumps({
+            "data_file":        dest,
+            "channels":         channels,
+            "num_points":       n,
+            "sample_interval_s": dt,
+            "traces":           ["time_s"] + [f"c{c}" for c in channels],
+        })
+    return _run(_save)
 
 
 @mcp.tool()
@@ -1037,14 +1125,13 @@ def scope_save_waveform_csv(channel: int, max_points: int = 10000) -> str:
     Transport: SCPI (binary WF? DAT1 transfer + INSPECT? WAVEDESC scaling)
     """
     def _save():
-        import os
         ts = datetime.now().strftime("%Y%m%d_%H%M%S")
         folder = os.path.join(os.getcwd(), "waveforms")
         os.makedirs(folder, exist_ok=True)
         dest = os.path.join(folder, f"C{channel}_{ts}.csv")
 
         data = _scope.get_waveform(channel, max_points)
-        voltages = [float(v) for v in data["csv"].split(",")]
+        voltages = data["voltages"]
         dt = data["sample_interval_s"]
         idn = _scope.identify()
 
