@@ -489,109 +489,50 @@ def scope_channel_info(channel: int) -> str:
 
 
 @mcp.tool()
-def scope_set_vdiv(channel: int, volts_per_div: float) -> str:
-    """Set the vertical scale for a channel.
+def scope_configure_channel(
+    channel: int,
+    vdiv: float = None,
+    offset: float = None,
+    coupling: str = None,
+    bwlimit: str = None,
+    invert: bool = None,
+    trace: bool = None,
+    attenuation: float = None,
+    unit: str = None,
+) -> str:
+    """Configure one or more settings for a channel in a single call.
+
+    All parameters except channel are optional — only the provided ones are applied.
 
     Args:
-        channel:       Channel number 1–4
-        volts_per_div: V/div, e.g. 0.1 = 100 mV/div, 1.0 = 1 V/div
+        channel:     Channel number 1–4
+        vdiv:        Vertical scale in V/div, e.g. 0.1 = 100 mV/div, 1.0 = 1 V/div
+        offset:      Vertical offset in volts (positive shifts trace down)
+        coupling:    D1M (DC 1MΩ), D50 (DC 50Ω), A1M (AC 1MΩ), or GND
+        bwlimit:     Bandwidth limit: OFF (full BW), 20MHZ, 200MHZ.
+                     High-BW models also support 500MHZ, 1GHZ, etc.
+                     Use scope_capabilities to see valid values for the connected scope.
+        invert:      True to invert the signal polarity, False for normal
+        trace:       True to show the channel trace, False to hide it
+        attenuation: Probe attenuation ratio, typically 1, 10, 100, or 1000
+        unit:        Vertical unit: V (volts), A (amperes), W (watts), U (user)
 
     Transport: SCPI
     """
-    return _run(lambda: _scope.set_vdiv(channel, volts_per_div))
-
-
-@mcp.tool()
-def scope_set_offset(channel: int, offset_volts: float) -> str:
-    """Set the vertical offset for a channel.
-
-    Args:
-        channel:      Channel number 1–4
-        offset_volts: Offset in volts (positive shifts trace down)
-
-    Transport: SCPI
-    """
-    return _run(lambda: _scope.set_offset(channel, offset_volts))
-
-
-@mcp.tool()
-def scope_set_coupling(channel: int, coupling: str) -> str:
-    """Set the input coupling for a channel.
-
-    Args:
-        channel:  Channel number 1–4
-        coupling: D1M (DC 1MΩ), D50 (DC 50Ω), A1M (AC 1MΩ), or GND
-
-    Transport: SCPI
-    """
-    return _run(lambda: _scope.set_coupling(channel, coupling))
-
-
-@mcp.tool()
-def scope_set_bwlimit(channel: int, bwlimit: str) -> str:
-    """Set the bandwidth limit for a channel.
-
-    Args:
-        channel: Channel number 1–4
-        bwlimit: OFF (full bandwidth), 20MHZ, 200MHZ.
-                 High-bandwidth models also support 500MHZ, 1GHZ, 2GHZ, etc.
-                 Use scope_capabilities to see values valid for the connected scope.
-
-    Transport: SCPI
-    """
-    return _run(lambda: _scope.set_bwlimit(channel, bwlimit))
-
-
-@mcp.tool()
-def scope_set_invert(channel: int, inverted: bool) -> str:
-    """Invert the signal display for a channel.
-
-    Args:
-        channel:  Channel number 1–4
-        inverted: True to invert the signal, False for normal polarity
-
-    Transport: SCPI
-    """
-    return _run(lambda: _scope.set_invert(channel, inverted))
-
-
-@mcp.tool()
-def scope_set_trace(channel: int, visible: bool) -> str:
-    """Show or hide a channel trace on the display.
-
-    Args:
-        channel: Channel number 1–4
-        visible: True to show, False to hide
-
-    Transport: SCPI
-    """
-    return _run(lambda: _scope.set_trace(channel, visible))
-
-
-@mcp.tool()
-def scope_set_attenuation(channel: int, factor: float) -> str:
-    """Set the probe attenuation factor for a channel.
-
-    Args:
-        channel: Channel number 1–4
-        factor:  Attenuation ratio, typically 1, 10, 100, or 1000
-
-    Transport: SCPI
-    """
-    return _run(lambda: _scope.set_attenuation(channel, factor))
-
-
-@mcp.tool()
-def scope_set_unit(channel: int, unit: str) -> str:
-    """Set the vertical unit for a channel.
-
-    Args:
-        channel: Channel number 1–4
-        unit:    V (volts), A (amperes), W (watts), or U (user-defined)
-
-    Transport: SCPI
-    """
-    return _run(lambda: _scope.set_unit(channel, unit))
+    def _apply():
+        applied = []
+        if vdiv        is not None: _scope.set_vdiv(channel, vdiv);              applied.append(f"vdiv={vdiv}")
+        if offset      is not None: _scope.set_offset(channel, offset);          applied.append(f"offset={offset}")
+        if coupling    is not None: _scope.set_coupling(channel, coupling);      applied.append(f"coupling={coupling}")
+        if bwlimit     is not None: _scope.set_bwlimit(channel, bwlimit);        applied.append(f"bwlimit={bwlimit}")
+        if invert      is not None: _scope.set_invert(channel, invert);          applied.append(f"invert={invert}")
+        if trace       is not None: _scope.set_trace(channel, trace);            applied.append(f"trace={trace}")
+        if attenuation is not None: _scope.set_attenuation(channel, attenuation); applied.append(f"attenuation={attenuation}")
+        if unit        is not None: _scope.set_unit(channel, unit);              applied.append(f"unit={unit}")
+        if not applied:
+            return "No parameters specified — nothing changed."
+        return f"C{channel}: " + ", ".join(applied)
+    return _run(_apply)
 
 
 # =============================================================================
@@ -677,47 +618,51 @@ def scope_trigger_info() -> str:
 
 
 @mcp.tool()
-def scope_set_trigger_mode(mode: str) -> str:
-    """Set the trigger mode.
+def scope_configure_trigger(
+    mode: str = None,
+    source: str = None,
+    slope: str = None,
+    level: float = None,
+) -> str:
+    """Configure trigger mode, source, slope, and/or level in a single call.
+
+    All parameters are optional — only the provided ones are applied.
+    For complex trigger types (pulse width, window, TV, etc.) use scope_write.
+
+    If level is provided without source, it is applied to C1. To set the level
+    on a different channel, always pass source together with level.
 
     Args:
-        mode: AUTO  — free-running, triggers continuously
-              NORM  — waits for a valid trigger event
-              SINGLE — captures one trace then stops
-              STOP  — stops acquisition immediately
+        mode:   Trigger mode: AUTO (free-running), NORM (wait for trigger),
+                SINGLE (one capture then stop), STOP (stop acquisition)
+        source: Trigger source: C1, C2, C3, C4, EX, EX5, or LINE
+        slope:  Edge slope: POS (rising), NEG (falling), or EITHER
+        level:  Trigger threshold in volts
 
     Transport: SCPI
     """
-    return _run(lambda: _scope.set_trigger_mode(mode))
-
-
-@mcp.tool()
-def scope_set_trigger_source(source: str, slope: str = "POS") -> str:
-    """Configure edge trigger source and slope.
-
-    Sets an EDGE trigger type. Use scope_write for more complex trigger types
-    (pulse width, window, TV, etc.).
-
-    Args:
-        source: Trigger source — C1, C2, C3, C4, EX, EX5, or LINE
-        slope:  POS (rising edge), NEG (falling edge), or EITHER
-
-    Transport: SCPI
-    """
-    return _run(lambda: _scope.set_trigger_source(source, slope))
-
-
-@mcp.tool()
-def scope_set_trigger_level(channel: int, level_volts: float) -> str:
-    """Set the trigger level for a channel.
-
-    Args:
-        channel:     Trigger source channel 1–4
-        level_volts: Trigger threshold in volts
-
-    Transport: SCPI
-    """
-    return _run(lambda: _scope.set_trigger_level(channel, level_volts))
+    import re as _re
+    def _apply():
+        applied = []
+        if mode is not None:
+            _scope.set_trigger_mode(mode)
+            applied.append(f"mode={mode}")
+        if source is not None:
+            _scope.set_trigger_source(source, slope or "POS")
+            applied.append(f"source={source}" + (f" slope={slope}" if slope else ""))
+        if level is not None:
+            # Derive channel from source if it's C1–C4, else default to C1
+            ch_num = 1
+            if source is not None:
+                m = _re.match(r"[Cc](\d+)", source)
+                if m:
+                    ch_num = int(m.group(1))
+            _scope.set_trigger_level(ch_num, level)
+            applied.append(f"level={level}V on C{ch_num}")
+        if not applied:
+            return "No parameters specified — nothing changed."
+        return "Trigger: " + ", ".join(applied)
+    return _run(_apply)
 
 
 @mcp.tool()
@@ -1267,89 +1212,46 @@ def scope_wavesource_enable(on: bool) -> str:
 
 
 @mcp.tool()
-def scope_wavesource_set_shape(shape: str) -> str:
-    """Set the WaveSource output waveform shape.
+def scope_wavesource_configure(
+    shape: str = None,
+    frequency: float = None,
+    amplitude: float = None,
+    offset: float = None,
+    load: str = None,
+    duty_cycle: float = None,
+    symmetry: float = None,
+) -> str:
+    """Configure the WaveSource built-in generator in a single call.
+
+    All parameters are optional — only the provided ones are applied.
+    Only available on models with has_wavesource=True (e.g. WaveSurfer 3000Z).
+    Check scope_capabilities first.
 
     Args:
-        shape: Sine, Square, Triangle, Pulse, DC, Noise, or Arb.
-               For a sawtooth/ramp, use Triangle and set symmetry to 0 or 100
-               via scope_wavesource_set_symmetry.
+        shape:      Waveform shape: Sine, Square, Triangle, Pulse, DC, Noise, Arb.
+                    For sawtooth/ramp use Triangle with symmetry=0 or symmetry=100.
+        frequency:  Output frequency in Hz, e.g. 1000.0 for 1 kHz
+        amplitude:  Peak-to-peak amplitude in Vpp, e.g. 3.3 for 3.3 Vpp
+        offset:     DC offset in volts
+        load:       Output load: 'HiZ' (high impedance) or '50' (50 Ω termination)
+        duty_cycle: Duty cycle in percent — Square and Pulse shapes only
+        symmetry:   Symmetry in percent — Triangle shape only (50 = symmetric)
 
-    Transport: VBS (app.WaveSource.Shape)
+    Transport: VBS (app.WaveSource.*)
     """
-    return _run(lambda: _scope.wavesource_set_shape(shape))
-
-
-@mcp.tool()
-def scope_wavesource_set_frequency(frequency: float) -> str:
-    """Set the WaveSource output frequency.
-
-    Args:
-        frequency: Frequency in Hz, e.g. 1000.0 for 1 kHz.
-
-    Transport: VBS (app.WaveSource.Frequency)
-    """
-    return _run(lambda: _scope.wavesource_set_frequency(frequency))
-
-
-@mcp.tool()
-def scope_wavesource_set_amplitude(amplitude: float) -> str:
-    """Set the WaveSource peak-to-peak output amplitude.
-
-    Args:
-        amplitude: Amplitude in Vpp, e.g. 1.0 for 1 V peak-to-peak.
-
-    Transport: VBS (app.WaveSource.Amplitude)
-    """
-    return _run(lambda: _scope.wavesource_set_amplitude(amplitude))
-
-
-@mcp.tool()
-def scope_wavesource_set_offset(offset: float) -> str:
-    """Set the WaveSource DC offset.
-
-    Args:
-        offset: DC offset in volts.
-
-    Transport: VBS (app.WaveSource.Offset)
-    """
-    return _run(lambda: _scope.wavesource_set_offset(offset))
-
-
-@mcp.tool()
-def scope_wavesource_set_load(load: str) -> str:
-    """Set the WaveSource output load impedance.
-
-    Args:
-        load: 'HiZ' for high impedance, or '50' for 50 Ω termination.
-
-    Transport: VBS (app.WaveSource.Load)
-    """
-    return _run(lambda: _scope.wavesource_set_load(load))
-
-
-@mcp.tool()
-def scope_wavesource_set_duty_cycle(duty_cycle: float) -> str:
-    """Set the WaveSource duty cycle (Square and Pulse shapes only).
-
-    Args:
-        duty_cycle: Duty cycle in percent, e.g. 50.0 for 50%.
-
-    Transport: VBS (app.WaveSource.DutyCycle)
-    """
-    return _run(lambda: _scope.wavesource_set_duty_cycle(duty_cycle))
-
-
-@mcp.tool()
-def scope_wavesource_set_symmetry(symmetry: float) -> str:
-    """Set the WaveSource symmetry (Triangle shape only).
-
-    Args:
-        symmetry: Symmetry in percent, e.g. 50.0 for symmetric triangle.
-
-    Transport: VBS (app.WaveSource.Symmetry)
-    """
-    return _run(lambda: _scope.wavesource_set_symmetry(symmetry))
+    def _apply():
+        applied = []
+        if shape      is not None: _scope.wavesource_set_shape(shape);           applied.append(f"shape={shape}")
+        if frequency  is not None: _scope.wavesource_set_frequency(frequency);   applied.append(f"frequency={frequency}Hz")
+        if amplitude  is not None: _scope.wavesource_set_amplitude(amplitude);   applied.append(f"amplitude={amplitude}Vpp")
+        if offset     is not None: _scope.wavesource_set_offset(offset);         applied.append(f"offset={offset}V")
+        if load       is not None: _scope.wavesource_set_load(load);             applied.append(f"load={load}")
+        if duty_cycle is not None: _scope.wavesource_set_duty_cycle(duty_cycle); applied.append(f"duty_cycle={duty_cycle}%")
+        if symmetry   is not None: _scope.wavesource_set_symmetry(symmetry);     applied.append(f"symmetry={symmetry}%")
+        if not applied:
+            return "No parameters specified — nothing changed."
+        return "WaveSource: " + ", ".join(applied)
+    return _run(_apply)
 
 
 # =============================================================================

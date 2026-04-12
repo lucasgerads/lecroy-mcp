@@ -748,6 +748,7 @@ class LeCroyScope:
         results = []
         for channel in channels:
             ch = self._trace(channel)
+            self._inst.write(f"{ch}:TRA ON")
 
             raw = self._inst.query_binary_values(
                 f"{ch}:WF? DAT1",
