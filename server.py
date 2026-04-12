@@ -1255,6 +1255,81 @@ def scope_wavesource_configure(
 
 
 # =============================================================================
+# Serial Decode  (VBS — app.SerialDecode)
+# =============================================================================
+
+@mcp.tool()
+def scope_decode_read(decoder: int = 1) -> str:
+    """Read decoded serial data from the scope's SerialDecode subsystem.
+
+    The scope must already have a serial decode active (configured via its UI
+    or scope_decode_configure_uart). Works with UART/RS-232, I2C, SPI, CAN,
+    and any other protocol supported by the Decode option.
+
+    Reads the decoded table row-by-row using the VBS Table API and saves the
+    result to a timestamped .npz file so the raw data is not embedded in the
+    response. The file contains:
+      time_s  — float array, timestamp for each decoded frame/byte
+      data    — uint8 array, decoded byte values
+
+    Returns JSON with the file path and metadata. Load in Python with:
+        import numpy as np
+        d = np.load('/path/to/file.npz')
+        times, data_bytes = d['time_s'], d['data']
+
+    Note: row-by-row VBS queries are slow (~0.05 s each). Decodes with
+    hundreds of rows will take 10–20 s. Keep this in mind for large captures.
+
+    Args:
+        decoder: Decode slot number — 1 or 2 (default 1)
+
+    Transport: VBS (app.SerialDecode.Decode{n}.Out.Result.*)
+    """
+    def _save():
+        import numpy as np
+        result = _scope.decode_read(decoder)
+        rows = result["rows"]
+        if rows == 0:
+            return json.dumps({
+                "decoder": decoder,
+                "num_frames": 0,
+                "message": "Decode table is empty — trigger the scope first.",
+            })
+
+        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+        folder = os.path.join(os.getcwd(), "decode")
+        os.makedirs(folder, exist_ok=True)
+        dest = os.path.join(folder, f"Decode{decoder}_{ts}.npz")
+
+        arrays: dict = {}
+        if result["time_s"]:
+            arrays["time_s"] = np.array(
+                [x if x is not None else float("nan") for x in result["time_s"]],
+                dtype=float,
+            )
+        if result["data"]:
+            arrays["data"] = np.array(
+                [x if x is not None else 0 for x in result["data"]],
+                dtype=np.uint8,
+            )
+        # Save every visible column as a string array for reference
+        for col_name, col_idx in result["col_map"].items():
+            col_values = [r.get(col_name, "") for r in result["raw_rows"]]
+            arrays[f"col_{col_name.lower()}"] = np.array(col_values, dtype=object)
+
+        np.savez(dest, **arrays)
+        traces = list(arrays.keys())
+        return json.dumps({
+            "data_file":  dest,
+            "decoder":    decoder,
+            "num_frames": rows,
+            "col_map":    result["col_map"],
+            "traces":     traces,
+        })
+    return _run(_save)
+
+
+# =============================================================================
 # Entry point — HTTP transport (for `mcp dev server.py` inspector)
 # =============================================================================
 

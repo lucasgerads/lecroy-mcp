@@ -852,3 +852,104 @@ class LeCroyScope:
         self._require_connected()
         self._require_wavesource()
         self._vbs_set("app.WaveSource.Symmetry", str(pct))
+
+    # =========================================================================
+    # Serial Decode  (VBS — app.SerialDecode.Decode1 / Decode2)
+    # =========================================================================
+
+    @staticmethod
+    def _parse_column_state(col_state: str) -> dict:
+        """Parse pipe-delimited ColumnState into {name: 1-based visible-column index}.
+
+        Example input: "Idx=On|Time=On|Data=On|Width=Off"
+        Returns: {"Idx": 1, "Time": 2, "Data": 3}
+        Only columns with state "On" are counted; off columns are skipped.
+        """
+        col_map: dict = {}
+        visible_idx = 1
+        for entry in col_state.strip().split("|"):
+            if "=" not in entry:
+                continue
+            name, state = entry.split("=", 1)
+            if state.strip().lower() == "on":
+                col_map[name.strip()] = visible_idx
+                visible_idx += 1
+        return col_map
+
+    def decode_read(self, decoder: int = 1) -> dict:
+        """Read UART (or other protocol) decoded data from the SerialDecode table.
+
+        Uses the VBS Table API:
+          app.SerialDecode.Decode{n}.Out.Result.Rows
+          app.SerialDecode.Decode{n}.Out.Result.Columns
+          app.SerialDecode.Decode{n}.Decode.ColumnState  — pipe-delimited On/Off list
+          app.SerialDecode.Decode{n}.Out.Result.CellValue(row, col)(0,0)
+
+        Returns a dict with:
+          rows      — number of decoded frames/bytes
+          columns   — number of visible columns
+          col_map   — {column-name: 1-based index} from ColumnState
+          time_s    — list of timestamps (float) for each row, empty if no Time column
+          data      — list of byte values (int) for each row, empty if no Data column
+          raw_rows  — list of {col_name: raw_string} for every visible column
+        """
+        self._require_connected()
+        base = f"app.SerialDecode.Decode{decoder}.Out.Result"
+
+        def _q(expr: str) -> str:
+            return self._inst.query(f"VBS? 'Return={expr}'").strip()
+
+        rows_raw = _q(f"{base}.Rows")
+        cols_raw = _q(f"{base}.Columns")
+        try:
+            rows = int(rows_raw.split()[-1])
+            cols = int(cols_raw.split()[-1])
+        except (ValueError, IndexError) as e:
+            raise InstrumentError(
+                f"SerialDecode.Decode{decoder}: could not read table dimensions "
+                f"(rows={rows_raw!r}, cols={cols_raw!r}): {e}"
+            )
+
+        if rows == 0:
+            return {"rows": 0, "columns": cols, "col_map": {}, "time_s": [], "data": [], "raw_rows": []}
+
+        col_state_raw = _q(f"app.SerialDecode.Decode{decoder}.Decode.ColumnState")
+        col_map = self._parse_column_state(col_state_raw)
+
+        time_col = col_map.get("Time")
+        data_col = col_map.get("Data")
+
+        time_s: list = []
+        data: list = []
+        raw_rows: list = []
+
+        for row in range(1, rows + 1):
+            row_dict: dict = {}
+            for name, col_idx in col_map.items():
+                raw = _q(f"{base}.CellValue({row},{col_idx})(0,0)")
+                # VBS returns e.g. "VBS 3.14159" or just "3.14159" — take last token
+                row_dict[name] = raw.split()[-1] if raw.split() else raw
+            raw_rows.append(row_dict)
+
+            if time_col is not None:
+                raw_t = _q(f"{base}.CellValue({row},{time_col})(0,0)")
+                try:
+                    time_s.append(float(raw_t.split()[-1]))
+                except (ValueError, IndexError):
+                    time_s.append(None)
+
+            if data_col is not None:
+                raw_d = _q(f"{base}.CellValue({row},{data_col})(0,0)")
+                try:
+                    data.append(int(float(raw_d.split()[-1])))
+                except (ValueError, IndexError):
+                    data.append(None)
+
+        return {
+            "rows": rows,
+            "columns": cols,
+            "col_map": col_map,
+            "time_s": time_s,
+            "data": data,
+            "raw_rows": raw_rows,
+        }
