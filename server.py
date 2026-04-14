@@ -1150,10 +1150,10 @@ def scope_capture_channels(channels: list, max_points: int = 10000) -> str:
     cross-channel analysis, export). For scalar results like peak voltage or
     frequency, prefer scope_measure — no waveform transfer needed.
 
-    All channels are read within a single VISA lock hold (one COMM setup,
-    sequential reads), so the waveforms come from the same acquisition
-    snapshot. For guaranteed alignment on a fast-running scope, call
-    scope_stop before this tool.
+    Stops the scope before transferring so the acquisition is frozen during
+    the read. All channels are read within a single VISA lock hold (one COMM
+    setup, sequential reads), so the waveforms come from the same snapshot.
+    The scope remains stopped after capture — call scope_arm to resume.
 
     Saves to 'waveforms/' with an auto-generated filename,
     e.g.: waveforms/C3F1_20260329_153042.npz
@@ -1180,6 +1180,7 @@ def scope_capture_channels(channels: list, max_points: int = 10000) -> str:
         warnings = "".join(
             _probe_warning(c) for c in channels if isinstance(c, int)
         )
+        _scope.stop()
         waveforms = _scope.get_waveforms(channels, max_points)
         dt = waveforms[0]["sample_interval_s"]
         n  = waveforms[0]["num_points"]
