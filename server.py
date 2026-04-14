@@ -1105,6 +1105,9 @@ def scope_get_waveform(channel: int, max_points: int = 10000) -> str:
     analysis). For scalar results like peak voltage, frequency, or RMS, prefer
     scope_measure — it is faster and uses all scope points without any transfer.
 
+    Stops the scope before transferring so the acquisition is frozen.
+    The scope remains stopped after capture — call scope_arm to resume.
+
     Saves to a 'waveforms/' subfolder with an auto-generated filename,
     e.g.: waveforms/C1_20260329_153042.npz
 
@@ -1123,6 +1126,7 @@ def scope_get_waveform(channel: int, max_points: int = 10000) -> str:
     def _save():
         import numpy as np
         warn = _probe_warning(channel)
+        _scope.stop()
         data = _scope.get_waveform(channel, max_points)
         voltages = data["voltages"]
         dt = data["sample_interval_s"]
