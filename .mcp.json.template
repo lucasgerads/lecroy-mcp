@@ -5,7 +5,11 @@
       "command": "uvx",
       "args": ["lecroy-mcp"],
       "env": {
-        "LECROY_HOST": "192.168.1.111"
+        "LECROY_HOST": "192.168.1.111",
+        "LECROY_PROBE_C1": "10",
+        "LECROY_PROBE_C2": "1",
+        "LECROY_PROBE_C3": "none",
+        "LECROY_PROBE_C4": "none"
       }
     }
   }

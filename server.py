@@ -47,6 +47,29 @@ _HOST     = os.environ.get("LECROY_HOST")      # e.g. "192.168.1.111"
 _RESOURCE = os.environ.get("LECROY_RESOURCE")  # e.g. "USB0::0x05FF::0x1023::12345::INSTR"
 _SUBNET   = os.environ.get("LECROY_SUBNET")    # e.g. "192.168.1.0/24"
 
+# Probe configuration — keyed by channel number 1–4.
+#   dict  {"ratio": float, "unit": str} — probe is connected, ATTN applied at connect
+#   None  — engineer explicitly marked channel as not connected (LECROY_PROBE_Cn=none)
+#   missing key — engineer left it unspecified
+#
+# Format: LECROY_PROBE_C1=10        (10× voltage probe)
+#         LECROY_PROBE_C2=1         (1× voltage probe)
+#         LECROY_PROBE_C3=none      (nothing connected)
+#         LECROY_PROBE_C4=0.1,A     (current probe, 100 mV/A — future)
+def _parse_probe_env(val: str) -> "dict | None":
+    if val.strip().lower() == "none":
+        return None
+    parts = val.split(",")
+    ratio = float(parts[0].strip())
+    unit  = parts[1].strip() if len(parts) > 1 else "V"
+    return {"ratio": ratio, "unit": unit}
+
+_PROBES: "dict[int, dict | None]" = {}
+for _ch_n in (1, 2, 3, 4):
+    _env_val = os.environ.get(f"LECROY_PROBE_C{_ch_n}")
+    if _env_val is not None:
+        _PROBES[_ch_n] = _parse_probe_env(_env_val)
+
 # Module-level singleton — one persistent VISA connection per server process.
 _scope = LeCroyScope()
 
@@ -57,17 +80,45 @@ _scope = LeCroyScope()
 # corrupt both responses (or crash the server process entirely).
 _visa_lock = threading.Lock()
 
+
+def _apply_probe_config() -> None:
+    """Send ATTN (and UNIT for non-voltage probes) to the scope for every configured channel.
+
+    Called once after connect — either auto-connect at startup or manual scope_connect.
+    Channels marked 'none' are skipped (no signal present, nothing to configure).
+    """
+    for ch_n, probe in _PROBES.items():
+        if probe is None:
+            continue
+        try:
+            _scope.set_attenuation(ch_n, probe["ratio"])
+            if probe.get("unit", "V") != "V":
+                _scope.set_unit(ch_n, probe["unit"])
+            print(f"Probe C{ch_n}: ratio={probe['ratio']}, unit={probe.get('unit','V')}", file=sys.stderr, flush=True)
+        except Exception as e:
+            print(f"Probe config C{ch_n} failed: {e}", file=sys.stderr, flush=True)
+
+
+def _probe_warning(channel: int) -> str:
+    """Return a warning string if the channel is explicitly marked as not connected, else ''."""
+    if _PROBES.get(channel) is None and channel in _PROBES:
+        return f"WARNING: C{channel} is marked as not connected (LECROY_PROBE_C{channel}=none) — data may be noise.\n"
+    return ""
+
+
 # Auto-connect if a host or resource string was provided via environment.
 if _RESOURCE:
     try:
         _scope.connect(_RESOURCE)
         print(f"Auto-connected to {_RESOURCE}", file=sys.stderr, flush=True)
+        _apply_probe_config()
     except Exception as e:
         print(f"Auto-connect failed ({_RESOURCE}): {e}", file=sys.stderr, flush=True)
 elif _HOST:
     try:
         _scope.connect(f"TCPIP0::{_HOST}::inst0::INSTR")
         print(f"Auto-connected to {_HOST}", file=sys.stderr, flush=True)
+        _apply_probe_config()
     except Exception as e:
         print(f"Auto-connect failed ({_HOST}): {e}", file=sys.stderr, flush=True)
 
@@ -302,7 +353,11 @@ def scope_connect(resource_string: str) -> str:
 
     Transport: local (opens VISA session, then queries *IDN? via SCPI)
     """
-    return _run(lambda: _scope.connect(resource_string))
+    def _connect():
+        result = _scope.connect(resource_string)
+        _apply_probe_config()
+        return result
+    return _run(_connect)
 
 
 @mcp.tool()
@@ -327,7 +382,25 @@ def scope_connection_status() -> str:
             "1. Call scope_list_resources to discover instruments.\n"
             "2. Call scope_connect with the resource string."
         )
-    return _run(lambda: f"Connected: {_scope._resource_string}\nIDN: {_scope.identify()}\nlecroy-mcp version: {_SERVER_VERSION}")
+    def _status():
+        lines = [
+            f"Connected: {_scope._resource_string}",
+            f"IDN: {_scope.identify()}",
+            f"lecroy-mcp version: {_SERVER_VERSION}",
+        ]
+        if _PROBES:
+            lines.append("Probe config:")
+            for ch_n in (1, 2, 3, 4):
+                if ch_n not in _PROBES:
+                    continue
+                probe = _PROBES[ch_n]
+                if probe is None:
+                    lines.append(f"  C{ch_n}: not connected")
+                else:
+                    unit = probe.get("unit", "V")
+                    lines.append(f"  C{ch_n}: {probe['ratio']}× probe ({unit})")
+        return "\n".join(lines)
+    return _run(_status)
 
 
 @mcp.tool()
@@ -472,7 +545,7 @@ def scope_channel_info(channel: int) -> str:
     """Get all current settings for a channel in one call.
 
     Returns vertical scale, offset, coupling, bandwidth limit, invert,
-    trace visibility, probe attenuation, and unit.
+    trace visibility, unit, and configured probe (from LECROY_PROBE_Cn env var).
 
     Args:
         channel: Channel number 1–4
@@ -484,7 +557,14 @@ def scope_channel_info(channel: int) -> str:
         lines = [f"Channel {channel} settings:"]
         for k, v in info.items():
             lines.append(f"  {k:14s}: {v}")
-        return "\n".join(lines)
+        if channel in _PROBES:
+            probe = _PROBES[channel]
+            if probe is None:
+                lines.append(f"  configured probe: not connected")
+            else:
+                unit = probe.get("unit", "V")
+                lines.append(f"  configured probe: {probe['ratio']}× ({unit})")
+        return _probe_warning(channel) + "\n".join(lines)
     return _run(_fmt)
 
 
@@ -497,41 +577,42 @@ def scope_configure_channel(
     bwlimit: str = None,
     invert: bool = None,
     trace: bool = None,
-    attenuation: float = None,
     unit: str = None,
 ) -> str:
     """Configure one or more settings for a channel in a single call.
 
     All parameters except channel are optional — only the provided ones are applied.
 
+    Probe attenuation (ATTN) is set automatically from the LECROY_PROBE_Cn
+    environment variable at connect time and cannot be changed here — it
+    reflects the physical probe and is the engineer's responsibility.
+
     Args:
-        channel:     Channel number 1–4
-        vdiv:        Vertical scale in V/div, e.g. 0.1 = 100 mV/div, 1.0 = 1 V/div
-        offset:      Vertical offset in volts (positive shifts trace down)
-        coupling:    D1M (DC 1MΩ), D50 (DC 50Ω), A1M (AC 1MΩ), or GND
-        bwlimit:     Bandwidth limit: OFF (full BW), 20MHZ, 200MHZ.
-                     High-BW models also support 500MHZ, 1GHZ, etc.
-                     Use scope_capabilities to see valid values for the connected scope.
-        invert:      True to invert the signal polarity, False for normal
-        trace:       True to show the channel trace, False to hide it
-        attenuation: Probe attenuation ratio, typically 1, 10, 100, or 1000
-        unit:        Vertical unit: V (volts), A (amperes), W (watts), U (user)
+        channel:  Channel number 1–4
+        vdiv:     Vertical scale in V/div, e.g. 0.1 = 100 mV/div, 1.0 = 1 V/div
+        offset:   Vertical offset in volts (positive shifts trace down)
+        coupling: D1M (DC 1MΩ), D50 (DC 50Ω), A1M (AC 1MΩ), or GND
+        bwlimit:  Bandwidth limit: OFF (full BW), 20MHZ, 200MHZ.
+                  High-BW models also support 500MHZ, 1GHZ, etc.
+                  Use scope_capabilities to see valid values for the connected scope.
+        invert:   True to invert the signal polarity, False for normal
+        trace:    True to show the channel trace, False to hide it
+        unit:     Vertical unit: V (volts), A (amperes), W (watts), U (user)
 
     Transport: SCPI
     """
     def _apply():
         applied = []
-        if vdiv        is not None: _scope.set_vdiv(channel, vdiv);              applied.append(f"vdiv={vdiv}")
-        if offset      is not None: _scope.set_offset(channel, offset);          applied.append(f"offset={offset}")
-        if coupling    is not None: _scope.set_coupling(channel, coupling);      applied.append(f"coupling={coupling}")
-        if bwlimit     is not None: _scope.set_bwlimit(channel, bwlimit);        applied.append(f"bwlimit={bwlimit}")
-        if invert      is not None: _scope.set_invert(channel, invert);          applied.append(f"invert={invert}")
-        if trace       is not None: _scope.set_trace(channel, trace);            applied.append(f"trace={trace}")
-        if attenuation is not None: _scope.set_attenuation(channel, attenuation); applied.append(f"attenuation={attenuation}")
-        if unit        is not None: _scope.set_unit(channel, unit);              applied.append(f"unit={unit}")
+        if vdiv     is not None: _scope.set_vdiv(channel, vdiv);         applied.append(f"vdiv={vdiv}")
+        if offset   is not None: _scope.set_offset(channel, offset);     applied.append(f"offset={offset}")
+        if coupling is not None: _scope.set_coupling(channel, coupling);  applied.append(f"coupling={coupling}")
+        if bwlimit  is not None: _scope.set_bwlimit(channel, bwlimit);   applied.append(f"bwlimit={bwlimit}")
+        if invert   is not None: _scope.set_invert(channel, invert);     applied.append(f"invert={invert}")
+        if trace    is not None: _scope.set_trace(channel, trace);       applied.append(f"trace={trace}")
+        if unit     is not None: _scope.set_unit(channel, unit);         applied.append(f"unit={unit}")
         if not applied:
             return "No parameters specified — nothing changed."
-        return f"C{channel}: " + ", ".join(applied)
+        return _probe_warning(channel) + f"C{channel}: " + ", ".join(applied)
     return _run(_apply)
 
 
@@ -1041,6 +1122,7 @@ def scope_get_waveform(channel: int, max_points: int = 10000) -> str:
     """
     def _save():
         import numpy as np
+        warn = _probe_warning(channel)
         data = _scope.get_waveform(channel, max_points)
         voltages = data["voltages"]
         dt = data["sample_interval_s"]
@@ -1050,7 +1132,7 @@ def scope_get_waveform(channel: int, max_points: int = 10000) -> str:
         os.makedirs(folder, exist_ok=True)
         dest = os.path.join(folder, f"C{channel}_{ts}.npz")
         np.savez(dest, time_s=time_arr, voltage_v=voltages)
-        return json.dumps({
+        return warn + json.dumps({
             "data_file":        dest,
             "channel":          channel,
             "num_points":       len(voltages),
@@ -1094,6 +1176,10 @@ def scope_capture_channels(channels: list, max_points: int = 10000) -> str:
     """
     def _save():
         import numpy as np
+        # Warn for any integer channels explicitly marked as not connected
+        warnings = "".join(
+            _probe_warning(c) for c in channels if isinstance(c, int)
+        )
         waveforms = _scope.get_waveforms(channels, max_points)
         dt = waveforms[0]["sample_interval_s"]
         n  = waveforms[0]["num_points"]
@@ -1113,7 +1199,7 @@ def scope_capture_channels(channels: list, max_points: int = 10000) -> str:
         np.savez(dest, **arrays)
         def _key(c):
             return str(c).lower() if isinstance(c, str) else f"c{c}"
-        return json.dumps({
+        return warnings + json.dumps({
             "data_file":        dest,
             "channels":         channels,
             "num_points":       n,

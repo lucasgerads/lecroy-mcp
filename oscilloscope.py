@@ -446,7 +446,6 @@ class LeCroyScope:
             "coupling":    f"{ch}:{self.profile.coupling_cmd}?",
             "bwlimit":     "BWL?",
             "trace":       f"{ch}:TRA?",
-            "attenuation": f"{ch}:ATTN?",
         }
         if self.profile.has_invs:
             keys["invert"] = f"{ch}:INVS?"
