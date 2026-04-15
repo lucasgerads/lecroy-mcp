@@ -577,6 +577,34 @@ class LeCroyScope:
     def stop(self) -> None:
         self.write("STOP")
 
+    def is_stopped(self) -> bool:
+        """Return True if the scope is currently stopped (not waiting for trigger)."""
+        trmd = self.query("TRMD?").strip()
+        return "STOP" in trmd.upper()
+
+    def arm_and_wait(self, timeout_s: float = 10.0) -> bool:
+        """Arm the scope and wait for one acquisition to complete.
+
+        Polls INR bit 0 (new signal acquired) every 50 ms until the acquisition
+        completes or the timeout expires.
+
+        Returns True if a new acquisition was captured, False if timed out.
+        """
+        import time
+        self.write("ARM")
+        # Clear any previous INR flags by reading once
+        self.query("INR?")
+        deadline = time.monotonic() + timeout_s
+        while time.monotonic() < deadline:
+            try:
+                inr = int(self.query("INR?").strip().split()[-1])
+                if inr & 1:   # bit 0 = new signal acquired
+                    return True
+            except (ValueError, IndexError):
+                pass
+            time.sleep(0.05)
+        return False
+
     def get_acquisition_status(self) -> str:
         trmd = self.query("TRMD?")
         inr  = self.query("INR?")

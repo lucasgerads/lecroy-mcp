@@ -1105,8 +1105,9 @@ def scope_get_waveform(channel: int, max_points: int = 10000) -> str:
     analysis). For scalar results like peak voltage, frequency, or RMS, prefer
     scope_measure — it is faster and uses all scope points without any transfer.
 
-    Stops the scope before transferring so the acquisition is frozen.
-    The scope remains stopped after capture — call scope_arm to resume.
+    If the scope is already stopped (e.g. from a previous capture), arms it
+    first and waits for a fresh acquisition before reading. Always leaves the
+    scope stopped after capture so the on-screen waveform matches the file.
 
     Saves to a 'waveforms/' subfolder with an auto-generated filename,
     e.g.: waveforms/C1_20260329_153042.npz
@@ -1126,6 +1127,8 @@ def scope_get_waveform(channel: int, max_points: int = 10000) -> str:
     def _save():
         import numpy as np
         warn = _probe_warning(channel)
+        if _scope.is_stopped():
+            _scope.arm_and_wait()
         _scope.stop()
         data = _scope.get_waveform(channel, max_points)
         voltages = data["voltages"]
@@ -1154,10 +1157,10 @@ def scope_capture_channels(channels: list, max_points: int = 10000) -> str:
     cross-channel analysis, export). For scalar results like peak voltage or
     frequency, prefer scope_measure — no waveform transfer needed.
 
-    Stops the scope before transferring so the acquisition is frozen during
-    the read. All channels are read within a single VISA lock hold (one COMM
-    setup, sequential reads), so the waveforms come from the same snapshot.
-    The scope remains stopped after capture — call scope_arm to resume.
+    If the scope is already stopped (e.g. from a previous capture), arms it
+    first and waits for a fresh acquisition before reading. All channels are
+    read within a single VISA lock hold so the waveforms come from the same
+    snapshot. Always leaves the scope stopped after capture.
 
     Saves to 'waveforms/' with an auto-generated filename,
     e.g.: waveforms/C3F1_20260329_153042.npz
@@ -1184,6 +1187,8 @@ def scope_capture_channels(channels: list, max_points: int = 10000) -> str:
         warnings = "".join(
             _probe_warning(c) for c in channels if isinstance(c, int)
         )
+        if _scope.is_stopped():
+            _scope.arm_and_wait()
         _scope.stop()
         waveforms = _scope.get_waveforms(channels, max_points)
         dt = waveforms[0]["sample_interval_s"]
